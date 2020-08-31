@@ -3,17 +3,18 @@
     flex-direction: column;
     text-align: center;
     align-items: center;
-    margin: auto;
-    padding: 5px;
-    width: 45%;
+    // margin: auto;
+    // padding: 5px;
+    // width: 45%;
 }
 
 .login-form, .signup-form {
-    height: 300px;
+    height: 320px;
     width: 300px;
     border: 1px solid black;
     border-radius: 5px;
     background: white;
+    padding: 20px;
 }
 
 @keyframes shake {
@@ -25,11 +26,18 @@
   100% { transform: skewX(0deg); }  
 }
 
-.session-form-errors {
+.errors-list {
+    text-align: left;
+    list-style: none;
     color: red;
-    width: 200px;
     animation: .5s shake infinite;
-    animation-iteration-count: 4;
+    animation-iteration-count: 3;
+    font-size: 14px;
+}
+
+.modal-header {
+    font-size: 22px;
+    margin-bottom: 10px;
 }
 
 .login-username, 
@@ -42,6 +50,29 @@
     border-bottom: 1px solid black;
     text-align: center;
     margin: 10px;
+    font-size: 20px;
+}
+
+.login-username:focus, 
+.login-password:focus, 
+.signup-username:focus, 
+.signup-password:focus, 
+.signup-password2:focus {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid burlywood;
+    text-align: center;
+    margin: 10px;
+    font-size: 20px;
+}
+
+.login-username::placeholder, 
+.login-password::placeholder, 
+.signup-username::placeholder, 
+.signup-password::placeholder, 
+.signup-password2::placeholder {
+    font-size: 20px;
+    color: lightgray;
 }
 
 .close-x {
@@ -49,9 +80,31 @@
     top: 0;
     right: 0;
     margin: 20px;
+    font-size: 18px;
+}
+
+.close-x:hover, .session-btn:hover, .other-form:hover {
+    cursor: pointer;
+}
+
+.session-btn {
+    border-radius: 5px;
+    border: 1px solid burlywood;
+    outline: none;
+    padding: 6px 12px;
+    background: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
     font-size: 16px;
 }
 
-.close-x:hover {
-    cursor: pointer;
+.session-btn:hover {
+    background: lightblue;
+}
+
+.other-form {
+    border: none;
+    outline: none;
+    color: burlywood;
+    background: white;
 }

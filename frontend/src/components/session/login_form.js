@@ -48,7 +48,7 @@ class LoginForm extends React.Component {
   // Render the session errors if there are any
   renderErrors() {
     return (
-      <ul>
+      <ul className='errors-list'>
         {Object.keys(this.state.errors).map((error, i) => (
           <li key={`error-${i}`}>{this.state.errors[error]}</li>
         ))}
@@ -61,10 +61,10 @@ class LoginForm extends React.Component {
       <div className="login-form-container">
         <form onSubmit={this.handleSubmit}>
           <div className="login-form">
+            <div className="modal-header">Login to Global Window</div>
             <div onClick={this.props.closeModal} className="close-x">
               X
             </div>
-            {this.renderErrors()}
             <input
               className="login-username"
               type="text"
@@ -81,9 +81,10 @@ class LoginForm extends React.Component {
               placeholder="Password"
             />
             <br />
-            <input type="submit" value="Submit" />
+            <input type="submit" value="Submit" className="session-btn" />
             <br />
-            {this.props.otherForm}
+            <div>Join for free!{this.props.otherForm}</div>
+            {this.renderErrors()}
           </div>
         </form>
       </div>
