@@ -1,0 +1,29 @@
+.login-form-container, .signup-form-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    margin: auto;
+    padding: 5px;
+    width: 45%;
+}
+
+.login-form, .sigup-form {
+    background: red;
+}
+
+@keyframes shake {
+  0% { transform: skewX(-15deg); }
+  5% { transform: skewX(15deg); }
+  10% { transform: skewX(-15deg); }
+  15% { transform: skewX(15deg); }
+  20% { transform: skewX(0deg); }
+  100% { transform: skewX(0deg); }  
+}
+
+.session-form-errors {
+    color: red;
+    width: 200px;
+    animation: .5s shake infinite;
+    animation-iteration-count: 4;
+}

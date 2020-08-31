@@ -56,6 +56,7 @@ class SignupForm extends React.Component {
       <div className="signup-form-container">
         <form onSubmit={this.handleSubmit}>
           <div className="signup-form">
+            {this.renderErrors()}
             <br />
             <input
               type="text"
@@ -79,7 +80,6 @@ class SignupForm extends React.Component {
             />
             <br />
             <input type="submit" value="Submit" />
-            {this.renderErrors()}
             {this.props.otherForm}
           </div>
         </form>
