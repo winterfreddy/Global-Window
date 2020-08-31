@@ -1,49 +1,27 @@
-const Validator = require('validator');
-const validText = require("./valid-text");
-const LAT = 'lat';
-const LNG = 'lng';
+const express = require("express");
+const router = express.Router();
+const passport = require("passport");
 
+const Photo = require("../../models/Photo");
+const validatePhotoInput = require("../../validation/photos");
 
+router.post("/", 
+    passport.authenticate("jwt", { session: false }),
+    (req, res) => {
+        const { errors, isValid } = validatePhotoInput(req.body);
 
-module.exports = function validateNewPhotoInput(data) {
-  let errors = {};
+        if (!isValid) {
+            return res.status(400).json(errors);
+        }
+    
+        const newPhoto = new Photo({
+            creatorId: req.user.id,
+            imageURL: req.body.imageURL,
+            coordinates: { lat: req.body.lat, lng: req.body.lng }
+        });
 
+        newPhoto.save().then((photo) => res.json(photo));
+    }
+);
 
-  data.creatorId = validText(data.creatorId) ? data.creatorId : "";
-  data.imageURL = validText(data.imageURL) ? data.imageURL : "";
-  const coords = data.coordinates;
-  data.lat = validText(coords[LAT]) ? coords[LAT] : "";
-  data.lng = validText(coords[LNG]) ? coords[LNG] : "";
-
-
-  if(Validator.isEmpty(data.imageURL)) {
-​    errors.imageURL = "Image URL is required";
-  }
-
-
-  // Posting URLs or uploading image?
-  // if(!Validator.isURL(data.imageURL)) {
-  //   errors.imageURL = "Image URL must be valid";
-  // }
-
-  if (!Validator.isDecimal(data.lat)) {
-​    errors.lat = "Latitude must be decimal";
-  }
-  if (Validator.isEmpty(data.lat)) {
-​    errors.lat = "Latitude is required";
-  }
-
-
-
-  if (!Validator.isDecimal(data.lng)) {
-​    errors.lng = "Longitude must be decimal";
-  }
-  if (Validator.isEmpty(data.lng)) {
-​    errors.lng = "Longitude is required";
-  }
-
-  return {
-​    errors,
-​    isValid: Object.keys(errors).length === 0
-  }
-}
+module.exports = router;
