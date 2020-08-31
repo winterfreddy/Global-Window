@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require("passport");
 
 const Photo = require("../../models/Photo");
-const validatePhotoInput = require("../../validation/photos");
+const validatePhotoInput = require("../../validation/photo");
 
 router.post("/", 
     passport.authenticate("jwt", { session: false }),
@@ -15,7 +15,7 @@ router.post("/",
         }
     
         const newPhoto = new Photo({
-            creatorId: req.user.id,
+            creatorId: req.body.creatorId,
             imageURL: req.body.imageURL,
             coordinates: { lat: req.body.lat, lng: req.body.lng }
         });
