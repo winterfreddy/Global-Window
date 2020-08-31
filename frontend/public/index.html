@@ -30,20 +30,20 @@
     </script>
     <script>
       function initMap() {
-        // The location of Uluru
-        var uluru = {
-          lat: -25.344,
-          lng: 131.036
+        // The location of App Academy
+        var aaOffice = {
+          lat: 37.7941135,
+          lng: -122.4126891
         };
-        // The map, centered at Uluru
+        // The map, centered at App Academy
         var map = new google.maps.Map(
           document.getElementById('map'), {
-            zoom: 4,
-            center: uluru
+            zoom: 10,
+            center: aaOffice
           });
-        // The marker, positioned at Uluru
+        // The marker, positioned at App Academy
         var marker = new google.maps.Marker({
-          position: uluru,
+          position: aaOffice,
           map: map
         });
       }
