@@ -42,13 +42,13 @@ class LoginForm extends React.Component {
       password: this.state.password,
     };
 
-    this.props.login(user);
+    this.props.login(user).then(() => this.props.closeModal);
   }
 
   // Render the session errors if there are any
   renderErrors() {
     return (
-      <ul>
+      <ul className='errors-list'>
         {Object.keys(this.state.errors).map((error, i) => (
           <li key={`error-${i}`}>{this.state.errors[error]}</li>
         ))}
@@ -58,10 +58,15 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="login-form-container">
         <form onSubmit={this.handleSubmit}>
-          <div>
+          <div className="login-form">
+            <div className="modal-header">Login to Global Window</div>
+            <div onClick={this.props.closeModal} className="close-x">
+              X
+            </div>
             <input
+              className="login-username"
               type="text"
               value={this.state.username}
               onChange={this.update("username")}
@@ -69,13 +74,16 @@ class LoginForm extends React.Component {
             />
             <br />
             <input
+              className="login-password"
               type="password"
               value={this.state.password}
               onChange={this.update("password")}
               placeholder="Password"
             />
             <br />
-            <input type="submit" value="Submit" />
+            <input type="submit" value="Submit" className="session-btn" />
+            <br />
+            <div>Join for free!{this.props.otherForm}</div>
             {this.renderErrors()}
           </div>
         </form>

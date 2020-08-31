@@ -38,12 +38,12 @@ class SignupForm extends React.Component {
       password2: this.state.password2,
     };
 
-    this.props.signup(user, this.props.history);
+    this.props.signup(user, this.props.history).then(() => this.props.closeModal);
   }
 
   renderErrors() {
     return (
-      <ul>
+      <ul className='errors-list'>
         {Object.keys(this.state.errors).map((error, i) => (
           <li key={`error-${i}`}>{this.state.errors[error]}</li>
         ))}
@@ -56,8 +56,13 @@ class SignupForm extends React.Component {
       <div className="signup-form-container">
         <form onSubmit={this.handleSubmit}>
           <div className="signup-form">
+            <div className="modal-header">Signup for Global Window</div>
+            <div onClick={this.props.closeModal} className="close-x">
+              X
+            </div>
             <br />
             <input
+              className="signup-username"
               type="text"
               value={this.state.username}
               onChange={this.update("username")}
@@ -65,6 +70,7 @@ class SignupForm extends React.Component {
             />
             <br />
             <input
+              className="signup-password"
               type="password"
               value={this.state.password}
               onChange={this.update("password")}
@@ -72,13 +78,16 @@ class SignupForm extends React.Component {
             />
             <br />
             <input
+              className="signup-password2"
               type="password"
               value={this.state.password2}
               onChange={this.update("password2")}
               placeholder="Confirm Password"
             />
             <br />
-            <input type="submit" value="Submit" />
+            <input type="submit" value="Submit" className="session-btn" />
+            <br />
+            <div>Already have an account?{this.props.otherForm}</div>
             {this.renderErrors()}
           </div>
         </form>
