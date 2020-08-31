@@ -38,7 +38,7 @@ class SignupForm extends React.Component {
       password2: this.state.password2,
     };
 
-    this.props.signup(user, this.props.history).then(this.props.closeModal);
+    this.props.signup(user, this.props.history).then(() => this.props.closeModal);
   }
 
   renderErrors() {
@@ -56,9 +56,13 @@ class SignupForm extends React.Component {
       <div className="signup-form-container">
         <form onSubmit={this.handleSubmit}>
           <div className="signup-form">
+            <div onClick={this.props.closeModal} className="close-x">
+              X
+            </div>
             {this.renderErrors()}
             <br />
             <input
+              className="signup-username"
               type="text"
               value={this.state.username}
               onChange={this.update("username")}
@@ -66,6 +70,7 @@ class SignupForm extends React.Component {
             />
             <br />
             <input
+              className="signup-password"
               type="password"
               value={this.state.password}
               onChange={this.update("password")}
@@ -73,6 +78,7 @@ class SignupForm extends React.Component {
             />
             <br />
             <input
+              className="signup-password2"
               type="password"
               value={this.state.password2}
               onChange={this.update("password2")}
@@ -80,6 +86,7 @@ class SignupForm extends React.Component {
             />
             <br />
             <input type="submit" value="Submit" />
+            <br />
             {this.props.otherForm}
           </div>
         </form>

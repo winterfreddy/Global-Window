@@ -8,8 +8,12 @@
     width: 45%;
 }
 
-.login-form, .sigup-form {
-    background: red;
+.login-form, .signup-form {
+    height: 300px;
+    width: 300px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background: white;
 }
 
 @keyframes shake {
@@ -26,4 +30,28 @@
     width: 200px;
     animation: .5s shake infinite;
     animation-iteration-count: 4;
+}
+
+.login-username, 
+.login-password, 
+.signup-username, 
+.signup-password, 
+.signup-password2 {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid black;
+    text-align: center;
+    margin: 10px;
+}
+
+.close-x {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 20px;
+    font-size: 16px;
+}
+
+.close-x:hover {
+    cursor: pointer;
 }
