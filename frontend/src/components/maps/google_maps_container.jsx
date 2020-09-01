@@ -38,13 +38,27 @@ export class MapContainer extends Component {
       <Map
         className="google-api-map"
         google={this.props.google}
-        zoom={14}
+        zoom={12}
         style={mapStyles}
         initialCenter={{
-          lat: -1.2884,
-          lng: 36.8233,
+          lat: 37.7941135,
+          lng: -122.4126891,
         }}
-      />
+      >
+        <Marker
+          onClick={this.onMarkerClick}
+          name={"App Academy San Francisco Office"}
+        />
+        <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}
+          onClose={this.onClose}
+        >
+          <div>
+            <h4>{this.state.selectedPlace.name}</h4>
+          </div>
+        </InfoWindow>
+      </Map>
     );
   }
 }
