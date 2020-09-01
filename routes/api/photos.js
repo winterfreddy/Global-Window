@@ -46,41 +46,56 @@ const config = new AWS.Config({
 const uploadFile = (file) => {
   // Read content from the file
   console.log(file);
-  const fileContent = fs.readFileSync(file);
+//   const fileContent = fs.readFileSync(file.buffer);
+//   const fileContent = fs.readFile(file, 'utf8');
+    // const fileContent = fs.readFile(file,(err, data) => {
+    //     if (err) throw err;
+    //     console.log(data);
+    // });
 
-  const newFileName = uuidv4();
+//   const newFileName = uuidv4();
   // Setting up S3 upload parameters
   const params = {
     Bucket: keys.s3Bucket,
-    Key: newFileName, // File name you want to save as in S3
-    Body: fileContent,
+    Key: file.originalname, // File name you want to save as in S3
+    Body: file.buffer,
+    ContentType: file.mimetype,
+    ACL: "public-read"
   };
 
+  let uploadedFileURL;
   // Uploading files to the bucket
-  s3.upload(params, function (err, data) {
-    if (err) {
-      throw err;
-    }
-    console.log(`File uploaded successfully. ${data.Location}`);
+
+    // if (err) {
+    //   throw err;
+    // }
+    // console.log(`File uploaded successfully. ${data.Location}`);
     // uploadedFileURL = data.Location;
+  const uploadPhoto = s3.upload(params).promise();
+  
+  return uploadPhoto.then((data) => {
+    console.log(data.Location);
+    return data.Location;  
+  }).catch((err) => {
+      console.log('photo error: ', err);
   });
-  return data.Location;
 };
 
 router.post("/", upload.single("file"), 
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
 
-        console.log('req: ', req);
-        console.log('body: ', req.body);
+        // console.log('req: ', req);
+        // console.log('body: ', req.body);
+        // console.log('file: ', req.file);
         // const { errors, isValid } = validatePhotoInput(req.body);
 
         // if (!isValid) {
         //     return res.status(400).json(errors);
         // }
 
-        const uploadedFileURL = uploadFile(req.body.file);
-    
+        const uploadedFileURL = uploadFile(req.file);
+        console.log("received uploadedFileURL");
         const newPhoto = new Photo({
             creatorId: req.body.creatorId, // req.user.id
             imageURL: uploadedFileURL,
