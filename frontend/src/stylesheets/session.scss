@@ -58,6 +58,7 @@
     margin: 10px;
     font-size: 20px;
     background: transparent;
+    padding: 5px;
 }
 
 .login-username:hover, 
@@ -66,6 +67,7 @@
 .signup-password:hover, 
 .signup-password2:hover {
     border: 1px solid burlywood;
+    background: white;
 }
 
 .login-username::placeholder, 
@@ -107,11 +109,11 @@
 .other-form {
     border: none;
     outline: none;
-    color: burlywood;
+    color: green;
     background: transparent;
     font-size: 16px;
 }
 
 .other-form:hover {
-    color: lightblue;
+    color: blue;
 }
