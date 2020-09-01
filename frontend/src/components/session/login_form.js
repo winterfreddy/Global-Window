@@ -42,8 +42,12 @@ class LoginForm extends React.Component {
       password: this.state.password,
     };
 
-    this.props.login(user).then(() => this.props.closeModal)
-      .then(this.props.history.push('/'));
+    this.props.login(user)
+      .then(this.props.history.push('/home'))
+ 
+
+
+
   }
 
   // Render the session errors if there are any
@@ -63,7 +67,7 @@ class LoginForm extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <div className="login-form">
             <div className="modal-header">Login to Global Window</div>
-            <div onClick={this.props.closeModal} className="close-x">
+            <div id='close-x' onClick={this.props.closeModal} className="close-x">
               X
             </div>
             <input

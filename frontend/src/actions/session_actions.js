@@ -1,5 +1,6 @@
 import * as APIUtil from "../util/session_api_util";
 import jwt_decode from "jwt-decode";
+import { closeModal } from './modal_actions';
 
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
 export const RECEIVE_USER_SIGN_IN = "RECEIVE_USER_SIGN_IN";
@@ -28,6 +29,7 @@ export const signup = user => dispatch => {
     return APIUtil.signup(user)
         .then(() => dispatch(receiveUserSignIn()),
         err => dispatch(receiveErrors(err.response.data)))
+        .then(() => dispatch(closeModal()))
 };
 
 export const login = (user) => (dispatch) => (
@@ -39,6 +41,7 @@ export const login = (user) => (dispatch) => (
       const decoded = jwt_decode(token);
       dispatch(receiveCurrentUser(decoded));
     })
+    .then(() => dispatch(closeModal()))
     .catch((err) => {
       dispatch(receiveErrors(err.response.data));
     })
