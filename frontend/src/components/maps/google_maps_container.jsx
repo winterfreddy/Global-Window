@@ -10,6 +10,7 @@ export class MapContainer extends Component {
   render() {
     return (
       <Map
+        className='google-api-map'
         google={this.props.google}
         zoom={14}
         style={mapStyles}
