@@ -15,9 +15,11 @@ export class MapContainer extends Component {
       activeMarker: {}, //Shows the active marker upon click
       selectedPlace: {}, //Shows the infoWindow to the selected place upon a marker
     };
+
+    this.mapClick = this.mapClick.bind(this);
   }
 
-  onMarkerClick = (props, marker, e) =>
+  onMarkerClick = (props, marker, e) => 
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
@@ -33,23 +35,24 @@ export class MapContainer extends Component {
     }
   };
 
-  initMap() {
-    var map = new google.maps.Map(document.getElementsByClassName('google-api-map'), {
-      zoom: 4,
-      center: { lat: 37.7941135, lng: -122.4126891 }
-    });
+  mapClick(mapProps, map, clickEvent) {
+    const { google } = this.props;
+    // console.log('clicking');
+    // console.log(mapProps);
+    // console.log(map);
+    // console.log(clickEvent);
 
     map.addListener('click', function (e) {
       placeMarkerAndPanTo(e.latLng, map);
-    });
-  }
+    }); 
 
-  placeMarkerAndPanTo(latLng, map) {
-    var marker = new google.maps.Marker({
-      position: latLng,
-      map: map
-    });
-    map.panTo(latLng);
+    function placeMarkerAndPanTo(latLng, map) {
+      var marker = new google.maps.Marker({
+        position: latLng,
+        map: map
+      });
+      map.panTo(latLng);
+    }
   }
 
   render() {
@@ -64,6 +67,7 @@ export class MapContainer extends Component {
           lat: 37.7941135,
           lng: -122.4126891,
         }}
+        onClick={this.mapClick}
       >
         <Marker
           onClick={this.onMarkerClick}
