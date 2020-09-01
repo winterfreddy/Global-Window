@@ -8,7 +8,7 @@ export const setAuthToken = (token) => {
 };
 
 export const signup = (userData) => {
-  console.log('signpu session_api_util');
+  console.log('signup session_api_util');
   return axios.post("/api/users/register", userData);
 };
 
