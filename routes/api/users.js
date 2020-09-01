@@ -33,7 +33,7 @@ router.get(
 // "
 
 router.post("/register", (req, res) => {
-  console.log("users controller /register");
+  // console.log("users controller /register");
   const { errors, isValid } = validateRegisterInput(req.body);
   if(!isValid) {
     return res.status(400).json(errors);
@@ -50,14 +50,30 @@ router.post("/register", (req, res) => {
         username: req.body.username,
         password: req.body.password,
       });
-
+      
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
           if (err) throw err;
           newUser.password = hash;
+          console.log('hashed password');
           newUser
             .save()
-            .then((user) => res.json(user))
+            .then((user) => {
+              console.log('finished hashing password for user');
+              const payload = { id: user.id, username: user.username };
+
+              jwt.sign(
+                payload,
+                keys.secretOrKey,
+                { expiresIn: 3600 },
+                (err, token) => {
+                  res.json({
+                    success: true,
+                    token: "Bearer " + token,
+                  });
+                }
+              );
+            })
             .catch((err) => console.log(err));
         });
       });
