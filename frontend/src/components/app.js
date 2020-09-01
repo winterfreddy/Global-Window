@@ -4,6 +4,7 @@ import { Switch } from "react-router-dom";
 import NavBarContainer from "./nav/navbar_container";
 import MainPage from "./main/main_page";
 import Modal from './modal/modal';
+import SplashContainer from './splash/splash_container';
 
 const App = () => (
   <div>

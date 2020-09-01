@@ -43,7 +43,7 @@ class LoginForm extends React.Component {
     };
 
     this.props.login(user)
-      .then((this.props.history.push('/home'))
+      .then(this.props.history.push('/home'))
   }
 
   // Render the session errors if there are any
