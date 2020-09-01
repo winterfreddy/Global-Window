@@ -13,12 +13,13 @@ class LoginForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
+    this.handleDemoLogin = this.handleDemoLogin.bind(this);
   }
 
   // Once the user has been authenticated, redirect to the main page TODO
   componentWillReceiveProps(nextProps) {
     if (nextProps.currentUser === true) {
-      this.props.history.push("/");
+      this.props.history.push("/home");
     }
 
     // Set or clear errors
@@ -31,6 +32,11 @@ class LoginForm extends React.Component {
       this.setState({
         [field]: e.currentTarget.value,
       });
+  }
+
+  handleDemoLogin(e) {
+    e.persist();
+    this.setState({ username: 'demo', password: '123456' }, () => this.handleSubmit(e));
   }
 
   // Handle form submission
@@ -83,6 +89,8 @@ class LoginForm extends React.Component {
             />
             <br />
             <input type="submit" value="Submit" className="session-btn" />
+            <br />
+            <button className='session-btn' onClick={this.handleDemoLogin}>Demo Login</button>
             <br />
             <div>Join for free!{this.props.otherForm}</div>
             {this.renderErrors()}
