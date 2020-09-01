@@ -15,6 +15,11 @@
 }
 
 .google-api-map {
-    height: 700px !important;
+    height: 550px !important;
     width: 75% !important;
+    border: 5px solid lightblue;
+}
+
+.google-api-map:active {
+    border: 5px solid green;
 }
