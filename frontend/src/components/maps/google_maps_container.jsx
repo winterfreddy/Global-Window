@@ -14,6 +14,8 @@ export class MapContainer extends Component {
       showingInfoWindow: false, //Hides or the shows the infoWindow
       activeMarker: {}, //Shows the active marker upon click
       selectedPlace: {}, //Shows the infoWindow to the selected place upon a marker
+      lat: "",
+      lng: ""
     };
 
     this.mapClick = this.mapClick.bind(this);
@@ -41,18 +43,53 @@ export class MapContainer extends Component {
     // console.log(mapProps);
     // console.log(map);
     // console.log(clickEvent);
+    // let tmpLat;
+    // let tmpLng;
 
-    map.addListener('click', function (e) {
-      placeMarkerAndPanTo(e.latLng, map);
+    let tmpCoordinates = map.addListener('click', function (e) {
+      let tmpLatLng = placeMarkerAndPanTo(e.latLng, map);
+      console.log(tmpLatLng);
+      // this.setState({
+      //   lat: tmpLatLng[0],
+      //   lng: tmpLatLng[1],
+      // });
+      return tmpLatLng; // [37.74499191737994, -122.44655467102201]
     }); 
+    console.log(tmpCoordinates);
 
     function placeMarkerAndPanTo(latLng, map) {
       var marker = new google.maps.Marker({
         position: latLng,
-        map: map
+        map: map,
       });
       map.panTo(latLng);
+      console.log(latLng.lat()); // (37.74499191737994, -122.44655467102201)
+      console.log(latLng.lng());
+      let tmpLat = latLng.lat();
+      let tmpLng = latLng.lng();
+      return [tmpLat, tmpLng];
+      // console.log(tmpLat);
+      // console.log(tmpLng);
     }
+
+    this.setState({
+      coordinates: {
+        lat: tmpCoordinates[0],
+        lng: tmpCoordinates[1],
+      },
+    });
+
+    // console.log(tmpLat);
+    // console.log(tmpLng);
+
+    // this.setState({
+    //   coordinates: {
+    //     lat: tmpLat,
+    //     lng: tmpLng
+    //   }
+    // })
+
+    console.log(this.state);
   }
 
   render() {
