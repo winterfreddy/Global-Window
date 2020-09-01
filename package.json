@@ -33,10 +33,12 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.2",
     "mongoose-double": "0.0.1",
+    "multer": "^1.4.2",
     "node-sass": "^4.14.1",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "redux-thunk": "^2.3.0",
+    "uuid": "^8.3.0",
     "validator": "^13.1.1"
   },
   "devDependencies": {
