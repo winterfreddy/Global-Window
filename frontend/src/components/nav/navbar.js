@@ -42,9 +42,7 @@ class NavBar extends React.Component {
   render() {
     return (
       <div className="nav-bar">
-        <Link to='/home'>
-          <label className="logo-title">globalWindow</label>
-        </Link>
+        <Link to="/home" className="logo-title">globalWindow</Link>
         {this.getLinks()}
       </div>
     );
