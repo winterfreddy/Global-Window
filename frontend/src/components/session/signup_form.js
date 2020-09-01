@@ -38,7 +38,8 @@ class SignupForm extends React.Component {
       password2: this.state.password2,
     };
 
-    this.props.signup(user, this.props.history).then(() => this.props.closeModal);
+    this.props.signup(user, this.props.history)
+      .then(() => this.props.history.push('/home'));
   }
 
   renderErrors() {
@@ -57,7 +58,7 @@ class SignupForm extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <div className="signup-form">
             <div className="modal-header">Signup for Global Window</div>
-            <div onClick={this.props.closeModal} className="close-x">
+            <div id='close-x' onClick={this.props.closeModal} className="close-x">
               X
             </div>
             <br />

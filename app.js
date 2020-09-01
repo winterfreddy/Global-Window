@@ -5,6 +5,7 @@ const db = require("./config/keys").mongoURI;
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const users = require("./routes/api/users");
+const photos = require("./routes/api/photos");
 const keys = require("./config/keys");
 const { Client, Status } = require("@googlemaps/google-maps-services-js");
 
@@ -23,6 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json()); 
 app.get("/", (req, res) => res.send("Hello World"));
 app.use("/api/users", users);
+app.use("/api/photos", photos);
 // CORS
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -33,21 +35,21 @@ app.use((req, res, next) => {
 const client = new Client({});
 
 // Makes call to that specific location
-client
-  .elevation({
-    params: {
-      locations: [{ lat: 37.736155, lng: -122.508014 }],
-      key: keys.mapsAPIKey,
-    },
-    timeout: 1000, // milliseconds
-  })
-  .then((r) => {
-    console.log(r.data);
-    console.log(r.data.results[0].elevation);
-  })
-  .catch((e) => {
-    console.log(e.response.data.error_message);
-  });
+// client
+//   .elevation({
+//     params: {
+//       locations: [{ lat: 37.736155, lng: -122.508014 }],
+//       key: keys.mapsAPIKey,
+//     },
+//     timeout: 1000, // milliseconds
+//   })
+//   .then((r) => {
+//     console.log(r.data);
+//     console.log(r.data.results[0].elevation);
+//   })
+//   .catch((e) => {
+//     console.log(e.response.data.error_message);
+//   });
 
 
 // COMMENT HERE
