@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 // import "./navbar.css";
+import '../../stylesheets/navbar.scss'
 import '../../stylesheets/modal.scss';
 import '../../stylesheets/session.scss';
 
@@ -30,7 +31,7 @@ class NavBar extends React.Component {
       );
     } else {
       return (
-        <div>
+        <div className="navbar-links">
           <button className='navbar-login' onClick={() => openModal('login')}>Login</button>
           <button className='navbar-signup' onClick={() => openModal('signup')}>Signup</button>
         </div>
@@ -40,8 +41,8 @@ class NavBar extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>Global Window</h1>
+      <div className="nav-bar">
+        <label className="logo-title">globalWindow</label>
         {this.getLinks()}
       </div>
     );
