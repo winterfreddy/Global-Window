@@ -1,12 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 .logo-title {
+    font-family: 'Courgette', cursive;
     font-size: 40px;
     padding: 10px;
 }
 
 .nav-bar {
     display: flex;
+    background-color: #daa520;
+    border-radius: 3px;
     justify-content: space-between;
-    border-bottom: 1px solid gray;
+    // border-bottom: 1px solid black;
 }
 
 .navbar-links {
@@ -17,9 +23,11 @@
 .navbar-login,
 .navbar-signup,
 .logout-btn {
-    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
     border-radius: 5px;
     border-width: thin;
+    border: 1px solid black;
     background-color: transparent;
     padding: 10px;
     margin: 10px;
@@ -29,5 +37,6 @@
 .navbar-login:hover,
 .navbar-signup:hover,
 .logout-btn:hover {
-    background-color: whitesmoke;
+    background-color: #2055da;
+    color: white;
 }
