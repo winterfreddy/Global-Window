@@ -43,14 +43,12 @@ export class MapContainer extends Component {
 
     let tmpCoordinates = map.addListener('click', e => {
       let tmpLatLng = placeMarkerAndPanTo(e.latLng, map);
-      console.log(tmpLatLng);
       this.setState({
         lat: tmpLatLng[0],
         lng: tmpLatLng[1],
       });
       return tmpLatLng; 
     }); 
-    console.log(tmpCoordinates);
 
     function placeMarkerAndPanTo(latLng, map) {
       let marker = new google.maps.Marker({
@@ -62,8 +60,6 @@ export class MapContainer extends Component {
       let tmpLng = latLng.lng();
       return [tmpLat, tmpLng];
     }
-
-    console.log(this.state);
   }
 
   render() {
