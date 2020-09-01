@@ -9,14 +9,14 @@ module.exports = function validatePhotoInput(data) {
   data.lat = validText(data.lat) ? data.lat : "";
   data.lng = validText(data.lng) ? data.lng : "";
 
-  if (Validator.isEmpty(data.imageURL)) {
-    errors.imageURL = "Image URL is required";
-  }
+//   if (Validator.isEmpty(data.imageURL)) {
+//     errors.imageURL = "Image URL is required";
+//   }
 
 //   // Posting URLs or uploading image?
-  if(!Validator.isURL(data.imageURL)) {
-    errors.imageURL = "Image URL must be valid";
-  }
+//   if(!Validator.isURL(data.imageURL)) {
+//     errors.imageURL = "Image URL must be valid";
+//   }
 
   if(!Validator.isDecimal(data.lat)) {
     errors.lat = "Latitude must be decimal";
