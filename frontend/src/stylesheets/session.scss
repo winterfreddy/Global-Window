@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 .login-form-container, .signup-form-container {
-    background-image: url(../images/jenny-pace-mQZ_gd9CV-o-unsplash.jpg);
+    background-image: url(../images/jenny-pace-WERfZVEnPfA-unsplash.jpg);
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -19,7 +19,7 @@
     // border: 1px solid black;
     border-radius: 5px;
     background: transparent;
-    padding: 20px;
+    padding: 30px;
 }
 
 @keyframes shake {
@@ -38,11 +38,13 @@
     animation: .5s shake infinite;
     animation-iteration-count: 3;
     font-size: 14px;
+    margin-top: 10px;
 }
 
 .modal-header {
     font-size: 22px;
     margin-bottom: 10px;
+    font: bolder;
 }
 
 .login-username, 
@@ -50,25 +52,20 @@
 .signup-username, 
 .signup-password, 
 .signup-password2 {
-    border: none;
-    outline: none;
-    border-bottom: 1px solid black;
+    border-radius: 5px;
+    border: 1px solid black;
     text-align: center;
     margin: 10px;
     font-size: 20px;
+    background: transparent;
 }
 
-.login-username:focus, 
-.login-password:focus, 
-.signup-username:focus, 
-.signup-password:focus, 
-.signup-password2:focus {
-    border: none;
-    outline: none;
-    border-bottom: 1px solid burlywood;
-    text-align: center;
-    margin: 10px;
-    font-size: 20px;
+.login-username:hover, 
+.login-password:hover, 
+.signup-username:hover, 
+.signup-password:hover, 
+.signup-password2:hover {
+    border: 1px solid burlywood;
 }
 
 .login-username::placeholder, 
@@ -77,7 +74,7 @@
 .signup-password::placeholder, 
 .signup-password2::placeholder {
     font-size: 20px;
-    color: lightgray;
+    color: black;
 }
 
 .close-x {
@@ -111,5 +108,10 @@
     border: none;
     outline: none;
     color: burlywood;
-    background: white;
+    background: transparent;
+    font-size: 16px;
+}
+
+.other-form:hover {
+    color: lightblue;
 }
