@@ -22,7 +22,7 @@ class NavBar extends React.Component {
     const { openModal } = this.props;
     if (this.props.loggedIn) {
       return (
-        <div>
+        <div className="navbar-links">
           {/* <Link to={"/tweets"}>All Tweets</Link>
           <Link to={"/profile"}>Profile</Link>
           <Link to={"/new_tweet"}>Write a Tweet</Link> */}
@@ -42,7 +42,7 @@ class NavBar extends React.Component {
   render() {
     return (
       <div className="nav-bar">
-        <label className="logo-title">globalWindow</label>
+        <Link to="/home" className="logo-title">globalWindow</Link>
         {this.getLinks()}
       </div>
     );

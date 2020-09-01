@@ -1,8 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 .login-form-container, .signup-form-container {
+    background-image: url(../images/jenny-pace-mQZ_gd9CV-o-unsplash.jpg);
+    background-size: cover;
     display: flex;
     flex-direction: column;
     text-align: center;
     align-items: center;
+    border-radius: 5px;
     // margin: auto;
     // padding: 5px;
     // width: 45%;
@@ -11,9 +16,9 @@
 .login-form, .signup-form {
     height: 320px;
     width: 300px;
-    border: 1px solid black;
+    // border: 1px solid black;
     border-radius: 5px;
-    background: white;
+    background: transparent;
     padding: 20px;
 }
 

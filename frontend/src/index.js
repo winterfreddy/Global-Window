@@ -5,6 +5,7 @@ import configureStore from './store/store';
 import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/session_api_util';
 import { logout, signup } from './actions/session_actions';
+import './stylesheets/reset.scss';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
