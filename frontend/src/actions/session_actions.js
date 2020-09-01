@@ -29,6 +29,7 @@ export const signup = user => dispatch => {
     return APIUtil.signup(user)
         .then(() => dispatch(receiveUserSignIn()))
         .then(() => dispatch(closeModal()))
+        .then(() => dispatch(receiveCurrentUser(user)))
         .catch(err => dispatch(receiveErrors(err.response.data)))
 };
 
