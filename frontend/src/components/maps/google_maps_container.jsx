@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
 
 const mapStyles = {
-  width: "50%",
-  height: "50%",
+  width: "80%",
+  height: "80%",
 };
 
 export class MapContainer extends Component {
@@ -32,6 +32,25 @@ export class MapContainer extends Component {
       });
     }
   };
+
+  initMap() {
+    var map = new google.maps.Map(document.getElementsByClassName('google-api-map'), {
+      zoom: 4,
+      center: { lat: 37.7941135, lng: -122.4126891 }
+    });
+
+    map.addListener('click', function (e) {
+      placeMarkerAndPanTo(e.latLng, map);
+    });
+  }
+
+  placeMarkerAndPanTo(latLng, map) {
+    var marker = new google.maps.Marker({
+      position: latLng,
+      map: map
+    });
+    map.panTo(latLng);
+  }
 
   render() {
       
