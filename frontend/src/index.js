@@ -8,7 +8,8 @@ import { logout } from './actions/session_actions';
 import './stylesheets/reset.scss';
 
 // Testing imports:
-import { fetchPhoto } from './actions/photo_actions';
+// import { fetchPhotos, fetchPhoto } from './util/photos_api_util';
+import { fetchPhotos, fetchPhoto } from './actions/photo_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -35,5 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // testing:
   window.getState = store.getState;
   window.dispatch = store.dispatch;
+  window.fetchPhotos = fetchPhotos;
   window.fetchPhoto = fetchPhoto;
 });
