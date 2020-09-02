@@ -1,5 +1,6 @@
 .main-page {
     display: flex;
+    margin-top: 20px;
 }
 
 .left-side {
@@ -14,12 +15,19 @@
     margin-left: 50px;
 }
 
+// This is the actual map element
+#map {
+    height: 0px !important;
+    width: 0px !important;
+}
+
 .google-api-map {
     height: 550px !important;
     width: 75% !important;
-    border: 5px solid lightblue;
+    border: 3px solid black;
+    border-radius: 5px !important;
 }
 
 .google-api-map:active {
-    border: 5px solid green;
+    border: 3px solid green;
 }
