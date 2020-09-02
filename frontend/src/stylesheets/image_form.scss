@@ -10,7 +10,10 @@
 .image-upload-form-box {
     border: 1px solid black;
     box-shadow: 2px 2px 5px black;
-    max-width: 400px !important;
+    max-width: 300px !important;
+    min-height: 530px;
+    background: rgb(37, 37, 37);
+    color: white;
 }
 
 .image-description {
@@ -37,8 +40,8 @@
 }
 
 .image-preview > img {
-    max-height: 600px;
-    max-width: 500px;
+    max-height: 250px;
+    max-width: 250px;
 }
 
 
