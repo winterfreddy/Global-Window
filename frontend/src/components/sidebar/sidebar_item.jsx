@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../stylesheets/sidebar.scss';
 
 class SidebarItem extends React.Component {
     render() {
