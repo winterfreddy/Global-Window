@@ -12,7 +12,7 @@ class ImageUploadForm extends React.Component {
     this.state["tags"] =  "";
     this.state["photoFile"] = null;
     this.state['photoUrl'] = null;
-    this.state['errors'] = '';
+    this.state['errors'] = null;
 
     this.singleFileChangedHandler = this.singleFileChangedHandler.bind(this);
     this.singleFileUploadHandler = this.singleFileUploadHandler.bind(this);
@@ -25,7 +25,6 @@ class ImageUploadForm extends React.Component {
   singleFileChangedHandler = (event) => {
     const reader = new FileReader();
     const file = event.currentTarget.files[0];
-    console.log(file);
     reader.onloadend = () =>
       this.setState({ photoUrl: reader.result, photoFile: file });
     if (file) {
@@ -74,8 +73,12 @@ class ImageUploadForm extends React.Component {
     if (this.state.errors) {
       errorsDiv = (
         <div className="alert">
-          <span className="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-          <strong>Something went wrong.</strong>
+          <span 
+            id="closebtn" 
+            onClick={() => document.getElementById('closebtn').parentElement.style.display = 'none'}>
+            &times;
+          </span>
+          <strong>All fields must be filled out.</strong>
         </div>
       );
     }
