@@ -6,7 +6,7 @@ class ImageUploadForm extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { ...this.props };
+    this.state = { };
     this.state["description"] = "";
     this.state["tags"] =  "";
     this.state["photoFile"] = null;
@@ -27,6 +27,7 @@ class ImageUploadForm extends React.Component {
 
     const reader = new FileReader();
     const file = event.currentTarget.files[0];
+    console.log(file);
     reader.onloadend = () =>
       this.setState({ photoUrl: reader.result, photoFile: file });
     if (file) {
@@ -40,9 +41,9 @@ class ImageUploadForm extends React.Component {
     const formData = new FormData();
     if (this.state.photoFile) {
       formData.append('description', this.state.description);
-      formData.append('imageURL', this.state.photoFile);
-      let coordinates = { lat: this.state.lat, lng: this.state.lng};
-      formData.append('coordinates', coordinates);
+      formData.append('file', this.state.photoFile);
+      let coordinates = { lat: this.props.lat, lng: this.props.lng};
+      formData.append('coordinates', JSON.stringify(coordinates));
       let tagsArray = this.state.tags.split(' ');
       formData.append('tags', tagsArray);
       axios.post("/api/photos/", formData, {
@@ -100,7 +101,6 @@ class ImageUploadForm extends React.Component {
   };
 
   render() {
-    console.log(this.state.photoUrl);
     const preview = this.state.photoUrl ? (
       <img src={this.state.photoUrl} className="image-preview" />
     ) : null;
@@ -117,7 +117,7 @@ class ImageUploadForm extends React.Component {
             onChange={this.update('description')} />
         </label>
         <label>Tags
-          <input 
+          <input
             type="text"
             id='tags-field'
             className='tags-field' 
