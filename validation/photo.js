@@ -4,10 +4,12 @@ const validText = require("./valid-text");
 module.exports = function validatePhotoInput(data) {
   let errors = {};
 
+  const { lat, lng } = data.coordinates;
+  
   // data.creatorId = validText(data.creatorId) ? data.creatorId : "";
   data.imageURL = validText(data.imageURL) ? data.imageURL : "";
-  data.lat = validText(data.lat) ? data.lat : "";
-  data.lng = validText(data.lng) ? data.lng : "";
+  lat = validText(lat) ? lat : "";
+  lng = validText(lng) ? lng : "";
 
 //   if (Validator.isEmpty(data.imageURL)) {
 //     errors.imageURL = "Image URL is required";
@@ -18,19 +20,19 @@ module.exports = function validatePhotoInput(data) {
 //     errors.imageURL = "Image URL must be valid";
 //   }
 
-  if(!Validator.isDecimal(data.lat)) {
+  if(!Validator.isDecimal(lat)) {
     errors.lat = "Latitude must be decimal";
   }
 
-  if (Validator.isEmpty(data.lat)) {
+  if (Validator.isEmpty(lat)) {
     errors.lat = "Latitude is required";
   }
 
-  if (!Validator.isDecimal(data.lng)) {
+  if (!Validator.isDecimal(lng)) {
     errors.lng = "Longitude must be decimal";
   }
 
-  if (Validator.isEmpty(data.lng)) {
+  if (Validator.isEmpty(lng)) {
     errors.lng = "Longitude is required";
   }
 

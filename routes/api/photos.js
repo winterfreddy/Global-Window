@@ -66,7 +66,7 @@ router.post("/", upload.single("file"),
             const newPhoto = new Photo({
             creatorId: req.user.id, // req.user.id
             imageURL: uploadedFileURL,
-            coordinates: { lat: req.body.lat, lng: req.body.lng },
+            coordinates: req.body.coordinates,
             });
 
             newPhoto.save().then((photo) => res.json(photo));
@@ -83,7 +83,7 @@ router.delete('/:id',
   (req, res) => (
     Photo.findById(req.params.id)
     .then((photo) => {
-    const currUserId = req.user.id;
+      const currUserId = req.user.id;
       if(currUserId == photo.creatorId) {
         Photo.deleteOne({ _id: photo.id })
           .then(() => res.json({ successfulDelete: "Deleted successfuly" }))
