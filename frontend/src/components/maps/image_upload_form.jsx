@@ -8,7 +8,7 @@ class ImageUploadForm extends React.Component {
 
     this.state = { ...this.props };
     this.state["description"] = "";
-    this.state["selectedFile"] = null;
+    this.state["photoFile"] = null;
   }
 
   _onDrop(files) {
@@ -34,45 +34,64 @@ class ImageUploadForm extends React.Component {
 
   singleFileChangedHandler = (event) => {
     this.setState({
-      selectedFile: event.target.files[0],
+      photoFile: event.currentTarget.files[0],
     });
   };
 
   singleFileUploadHandler = () => {
-    const data = new FormData();
-    // If file selected
-    if (this.state.selectedFile) {
-      data.append(
-        "description",
-        this.state.lat,
-        this.state.lng,
-        this.state.selectedFile,
-        this.state.selectedFile.name
-      );
-      axios
-        .post("/api/photos/", data, {
-          headers: {
-            accept: "application/json",
-            "Accept-Language": "en-US,en;q=0.8",
-            "Content-Type": `multipart/form-data; boundary=${data._boundary}`,
-          },
-        })
-        .then((response) => {
-          if (200 === response.status) {
-            // If file size is larger than expected.
+    const formData = new FormData();
+    if (this.state.photoFile) {
+      // formData.append('description', this.state.description);
+      formData.append('imageURL', this.state.photoFile);
+      let coordinates = { lat: this.state.lat, lng: this.state.lng};
+      formData.append('coordinates', coordinates);
+
+      axios.post('/api/photos/',formData)
+        .then( (response) => {
+          if (response.status === 200) {
             if (response.data.error) {
-              if ("LIMIT_FILE_SIZE" === response.data.error.code) {
-              } else {
-                console.log(response.data);
-              }
-            } else {
-              // Success
-              let fileName = response.data;
-              console.log("fileName", fileName);
+              console.log(response.data);
+            }
+            else {
+              console.log("successful upload");
             }
           }
-        });
-    } 
+        })
+    }
+
+    // If file selected
+    // if (this.state.photoFile) {
+      // data.append(
+      //   "description",
+      //   this.state.lat,
+      //   this.state.lng,
+      //   this.state.photoFile,
+      //   this.state.photoFile.name
+      // );
+      // axios
+      //   .post("/api/photos/", data, {
+      //     headers: {
+      //       accept: "application/json",
+      //       "Accept-Language": "en-US,en;q=0.8",
+      //       "Content-Type": `multipart/form-data; boundary=${data._boundary}`,
+      //     },
+      //   })
+      //   .then((response) => {
+      //     if (200 === response.status) {
+      //       // If file size is larger than expected.
+      //       if (response.data.error) {
+      //         if ("LIMIT_FILE_SIZE" === response.data.error.code) {
+      //         } else {
+      //           console.log(response.data);
+      //         }
+      //       } else {
+      //         // Success
+      //         let fileName = response.data;
+      //         console.log("fileName", fileName);
+      //       }
+      //     }
+      //   });
+    // } 
   };
 
   render() {
