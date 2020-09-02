@@ -34,6 +34,10 @@ module.exports = function validatePhotoInput(data) {
     errors.lng = "Longitude is required";
   }
 
+  if (Validator.isEmpty(data.description)) {
+    errors.description = "Description is required";
+  }
+
   return {
     errors,
     isValid: Object.keys(errors).length === 0

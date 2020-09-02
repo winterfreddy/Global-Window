@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const User = require("../../models/User");
+const Photo = require("../../models/Photo");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const passport = require("passport");
@@ -116,6 +117,16 @@ router.post("/login", (req, res) => {
       }
     });
   });
+});
+
+router.get('/:id/photos', (req, res) => {
+  Photo.find({ creatorId: req.params.id })
+    .sort({ date: -1 })
+    .then(photos => res.json(photos))
+    .catch(err =>
+      res.status(404).json({ nophotosfound: 'No photos found from that user' }
+      )
+    );
 });
 
 module.exports = router;
