@@ -8,30 +8,17 @@ class ImageUploadForm extends React.Component {
 
     this.state = { ...this.props };
     this.state["description"] = "";
+    this.state["tags"] =  "";
     this.state["photoFile"] = null;
     this.state['photoUrl'] = null;
+
+    this.singleFileChangedHandler = this.singleFileChangedHandler.bind(this);
+    this.singleFileUploadHandler = this.singleFileUploadHandler.bind(this);
   }
 
-  _onDrop(files) {
-    var file = files[0];
+  update(field) {
+    return e => this.setState({ [field]: e.currentTarget.value });
   }
-
-  //   handleSubmit(e) {
-  //     e.preventDefault();
-  //     const formData = new FormData();
-  //     formData.append("photo[description]", this.state.description);
-  //     if (this.state.photoFile) {
-  //       formData.append("photo[photo]", this.state.photoFile);
-  //     }
-  //     $.ajax({
-  //       url: "/api/photos/",
-  //       method: "POST",
-  //       data: formData,
-  //       contentType: false,
-  //       processData: false,
-  //     });
-  //     // .then((photo) => history.push(`/home');
-  //   }
 
   singleFileChangedHandler = (event) => {
     // this.setState({
@@ -56,7 +43,8 @@ class ImageUploadForm extends React.Component {
       formData.append('imageURL', this.state.photoFile);
       let coordinates = { lat: this.state.lat, lng: this.state.lng};
       formData.append('coordinates', coordinates);
-
+      let tagsArray = this.state.tags.split(' ');
+      formData.append('tags', tagsArray);
       axios.post("/api/photos/", formData, {
           headers: {
             accept: "application/json",
@@ -122,12 +110,19 @@ class ImageUploadForm extends React.Component {
         style={{ boxShadow: "0 5px 10px 2px rgba(195,192,192,.5)" }}
       >
         <label>Image Description
-          <input type="text" className='description-field' />
+          <input 
+            type="text" 
+            className='description-field' 
+            value={this.state.description}
+            onChange={this.update('description')} />
         </label>
         <label>Tags
-          <select className='tags'>
-            <option selected disabled>--Select--</option>
-          </select>
+          <input 
+            type="text"
+            id='tags-field'
+            className='tags-field' 
+            value={this.state.tags} 
+            onChange={this.update('tags')} />
         </label>
         <div className="card-header">
           <h3 style={{ color: "#555", marginLeft: "12px" }}>
