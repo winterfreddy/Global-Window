@@ -31,7 +31,7 @@ const PhotoSchema = new Schema({
     default: Date.now,
   },
   tags: [],
-  favoriterIds: [],
+  // favoriterIds: [],
 });
 
 module.exports = User = mongoose.model("Photo", PhotoSchema);
