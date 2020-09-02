@@ -52,7 +52,7 @@ class ImageUploadForm extends React.Component {
   singleFileUploadHandler = () => {
     const formData = new FormData();
     if (this.state.photoFile) {
-      // formData.append('description', this.state.description);
+      formData.append('description', this.state.description);
       formData.append('imageURL', this.state.photoFile);
       let coordinates = { lat: this.state.lat, lng: this.state.lng};
       formData.append('coordinates', coordinates);
@@ -121,6 +121,14 @@ class ImageUploadForm extends React.Component {
         className="card border-light mb-3 mt-5"
         style={{ boxShadow: "0 5px 10px 2px rgba(195,192,192,.5)" }}
       >
+        <label>Image Description
+          <input type="text" className='description-field' />
+        </label>
+        <label>Tags
+          <select className='tags'>
+            <option selected disabled>--Select--</option>
+          </select>
+        </label>
         <div className="card-header">
           <h3 style={{ color: "#555", marginLeft: "12px" }}>
             Single Image Upload
