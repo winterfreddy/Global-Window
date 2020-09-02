@@ -64,34 +64,38 @@ export class MapContainer extends Component {
   render() {
       
     return (
-      <div>
-        {/* <Map
-          className="google-api-map"
-          google={this.props.google}
-          zoom={12}
-          style={mapStyles}
-          gestureHandling='cooperative'
-          initialCenter={{
-            lat: 37.7941135,
-            lng: -122.4126891,
-          }}
-          onClick={this.mapClick}
-        >
-          <Marker
-            onClick={this.onMarkerClick}
-            name={"App Academy San Francisco Office"}
-          />
-          <InfoWindow
-            marker={this.state.activeMarker}
-            visible={this.state.showingInfoWindow}
-            onClose={this.onClose}
+      <div className='google-maps-images-container'>
+        <div>
+          <Map
+            className="google-api-map"
+            google={this.props.google}
+            zoom={12}
+            style={mapStyles}
+            gestureHandling='cooperative'
+            initialCenter={{
+              lat: 37.7941135,
+              lng: -122.4126891,
+            }}
+            onClick={this.mapClick}
           >
-            <div>
-              <h4>{this.state.selectedPlace.name}</h4>
-            </div>
-          </InfoWindow>
-        </Map> */}
-        <ImageUploadFormContainer lat={this.state.lat} lng={this.state.lng} />
+            <Marker
+              onClick={this.onMarkerClick}
+              name={"App Academy San Francisco Office"}
+            />
+            <InfoWindow
+              marker={this.state.activeMarker}
+              visible={this.state.showingInfoWindow}
+              onClose={this.onClose}
+            >
+              <div>
+                <h4>{this.state.selectedPlace.name}</h4>
+              </div>
+            </InfoWindow>
+          </Map>
+        </div>
+        <div>
+          <ImageUploadFormContainer lat={this.state.lat} lng={this.state.lng} />
+        </div>
       </div>
     );
   }
