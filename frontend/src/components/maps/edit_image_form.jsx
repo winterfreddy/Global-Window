@@ -12,9 +12,9 @@ class EditImageForm extends React.Component {
         return(
             <div>
                 Edit Image Form here todo!
-                <ImageUploadForm
+                {/* <ImageUploadForm
                     description = {}
-                />
+                /> */}
             </div>
         )
     }
