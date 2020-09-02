@@ -35,6 +35,7 @@ router.get('/:id', (req, res) => {
 });
 
 const uploadImage = (file) => {
+  console.log(file)
   const params = {
     Bucket: keys.s3Bucket,
     Key: uuidv4(),
@@ -45,29 +46,34 @@ const uploadImage = (file) => {
 
   const uploadPhoto = s3.upload(params).promise();
   
-  return s3.upload(params).promise();
+  return uploadPhoto;
 };
 
 // create a new photo - NB: this uses the helper method above
 router.post("/", upload.single("file"), 
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
-        const { errors, isValid } = validatePhotoInput(req.body);
+        console.log('photo post, req.body: ', req.body);
+        console.log('photo post, req.file: ', req.file);
+        const { errors, isValid } = validatePhotoInput(req.body, req.file);
 
         if (!isValid) {
           return res.status(400).json(errors);
         }
-        
+        console.log('finished validations');
         // Wait for file to upload, get URL, and then create Photo object
         uploadImage(req.file).then(data => {
             const uploadedFileURL = data.Location;
 
             // create Photo object
             const newPhoto = new Photo({
-            creatorId: req.user.id, // req.user.id
-            imageURL: uploadedFileURL,
-            coordinates: { lat: req.body.lat, lng: req.body.lng },
+              creatorId: req.user.id, // req.user.id
+              description: req.body.description,
+              imageURL: uploadedFileURL,
+              coordinates: JSON.parse(req.body.coordinates),
+              tags: req.body.tags
             });
+            console.log('created photo object');
 
             newPhoto.save().then((photo) => res.json(photo));
         }).catch(err => {
@@ -83,7 +89,7 @@ router.delete('/:id',
   (req, res) => (
     Photo.findById(req.params.id)
     .then((photo) => {
-    const currUserId = req.user.id;
+      const currUserId = req.user.id;
       if(currUserId == photo.creatorId) {
         Photo.deleteOne({ _id: photo.id })
           .then(() => res.json({ successfulDelete: "Deleted successfuly" }))

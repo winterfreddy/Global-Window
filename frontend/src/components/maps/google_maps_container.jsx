@@ -62,7 +62,6 @@ export class MapContainer extends Component {
   }
 
   render() {
-      
     return (
       <div className='google-maps-images-container'>
         <div>

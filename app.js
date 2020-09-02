@@ -32,6 +32,7 @@ app.use(bodyParser.json());
 app.get("/", (req, res) => res.send("Hello World"));
 app.use("/api/users", users);
 app.use("/api/photos", photos);
+
 // CORS
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");

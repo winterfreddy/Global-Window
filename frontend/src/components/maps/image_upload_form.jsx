@@ -6,32 +6,19 @@ class ImageUploadForm extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { ...this.props };
+    this.state = { };
     this.state["description"] = "";
+    this.state["tags"] =  "";
     this.state["photoFile"] = null;
     this.state['photoUrl'] = null;
+
+    this.singleFileChangedHandler = this.singleFileChangedHandler.bind(this);
+    this.singleFileUploadHandler = this.singleFileUploadHandler.bind(this);
   }
 
-  _onDrop(files) {
-    var file = files[0];
+  update(field) {
+    return e => this.setState({ [field]: e.currentTarget.value });
   }
-
-  //   handleSubmit(e) {
-  //     e.preventDefault();
-  //     const formData = new FormData();
-  //     formData.append("photo[description]", this.state.description);
-  //     if (this.state.photoFile) {
-  //       formData.append("photo[photo]", this.state.photoFile);
-  //     }
-  //     $.ajax({
-  //       url: "/api/photos/",
-  //       method: "POST",
-  //       data: formData,
-  //       contentType: false,
-  //       processData: false,
-  //     });
-  //     // .then((photo) => history.push(`/home');
-  //   }
 
   singleFileChangedHandler = (event) => {
     // this.setState({
@@ -40,6 +27,7 @@ class ImageUploadForm extends React.Component {
 
     const reader = new FileReader();
     const file = event.currentTarget.files[0];
+    console.log(file);
     reader.onloadend = () =>
       this.setState({ photoUrl: reader.result, photoFile: file });
     if (file) {
@@ -52,11 +40,12 @@ class ImageUploadForm extends React.Component {
   singleFileUploadHandler = () => {
     const formData = new FormData();
     if (this.state.photoFile) {
-      // formData.append('description', this.state.description);
-      formData.append('imageURL', this.state.photoFile);
-      let coordinates = { lat: this.state.lat, lng: this.state.lng};
-      formData.append('coordinates', coordinates);
-
+      formData.append('description', this.state.description);
+      formData.append('file', this.state.photoFile);
+      let coordinates = { lat: this.props.lat, lng: this.props.lng};
+      formData.append('coordinates', JSON.stringify(coordinates));
+      let tagsArray = this.state.tags.split(' ');
+      formData.append('tags', tagsArray);
       axios.post("/api/photos/", formData, {
           headers: {
             accept: "application/json",
@@ -112,7 +101,6 @@ class ImageUploadForm extends React.Component {
   };
 
   render() {
-    console.log(this.state.photoUrl);
     const preview = this.state.photoUrl ? (
       <img src={this.state.photoUrl} className="image-preview" />
     ) : null;
@@ -121,6 +109,21 @@ class ImageUploadForm extends React.Component {
         className="card border-light mb-3 mt-5"
         style={{ boxShadow: "0 5px 10px 2px rgba(195,192,192,.5)" }}
       >
+        <label>Image Description
+          <input 
+            type="text" 
+            className='description-field' 
+            value={this.state.description}
+            onChange={this.update('description')} />
+        </label>
+        <label>Tags
+          <input
+            type="text"
+            id='tags-field'
+            className='tags-field' 
+            value={this.state.tags} 
+            onChange={this.update('tags')} />
+        </label>
         <div className="card-header">
           <h3 style={{ color: "#555", marginLeft: "12px" }}>
             Single Image Upload
