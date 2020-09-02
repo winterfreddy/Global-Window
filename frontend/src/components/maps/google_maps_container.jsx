@@ -47,7 +47,6 @@ export class MapContainer extends Component {
         lat: tmpLatLng[0],
         lng: tmpLatLng[1],
       });
-      return tmpLatLng; 
     }); 
 
     function placeMarkerAndPanTo(latLng, map) {
