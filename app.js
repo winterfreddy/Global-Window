@@ -6,9 +6,16 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const users = require("./routes/api/users");
 const photos = require("./routes/api/photos");
+const path = require("path");
 const keys = require("./config/keys");
 const { Client, Status } = require("@googlemaps/google-maps-services-js");
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("frontend/build"));
+  app.get("/", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
+  });
+}
 
 mongoose
   .connect(db, { useNewUrlParser: true })
