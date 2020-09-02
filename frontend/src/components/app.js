@@ -14,6 +14,7 @@ const App = () => (
     <Switch>
       <ProtectedRoute exact path="/home" component={MainPage} />
       <ProtectedRoute exact path='/upload' component={MapsFormContainer} />
+      <ProtectedRoute path='/${id}' />
     </Switch>
     <AuthRoute exact path="/" component={SplashContainer} />
   </div>
