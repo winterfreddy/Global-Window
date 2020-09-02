@@ -22,6 +22,7 @@
 }
 
 .google-api-map {
+    margin-top: 100px !important;
     height: 550px !important;
     width: 75% !important;
     border: 3px solid black;
@@ -30,4 +31,9 @@
 
 .google-api-map:active {
     border: 3px solid green;
+}
+
+.google-maps-images-container {
+    display: flex !important;
+    flex-direction: column-reverse !important;
 }

@@ -61,6 +61,14 @@
     padding: 5px;
 }
 
+.login-username:focus, 
+.login-password:focus, 
+.signup-username:focus, 
+.signup-password:focus, 
+.signup-password2:focus {
+    background: white;
+}
+
 .login-username:hover, 
 .login-password:hover, 
 .signup-username:hover, 
