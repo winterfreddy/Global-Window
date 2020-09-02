@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import '../../stylesheets/image_form.scss'
 // import Dropzone from 'react-dropzone';
 
 class ImageUploadForm extends React.Component {
@@ -105,46 +106,37 @@ class ImageUploadForm extends React.Component {
       <img src={this.state.photoUrl} className="image-preview" />
     ) : null;
     return (
-      <div
-        className="card border-light mb-3 mt-5"
-        style={{ boxShadow: "0 5px 10px 2px rgba(195,192,192,.5)" }}
-      >
-        <label>Image Description
+      <div className="image-upload-form-box">
+        <label className="image-upload-title">Image Upload Form</label>
+        <label className="image-upload-reminder">Don't forget to place a marker on the map!</label>
+        <div className="image-description">
+          <label>Image Description:</label>
+          <br/>
           <input 
             type="text" 
             className='description-field' 
             value={this.state.description}
             onChange={this.update('description')} />
-        </label>
-        <label>Tags
+        </div>
+        <div className="image-tags">
+          <label>Tags (separate by space for multiple tags):</label>
+          <br/>
           <input
             type="text"
             id='tags-field'
             className='tags-field' 
             value={this.state.tags} 
             onChange={this.update('tags')} />
-        </label>
-        <div className="card-header">
-          <h3 style={{ color: "#555", marginLeft: "12px" }}>
-            Single Image Upload
-          </h3>
-          <p className="text-muted" style={{ marginLeft: "12px" }}>
-            Upload Size: 250px x 250px ( Max 2MB )
-          </p>
         </div>
-        <div className="card-body">
-          <p className="card-text">Please upload an image</p>
+        <div>
           <input type="file" onChange={this.singleFileChangedHandler} />
-          <div className="mt-5">
-            <button
-              className="btn btn-info"
-              onClick={this.singleFileUploadHandler}
-            >
-              Upload
-            </button>
+          <div>
+            <button className="btn btn-info" onClick={this.singleFileUploadHandler}>Upload</button>
           </div>
         </div>
-        {preview}
+        <div className="image-preview">
+          {preview}
+        </div>
       </div>
     );
   }

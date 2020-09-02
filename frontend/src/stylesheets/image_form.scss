@@ -1,0 +1,43 @@
+.image-upload-form-box,
+.image-description,
+.image-tags {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    // width: 100%;
+}
+
+.image-upload-form-box {
+    border: 1px solid black;
+    box-shadow: 2px 2px 5px black;
+    max-width: 500px !important;
+}
+
+.image-description {
+    margin-top: 5px;
+}
+
+.image-upload-title,
+.image-upload-reminder {
+    font-size: 20px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.image-upload-reminder {
+    font-size: 15px;
+    color: red;
+    padding: 0;
+}
+
+.image-preview {
+    margin: 10px 0 5px 0;
+}
+
+.image-preview > img {
+    max-height: 600px;
+    max-width: 500px;
+}
+
