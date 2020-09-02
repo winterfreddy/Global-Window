@@ -13,7 +13,7 @@ export const uploadPhoto = photo => dispatch => (
         .catch(error => console.log(error))
 );
 
-export const getPhoto = id => dispatch => (
+export const fetchPhoto = id => dispatch => (
     PhotoAPIUtil.fetchPhoto(id)
         .then((photo) => dispatch(receivePhoto(photo)))
         .catch(error => console.log(error))
