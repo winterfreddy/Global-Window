@@ -66,7 +66,7 @@ export class MapContainer extends Component {
       
     return (
       <div>
-        <Map
+        {/* <Map
           className="google-api-map"
           google={this.props.google}
           zoom={12}
@@ -90,7 +90,7 @@ export class MapContainer extends Component {
               <h4>{this.state.selectedPlace.name}</h4>
             </div>
           </InfoWindow>
-        </Map>
+        </Map> */}
         <ImageUploadFormContainer lat={this.state.lat} lng={this.state.lng} />
       </div>
     );
