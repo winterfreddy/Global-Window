@@ -9,11 +9,21 @@
     width: 250px;
     border: 3px solid black;
     border-radius: 5px;
+    overflow: scroll;
 }
 
 .sidebar-content-container:active {
     border: 3px solid green;
     cursor: pointer;
+}
+
+.sidebar-item {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.sidebar-item:hover {
+    background: lightblue;
 }
 
 .sidebar-img-item {
