@@ -22,7 +22,7 @@ class Sidebar extends React.Component {
                     <header className='sidebar-header'>THIS IS SIDEBAR</header>
                     <span className='sidebar-content-container'>
                         SIDEBAR CONTENT
-                    {photos.map(photo => <SidebarItem photo={photo} />)}
+                    {photos.map(photo => <SidebarItem key={photo.id} photo={photo} />)}
                     </span>
                 </div>
             );

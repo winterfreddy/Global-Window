@@ -5,6 +5,7 @@ import '../../stylesheets/main_page.scss';
 
 class MainPage extends React.Component {
   render() {
+    const { photos, fetchPhotos } = this.props;
     return (
       <div className="main-page">
         <div className="left-aside">
@@ -12,7 +13,7 @@ class MainPage extends React.Component {
             <SidebarContainer />
         </div>
         <div className="google-maps-container">
-          <GoogleMapsContainer google={window.google}/>
+          <GoogleMapsContainer google={window.google} photos={photos} fetchPhotos={fetchPhotos} />
         </div>
       </div>
     );
