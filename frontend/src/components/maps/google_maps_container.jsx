@@ -63,7 +63,6 @@ export class MapContainer extends Component {
   }
 
   render() {
-    console.log(this.props);
     let uploadForm;
     if (this.props.location.pathname === '/upload') {
       uploadForm = (<div>
