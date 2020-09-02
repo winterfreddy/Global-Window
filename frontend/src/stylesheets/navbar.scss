@@ -26,7 +26,8 @@
 
 .navbar-login,
 .navbar-signup,
-.logout-btn {
+.logout-btn,
+.navbar-upload-btn {
     font-family: 'Roboto', sans-serif;
     font-size: 20px;
     border-radius: 5px;
@@ -40,8 +41,14 @@
 
 .navbar-login:hover,
 .navbar-signup:hover,
-.logout-btn:hover {
+.logout-btn:hover,
+.navbar-upload-btn:hover {
     background: lightblue;
     color: blue;
     cursor: pointer;
+}
+
+.navbar-upload {
+    margin-right: 20px;
+ 
 }
