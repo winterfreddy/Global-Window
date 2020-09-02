@@ -19,6 +19,7 @@
 #map {
     height: 0px !important;
     width: 0px !important;
+    float: left !important;
 }
 
 .google-api-map {
@@ -27,6 +28,7 @@
     width: 75% !important;
     border: 3px solid black;
     border-radius: 5px !important;
+    float: right !important;
 }
 
 .google-api-map:active {
@@ -35,5 +37,7 @@
 
 .google-maps-images-container {
     display: flex !important;
-    flex-direction: column-reverse !important;
+    // float: right !important;
+    // position: absolute !important;
+    // right: 1000px !important;
 }
