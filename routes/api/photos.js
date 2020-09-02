@@ -77,49 +77,44 @@ router.post("/", upload.single("file"),
     }
 );
 
-// delete a photo
-// router.delete('/:id', (req, res) => {
-//   Photo.findById(req.params.id)
-//     .then((photo) => {
-//       const currUserId = req.user.id;
-//       if(currUserId === photo.creatorId) {
-//         Photo.deleteOne({ id: photo.id })
-//           .then(() => res.json({ successfulDelete: "Deleted successfuly" }))
-//           .catch(err => res.status(400).json({ unsuccessfulDelete: "Not deleted" })) 
-//       } else {
-//         res.status(404).json({ unauthorizedDelete: "Not authorized to delete" })
-//       }
-//     })
-//     .catch(() => res.status(400).json({ photoNotFound: "Photo not found with that id" }))
-// })
-router.delete('/:id', (req, res) => (
+// delete a photo, MAY RETURN NULL
+router.delete('/:id',
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => (
     Photo.findById(req.params.id)
     .then((photo) => {
     const currUserId = req.user.id;
-      if(currUserId === photo.creatorId) {
-        Photo.deleteOne({ id: photo.id })
+      if(currUserId == photo.creatorId) {
+        Photo.deleteOne({ _id: photo.id })
           .then(() => res.json({ successfulDelete: "Deleted successfuly" }))
           .catch(err => res.status(400).json({ unsuccessfulDelete: "Not deleted" })) 
       } else {
         res.status(404).json({ unauthorizedDelete: "Not authorized to delete" })
       }
     })
-      .catch(err => console.log("delete error: ", err))
+    .catch(() => res.status(400).json({ photoNotFound: "Photo not found with that id" }))
 ));
 
 // update a photo
-router.patch('/:id', (req, res) => {
-  Photo.findById(req.params.id)
-    .then(photo => {
-      photo.updateOne(
-        { description: req.body.description },
-        { tags: req.body.tags }
-        // If `new` isn't true, `findOneAndUpdate()` will return the
-        // document as it was _before_ it was updated.
-        // { new: true }
-      ).then(() => res.status(200).json({ successfulUpdate: "Photo successfully updated" }))
-      .catch(err => res.json({ failedUpdate: "Photo could not be updated "}))
-    })
+router.patch('/:id',
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Photo.findById(req.params.id)
+      .then(photo => {
+        const currUserId = req.user.id;
+        if(currUserId == photo.creatorId) {
+          photo.updateOne(
+            { description: req.body.description },
+            { tags: req.body.tags }
+            // If `new` isn't true, `findOneAndUpdate()` will return the
+            // document as it was _before_ it was updated.
+            // { new: true }
+          ).then(() => res.status(200).json({ successfulUpdate: "Photo successfully updated" }))
+          .catch(err => res.json({ failedUpdate: "Photo could not be updated "}))
+        } else {
+          res.status(404).json({ unauthorizedUpdate: "Not authorized to update" })
+        }
+      })
     .catch(err =>
       res.status(422).json({ noPhotoFound: "Photo could not be found" }))
 })
