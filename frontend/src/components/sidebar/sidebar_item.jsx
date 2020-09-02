@@ -9,6 +9,8 @@ class SidebarItem extends React.Component {
                 <img className='sidebar-img-item' src={photo.imageURL}/>
                 <br/>
                 <div>{photo.description}</div>
+                <br/>
+                <div>{photo.created}</div>
             </div>
         );
     }
