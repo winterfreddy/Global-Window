@@ -8,7 +8,7 @@
 }
 
 .logo-title:hover {
-    color: lightblue;
+    color: lightblue
 }
 
 .nav-bar {
@@ -41,6 +41,7 @@
 .navbar-login:hover,
 .navbar-signup:hover,
 .logout-btn:hover {
-    background-color: #2055da;
-    color: white;
+    background: lightblue;
+    color: blue;
+    cursor: pointer;
 }

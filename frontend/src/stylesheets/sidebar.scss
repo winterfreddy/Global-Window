@@ -4,12 +4,13 @@
 
 .sidebar-content-container {
     display: block;
-    background: red;
+    background: burlywood;
     height: 520px;
-    border: 5px solid lightblue;
+    border: 3px solid black;
+    border-radius: 5px;
 }
 
 .sidebar-content-container:active {
-    border: 5px solid green;
+    border: 3px solid green;
     cursor: pointer;
 }
