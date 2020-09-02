@@ -8,6 +8,10 @@ const PhotoSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "users",
   },
+  description: {
+    type: String,
+    required: true,
+  },
   imageURL: {
       type: String,
       required: true,
