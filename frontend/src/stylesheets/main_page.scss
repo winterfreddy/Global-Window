@@ -14,6 +14,12 @@
     margin-left: 50px;
 }
 
+// This is the actual map element
+#map {
+    height: 0px !important;
+    width: 0px !important;
+}
+
 .google-api-map {
     height: 550px !important;
     width: 75% !important;
