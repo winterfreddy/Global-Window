@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import EditImageForm from './edit_image_form';
-import { getPhoto } from '../../actions/photo_actions';
+import { fetchPhoto } from '../../actions/photo_actions';
 
 const mapStateToProps = (state, ownProps) => ({
     wholeState: state,
@@ -8,7 +8,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    fetchPhoto: (id) => dispatch(getPhoto(id)),
+    fetchPhoto: (id) => dispatch(fetchPhoto(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditImageForm);
