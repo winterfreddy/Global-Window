@@ -13,20 +13,21 @@ const receivePhoto = photo => ({
     photo
 });
 
+
+export const fetchPhotos = () => dispatch => (
+    PhotoAPIUtil.fetchPhotos()
+    .then(photos => dispatch(receivePhotos(photos)))
+    .catch(error => console.log(error))
+);
+    
+export const fetchPhoto = id => dispatch => (
+    PhotoAPIUtil.fetchPhoto(id)
+    .then((photo) => dispatch(receivePhoto(photo)))
+    .catch(error => console.log(error))
+);
+
 export const uploadPhoto = photo => dispatch => (
     PhotoAPIUtil.uploadPhoto(photo)
         .then(photo => dispatch(receivePhoto(photo)))
         .catch(error => console.log(error))
 );
-
-export const fetchPhotos = () => dispatch => (
-    PhotoAPIUtil.fetchPhotos()
-        .then(photos => dispatch(receivePhotos(photos)))
-        .catch(error => console.log(error))
-)
-
-export const fetchPhoto = id => dispatch => (
-    PhotoAPIUtil.fetchPhoto(id)
-        .then((photo) => dispatch(receivePhoto(photo)))
-        .catch(error => console.log(error))
-)
