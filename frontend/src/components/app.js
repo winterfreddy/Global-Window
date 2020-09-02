@@ -13,6 +13,7 @@ const App = () => (
     <NavBarContainer />
     <Switch>
       <ProtectedRoute exact path="/home" component={MainPage} />
+      <ProtectedRoute exact path='/upload' component={MapsFormContainer} />
     </Switch>
     <AuthRoute exact path="/" component={SplashContainer} />
   </div>

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from 'react-router-dom';
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
 import ImageUploadFormContainer from './image_upload_form_container';
 
@@ -62,6 +63,13 @@ export class MapContainer extends Component {
   }
 
   render() {
+    console.log(this.props);
+    let uploadForm;
+    if (this.props.location.pathname === '/upload') {
+      uploadForm = (<div>
+        <ImageUploadFormContainer lat={this.state.lat} lng={this.state.lng} />
+      </div>);
+    }
     return (
       <div className='google-maps-images-container'>
         <div>
@@ -92,14 +100,12 @@ export class MapContainer extends Component {
             </InfoWindow>
           </Map>
         </div>
-        <div>
-          <ImageUploadFormContainer lat={this.state.lat} lng={this.state.lng} />
-        </div>
+        {uploadForm}
       </div>
     );
   }
 }
 
-export default GoogleApiWrapper({
+export default withRouter(GoogleApiWrapper({
   apiKey: 'AIzaSyAj-6TurQZ8nVQKKEMYKN_u7iCWuds7jpQ',
-})(MapContainer);
+})(MapContainer));
