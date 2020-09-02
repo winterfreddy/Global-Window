@@ -1,5 +1,6 @@
 import React from "react";
 import GoogleMapsContainer from '../maps/google_maps_container';
+import Sidebar from '../sidebar/sidebar';
 import '../../stylesheets/main_page.scss';
 
 class MainPage extends React.Component {
