@@ -6,6 +6,7 @@ import MainPage from "./main/main_page";
 import Modal from './modal/modal';
 import SplashContainer from './splash/splash_container';
 import MapsFormContainer from './maps/maps_forms_container';
+import EditImageFormContainer from './maps/edit_image_form_container';
 
 const App = () => (
   <div>
@@ -14,6 +15,7 @@ const App = () => (
     <Switch>
       <ProtectedRoute exact path="/home" component={MainPage} />
       <ProtectedRoute exact path='/upload' component={MapsFormContainer} />
+      <ProtectedRoute path='/edit/${id}' component={EditImageFormContainer}/>
     </Switch>
     <AuthRoute exact path="/" component={SplashContainer} />
   </div>
