@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import "./navbar.css";
 import '../../stylesheets/navbar.scss'
 import '../../stylesheets/modal.scss';
 import '../../stylesheets/session.scss';
@@ -26,8 +25,8 @@ class NavBar extends React.Component {
           {/* <Link to={"/tweets"}>All Tweets</Link>
           <Link to={"/profile"}>Profile</Link>
           <Link to={"/new_tweet"}>Write a Tweet</Link> */}
-          <Link to='/upload'>
-            <button>Upload Images</button>
+          <Link to='/upload' className='navbar-upload'>
+            <button className='navbar-upload-btn'>Upload</button>
           </Link>
           <button className='logout-btn' onClick={this.logoutUser}>Logout</button>
         </div>
