@@ -110,12 +110,15 @@ export class MapContainer extends Component {
   //   this.props.fetchPhotos();
   // }
 
-  onMarkerClick = (props, marker, e) => 
+  onMarkerClick = (props, marker, e) => {
+    console.log(this.state);
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true,
     });
+    // this.props.google.maps.panTo
+  }
 
   onClose = (props) => {
     if (this.state.showingInfoWindow) {
@@ -150,7 +153,7 @@ export class MapContainer extends Component {
   }
 
   render() {
-    // console.log(this.props);
+    console.log(this.props);
     let uploadForm;
     if (this.props.location.pathname === '/upload') {
       uploadForm = (<div className='image-upload-form-container'>
@@ -168,7 +171,7 @@ export class MapContainer extends Component {
 
     return (
       <div className='google-maps-images-container'>
-        <div>
+        <div id="map">
           <Map
             id="google-api-map"
             className="google-api-map"
