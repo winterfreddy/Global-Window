@@ -149,7 +149,7 @@ class EditImageForm extends React.Component {
             let tmpLng = latLng.lng();
             return [tmpLat, tmpLng];
         }
-    }
+    }dd
 
     render() {
         const { photo, formType, fetchPhoto } = this.props;

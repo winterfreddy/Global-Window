@@ -9,20 +9,19 @@ class PhotoForm extends React.Component {
         super(props);
 
         this.state = {};
-        if (this.props.formType === 'edit form') {
+        if (this.props.formType === 'edit photo') {
             this.state["description"] = this.props.photo.data.description || "";
             this.state["tags"] = this.props.photo.data.tags.join(' ') || "";
             this.state["photoFile"] = null;
             this.state['photoUrl'] = this.props.photo.data.imageURL || null;
             this.state['errors'] = null;
-        } else {
+        } else if (this.props.formType === 'upload photo') {
             this.state["description"] = "";
             this.state["tags"] = "";
             this.state["photoFile"] = null;
             this.state['photoUrl'] = null;
             this.state['errors'] = null;
         }
-
 
         this.singleFileChangedHandler = this.singleFileChangedHandler.bind(this);
         this.singleFileUploadHandler = this.singleFileUploadHandler.bind(this);
@@ -110,7 +109,7 @@ class PhotoForm extends React.Component {
             );
         }
         let inputFile;
-        if (this.props.formType === 'edit form') {
+        if (this.props.formType === 'upload photo') {
             inputFile = (
                 <input type="file" onChange={this.singleFileChangedHandler} />
             );
