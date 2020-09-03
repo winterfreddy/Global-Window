@@ -158,8 +158,8 @@ export class MapContainer extends Component {
     }
     let markers;
     if (this.props.photos) {
-      markers = this.props.photos.map(photo => <Marker 
-        key={photo.id} 
+      markers = this.props.photos.map( (photo, idx) => <Marker 
+        key={idx} 
         position={photo.coordinates} 
         onClick={this.onMarkerClick} 
         name={photo.description}/>)
