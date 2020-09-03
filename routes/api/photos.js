@@ -20,10 +20,26 @@ const s3 = new AWS.S3({
 
 // // get all photos
 router.get('/', (req, res) => {
-  Photo.find()
-    .sort({ date: -1 })
-    .then(photos => res.json(photos))
-    .catch(err => res.status(404).json({ nophotosfound: 'No photos found' }));
+    // if(!req.body.coordinatesSet) { // USE THIS ONE FOR PROD
+    if(!req.body.lng1) {
+      // TESTING ONLY
+      Photo.find()
+        .sort({ date: -1 })
+        .then((photos) => res.json(photos))
+        .catch((err) =>
+          res.status(404).json({ nophotosfound: "No photos found" })
+        );
+      // } else if(coordsSet.length === 1) { // USE THIS ONE FOR PROD
+    } else if(!req.body.lng2) {
+      console.log("length 1 coordsSet");
+      // const coordsSet = JSON.parse(req.body.coordinatesSet);
+
+      // } else if(coordsSet.length === 2) { // USE THIS ONE FOR PROD
+    } else if(req.body.lng1 && req.body.lng2) { 
+        console.log("length 2 coordsSet");
+        // const coordsSet = JSON.parse(req.body.coordinatesSet);
+        
+    }
 });
 
 // get a specific photo
