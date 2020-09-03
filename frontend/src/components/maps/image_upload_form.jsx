@@ -69,7 +69,6 @@ class ImageUploadForm extends React.Component {
       <img src={this.state.photoUrl} className="image-preview" />
     ) : null;
     let errorsDiv;
-    console.log(this.state.errors);
     if (this.state.errors) {
       errorsDiv = (
         <div className="alert">
