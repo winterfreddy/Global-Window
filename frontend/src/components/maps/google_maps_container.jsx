@@ -159,13 +159,7 @@ export class MapContainer extends Component {
       <div className='image-upload-form-container'>
         <UploadImageFormContainer lat={this.state.lat} lng={this.state.lng} />
       </div>);
-    } else if (this.props.location.pathname === '/edit/:id') {
-      editForm = (
-        <div>
-          <EditImageFormContainer lat={this.state.lat} lng={this.state.lng} />
-        </div>
-      );
-    }
+    } 
     let markers;
     if (this.props.photos) {
       markers = this.props.photos.map(photo => <Marker 
