@@ -8,7 +8,7 @@ import { logout } from './actions/session_actions';
 import './stylesheets/reset.scss';
 
 // Testing imports:
-// import { fetchPhotos, fetchPhoto } from './util/photos_api_util';
+// import { fetchPhotos, fetchPhoto, editPhoto, deletePhoto } from './util/photos_api_util';
 import { fetchPhotos, fetchPhoto, editPhoto, deletePhoto } from './actions/photo_actions';
 
 document.addEventListener('DOMContentLoaded', () => {

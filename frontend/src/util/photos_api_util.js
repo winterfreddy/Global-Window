@@ -17,5 +17,5 @@ export const editPhoto = photoData => (
 );
 
 export const deletePhoto = id => (
-    axios.delete(`/api/photos${id}`)
+    axios.delete(`/api/photos/${id}`)
 )
