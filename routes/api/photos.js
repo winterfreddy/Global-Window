@@ -200,7 +200,7 @@ router.patch('/:id',
       .then(photo => {
         const currUserId = req.user.id;
         if(currUserId == photo.creatorId) {
-          const newCoords = (coordinates) ? JSON.parse(coordinates) : photo.coordinantes; 
+          const newCoords = (coordinates) ? JSON.parse(coordinates) : photo.coordinates; 
         // const newCoords = (lat && lng) ? {lat: parseFloat(lat), lng: parseFloat(lng)} : photo.coordinates; // testing w/ postman
         const newDesc = description || photo.description;
         const newTags = tags || photo.tags;
