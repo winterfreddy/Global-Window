@@ -11,7 +11,7 @@ export default function (state = {}, action) {
         case RECEIEVE_ALL_PHOTOS:
             return action.photos;
         case RECEIVE_PHOTO:
-            newState[action.photo.id] = action.photo;
+            newState[action.photo.data._id] = action.photo;
             return newState;
         case REMOVE_PHOTO:
             delete newState[action.id];

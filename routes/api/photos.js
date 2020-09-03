@@ -89,7 +89,6 @@ router.delete('/:id',
   (req, res) => (
     Photo.findById(req.params.id)
     .then((photo) => {
-      console.log('photo found'); 
       const currUserId = req.user.id;
       if(currUserId == photo.creatorId) {
         Photo.deleteOne({ _id: photo.id })

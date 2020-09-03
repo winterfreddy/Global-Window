@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { withRouter } from 'react-router-dom';
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
-import ImageUploadFormContainer from './image_upload_form_container';
+import UploadImageFormContainer from './upload_image_form_container';
+import EditImageFormContainer from './edit_image_form_container';
 
 const mapStyles = {
   width: "100%",
@@ -155,15 +156,18 @@ export class MapContainer extends Component {
   render() {
     console.log(this.props);
     let uploadForm;
+    let editForm;
+    console.log(this.props);
     if (this.props.location.pathname === '/upload') {
-      uploadForm = (<div className='image-upload-form-container'>
-        <ImageUploadFormContainer lat={this.state.lat} lng={this.state.lng} />
+      uploadForm = (
+      <div className='image-upload-form-container'>
+        <UploadImageFormContainer lat={this.state.lat} lng={this.state.lng} />
       </div>);
-    }
+    } 
     let markers;
     if (this.props.photos) {
-      markers = this.props.photos.map( (photo, idx) => <Marker 
-        key={idx} 
+      markers = this.props.photos.map(photo => <Marker 
+        key={photo._id} 
         position={photo.coordinates} 
         onClick={this.onMarkerClick} 
         name={photo.description}/>)
@@ -203,6 +207,7 @@ export class MapContainer extends Component {
           </Map>
         </div>
         {uploadForm}
+        {editForm}
       </div>
     );
   }
