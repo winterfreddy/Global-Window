@@ -13,18 +13,23 @@ const PhotoSchema = new Schema({
     required: true,
   },
   imageURL: {
-      type: String,
-      required: true,
+    type: String,
+    required: true,
   },
   coordinates: {
-      lat: {
-          type: SchemaTypes.Double,
-          required: true,
-      },
-      lng: {
-          type: SchemaTypes.Double,
-          required: true,
-      },
+    lat: {
+      type: SchemaTypes.Double,
+      required: true,
+    },
+    lng: {
+      type: SchemaTypes.Double,
+      required: true,
+    },
+  },
+  location: {
+    type: Schema.Types.ObjectId,
+    ref: "points",
+    index: true,
   },
   created: {
     type: Date,
