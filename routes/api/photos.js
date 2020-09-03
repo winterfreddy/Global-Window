@@ -71,7 +71,7 @@ router.get('/', (req, res) => {
 
       // } else if(coordsSet.length === 2) { // USE THIS ONE FOR PROD
     } else if (lng1 && lng2) {
-
+        console.log("2 coords");
       const searchArea = getSearchArea(req.query);
       let search;
       if (req.query.tag) {
@@ -153,7 +153,7 @@ router.post(
           coordinates: [coords.lng, coords.lat],
         });
         console.log("locationObject: ", locationObject);
-        locationObject.save().then((point) => {
+        // locationObject.save().then((point) => {
           // create Photo object
           console.log("locationObject saved!");
           const newPhoto = new Photo({
@@ -161,11 +161,11 @@ router.post(
             description: req.body.description,
             imageURL: uploadedFileURL,
             coordinates: coords,
-            location: point,
+            location: locationObject,
             tags: req.body.tags,
           });
           newPhoto.save().then((photo) => res.json(photo));
-        });
+        // });
       })
       .catch((err) => {
         res.status(400).json({ image: "Image upload did not work" });
@@ -196,18 +196,31 @@ router.delete('/:id',
 router.patch('/:id',
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    const { coordinates, tags, description, lat, lng } = req.body;
     Photo.findById(req.params.id)
       .then(photo => {
         const currUserId = req.user.id;
         if(currUserId == photo.creatorId) {
-          photo.updateOne(
-            { description: req.body.description },
-            { tags: req.body.tags }
-            // If `new` isn't true, `findOneAndUpdate()` will return the
-            // document as it was _before_ it was updated.
-            // { new: true }
-          ).then(() => res.status(200).json({ successfulUpdate: "Photo successfully updated" }))
-          .catch(err => res.json({ failedUpdate: "Photo could not be updated "}))
+          const newCoords = (coordinates) ? JSON.parse(coordinates) : photo.coordinantes; 
+        // const newCoords = (lat && lng) ? {lat: parseFloat(lat), lng: parseFloat(lng)} : photo.coordinates; // testing w/ postman
+        const newDesc = description || photo.description;
+        const newTags = tags || photo.tags;
+          const locationObject = new Point({
+            type: "Point",
+            coordinates: [newCoords.lng, newCoords.lat],
+          });
+          photo.updateOne({ 
+                description: newDesc ,
+                tags: newTags ,
+                coordinates: newCoords ,
+                location: locationObject 
+          })
+            .then(() =>
+              res.json({ successfulUpdate: "Photo successfully updated" })
+            )
+            .catch((err) =>
+              res.json({ failedUpdate: "Photo could not be updated " })
+            );
         } else {
           res.status(404).json({ unauthorizedUpdate: "Not authorized to update" })
         }
