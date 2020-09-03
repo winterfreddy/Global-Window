@@ -30,3 +30,22 @@
     max-width: 100px;
     max-height: 100px; 
 }
+
+.fa-trash-alt,
+.fa-edit,
+.fa-map-marker-alt {
+    font-size: 20px;
+    margin-right: 15px;
+}
+
+.fa-trash-alt:hover {
+    color: red;
+}
+
+.fa-edit:hover {
+    color: blue;
+}
+
+.fa-map-marker-alt:hover {
+    color: green;
+}
