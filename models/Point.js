@@ -9,6 +9,7 @@ const PointSchema = new Schema({
   coordinates: {
     type: [Number], // [lng, lat] IMPORTANT
     required: true,
+    index: '2dsphere'
   },
 });
 module.exports = Point = mongoose.model("Point", PointSchema);

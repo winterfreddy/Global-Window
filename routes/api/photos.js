@@ -8,7 +8,7 @@ const Photo = require("../../models/Photo");
 const Point = require("../../models/Point");
 const validatePhotoInput = require("../../validation/photo");
 
-const SET_MAX_DISTANCE = 30000;
+const SET_MAX_DISTANCE = 30000000;
 const MAX_SEARCH_LIMIT = 20;
 
 // Middleware for Form-Data Postman
@@ -41,23 +41,26 @@ router.get('/', (req, res) => {
       let coords = [];
       coords[0] = parseFloat(req.query.lng1) || 0;
       coords[1] = parseFloat(req.query.lat1) || 0;
-      const centerPoint = {
-          type: 'Point',
-          coordinates: coords
-      };
+    //   const centerPoint = {
+    //       type: 'Point',
+    //       coordinates: coords
+    //   };
       console.log(coords);
       Photo.find({
         location: {
-          $near: centerPoint,
-          $maxDistance: SET_MAX_DISTANCE,
+          $near: {
+            $geometry: {
+                type: "Point",
+                coordinates: coords,
+            },
+            $maxDistance: SET_MAX_DISTANCE,
+          },
         },
       })
         // .limit(MAX_SEARCH_LIMIT)
         // .sort({ date: -1 })
         .then((photos) => res.json(photos)) // try .exec() if this doesn't work
-        .catch((err) =>
-          res.status(404).json(err)
-        );
+        .catch((err) => res.status(404).json(err));
         // .exec(function(err, locations) {
         //     if (err) {
         //         return res.status(500).json(err);
