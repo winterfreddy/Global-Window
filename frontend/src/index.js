@@ -8,8 +8,8 @@ import { logout } from './actions/session_actions';
 import './stylesheets/reset.scss';
 
 // Testing imports:
-// import { fetchPhotos, fetchPhoto } from './util/photos_api_util';
-import { fetchPhotos, fetchPhoto } from './actions/photo_actions';
+// import { fetchPhotos, fetchPhoto, editPhoto, deletePhoto } from './util/photos_api_util';
+import { fetchPhotos, fetchPhoto, editPhoto, deletePhoto } from './actions/photo_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (decodedUser.exp < currentTime) {
       store.dispatch(logout());
-      window.location.href = '/login';
+      window.location.href = '/';
     }
   } else {
     store = configureStore({});
@@ -38,4 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
   window.dispatch = store.dispatch;
   window.fetchPhotos = fetchPhotos;
   window.fetchPhoto = fetchPhoto;
+  window.editPhoto = editPhoto;
+  window.deletePhoto = deletePhoto;
 });

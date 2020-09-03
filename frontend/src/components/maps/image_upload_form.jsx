@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 import '../../stylesheets/image_form.scss'
 // import Dropzone from 'react-dropzone';
 
@@ -51,19 +52,26 @@ class ImageUploadForm extends React.Component {
             "Access-Control-Allow-Origin": "*",
           },
         })
-        .then((response) => {
-          if (response.status === 200) {
-            if (response.data.error) {
-              console.log(response.data);
-            } else {
-              console.log("successful upload");
-            }
+        .then(response => {
+          if (response.state === 200) {
+            console.log(response.data);
+          } else {
+            this.props.history.push('/home')
           }
         })
         .catch(errors => this.setState({ errors: errors }));
-    }
-  };
-
+      }
+    };
+    
+    // .then((response) => {
+    //   if (response.status === 200) {
+    //     if (response.data.error) {
+    //       console.log(response.data);
+    //     } else {
+    //       console.log("successful upload");
+    //     }
+    //   }
+    // })
   render() {
     const preview = this.state.photoUrl ? (
       <img src={this.state.photoUrl} className="image-preview" />
@@ -119,4 +127,4 @@ class ImageUploadForm extends React.Component {
   }
 }
 
-export default ImageUploadForm;
+export default withRouter(ImageUploadForm);
