@@ -8,8 +8,9 @@ import { logout } from './actions/session_actions';
 import './stylesheets/reset.scss';
 
 // Testing imports:
-// import { fetchPhotos, fetchPhoto, editPhoto, deletePhoto } from './util/photos_api_util';
-import { fetchPhotos, fetchPhoto, editPhoto, deletePhoto } from './actions/photo_actions';
+import { fetchPhotos, fetchPhoto, editPhoto, deletePhoto } from './util/photos_api_util';
+// import { fetchPhotos, fetchPhoto, editPhoto, deletePhoto } from './actions/photo_actions';
+import { favorite, unfavorite } from './util/favorites_api_util';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -40,4 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
   window.fetchPhoto = fetchPhoto;
   window.editPhoto = editPhoto;
   window.deletePhoto = deletePhoto;
+  window.favorite = favorite;
+  window.unfavorite = unfavorite;
 });
