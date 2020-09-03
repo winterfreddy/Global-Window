@@ -70,8 +70,41 @@ router.get('/', (req, res) => {
 
       // } else if(coordsSet.length === 2) { // USE THIS ONE FOR PROD
     } else if (req.query.lng1 && req.query.lng2) {
-      console.log("length 2 coordsSet");
       // const coordsSet = JSON.parse(req.body.coordinatesSet);
+      console.log("2+ coord values found, searchArea");
+      let northValue = req.query.lng2;
+      let southValue = req.query.lng1;
+      let eastValue = req.query.lat2;
+      let westValue = req.query.lat1;
+
+      const searchArea = {
+        type: "Polygon",
+        coordinates: [
+          [
+            [northValue, westValue],
+            [southValue, westValue],
+            [southValue, eastValue],
+            [northValue, eastValue],
+            [northValue, westValue],
+          ],
+        ],
+      };
+
+      console.log('serach area: ', searchArea);
+
+      Photo.find({ // or .find()
+        location: {
+          $geoWithin: {
+            $geometry: searchArea,
+          },
+        },
+      })
+        .limit(MAX_SEARCH_LIMIT)
+        .sort({ created: -1 })
+        .then((photos) => res.json(photos)) // try .exec() if this doesn't work
+        .catch((err) =>
+          res.status(404).json(err)
+        );
     }
 });
 
