@@ -3,6 +3,89 @@ import { Link } from 'react-router-dom';
 // import { Map } from 'google-maps-react';
 import '../../stylesheets/sidebar.scss';
 
+const darkMode = {
+    styles: [
+        { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
+        { elementType: 'labels.text.stroke', stylers: [{ color: '#242f3e' }] },
+        { elementType: 'labels.text.fill', stylers: [{ color: '#746855' }] },
+        {
+            featureType: 'administrative.locality',
+            elementType: 'labels.text.fill',
+            stylers: [{ color: '#d59563' }]
+        },
+        {
+            featureType: 'poi',
+            elementType: 'labels.text.fill',
+            stylers: [{ color: '#d59563' }]
+        },
+        {
+            featureType: 'poi.park',
+            elementType: 'geometry',
+            stylers: [{ color: '#263c3f' }]
+        },
+        {
+            featureType: 'poi.park',
+            elementType: 'labels.text.fill',
+            stylers: [{ color: '#6b9a76' }]
+        },
+        {
+            featureType: 'road',
+            elementType: 'geometry',
+            stylers: [{ color: '#38414e' }]
+        },
+        {
+            featureType: 'road',
+            elementType: 'geometry.stroke',
+            stylers: [{ color: '#212a37' }]
+        },
+        {
+            featureType: 'road',
+            elementType: 'labels.text.fill',
+            stylers: [{ color: '#9ca5b3' }]
+        },
+        {
+            featureType: 'road.highway',
+            elementType: 'geometry',
+            stylers: [{ color: '#746855' }]
+        },
+        {
+            featureType: 'road.highway',
+            elementType: 'geometry.stroke',
+            stylers: [{ color: '#1f2835' }]
+        },
+        {
+            featureType: 'road.highway',
+            elementType: 'labels.text.fill',
+            stylers: [{ color: '#f3d19c' }]
+        },
+        {
+            featureType: 'transit',
+            elementType: 'geometry',
+            stylers: [{ color: '#2f3948' }]
+        },
+        {
+            featureType: 'transit.station',
+            elementType: 'labels.text.fill',
+            stylers: [{ color: '#d59563' }]
+        },
+        {
+            featureType: 'water',
+            elementType: 'geometry',
+            stylers: [{ color: '#17263c' }]
+        },
+        {
+            featureType: 'water',
+            elementType: 'labels.text.fill',
+            stylers: [{ color: '#515c6d' }]
+        },
+        {
+            featureType: 'water',
+            elementType: 'labels.text.stroke',
+            stylers: [{ color: '#17263c' }]
+        }
+    ]
+}
+
 class SidebarItem extends React.Component {
     constructor(props) {
         super(props);
@@ -16,30 +99,20 @@ class SidebarItem extends React.Component {
     }
 
     handlePanTo() {
-        // const { google } = this.props;
-        // let google = this.state.google;
-        // console.log(this.state.google);
-        // console.log(this.props.google);
         const allPhotos = this.props.photos;
-        console.log(allPhotos);
         const { lat, lng } = this.props.photo.coordinates;
-        // console.log(lat);
-        // console.log(lng);
-        console.log(this.props.photo.coordinates);
-        console.log(window.google);
+        // console.log(allPhotos);
+        // console.log(this.props.photo.coordinates);
+        // console.log(window.google);
         const google = window.google;
         const mapProp = { 
             center: new google.maps.LatLng(lat, lng),
             zoom: 12
         }
-        console.log([...document.getElementsByClassName('google-api-map')][0]);
+        // console.log([...document.getElementsByClassName('google-api-map')][0]);
         const googleAPIMap = [...document.getElementsByClassName('google-api-map')][0];
-
-        // console.log(google.maps.Map.getCenter());
         const map = new google.maps.Map(googleAPIMap, mapProp);
-        // const map = new google.maps.Map(document.getElementById('map'), mapProp);
-        // if(map) {
-        //     console.log("check");
+        map.setOptions({ styles: darkMode.styles });
 
         let markers;
         markers = allPhotos.map(point => {
@@ -57,9 +130,6 @@ class SidebarItem extends React.Component {
 
         const panPoint = new google.maps.LatLng(lat, lng);
         map.panTo(panPoint);
-        // }
-        // console.log(panPoint);
-        // console.log("check2");
     }
 
     render() {
