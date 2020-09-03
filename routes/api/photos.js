@@ -6,8 +6,10 @@ const uuidv4 = require("uuid").v4;
 const keys = require("../../config/keys");
 const Photo = require("../../models/Photo");
 const Point = require("../../models/Point");
+const Favorite = require("../../models/Favorite");
 const validatePhotoInput = require("../../validation/photo");
 const getSearchArea = require("./_photos_helper");
+const strftime = require("strftime");
 
 const SET_MAX_DISTANCE = 30000000;
 const MAX_SEARCH_LIMIT = 20;
@@ -104,6 +106,14 @@ router.get('/:id', (req, res) => {
     );
 });
 
+router.get('/:id/favorites', 
+  (req, res) => {
+    Favorite.find({ photoId: req.params.id })
+      .then(favorites => res.json(favorites))
+      .catch((err) => res.status(400).json({ photoNotFound: "Photo with that id not found" }))
+  }
+)
+
 const uploadImage = (file) => {
   const params = {
     Bucket: keys.s3Bucket,
@@ -112,6 +122,7 @@ const uploadImage = (file) => {
     ContentType: file.mimetype,
     ACL: "public-read",
   };
+  console.log("image params are set");
   const uploadPhoto = s3.upload(params).promise();
   return uploadPhoto;
 };
@@ -135,13 +146,15 @@ router.post(
           type: "Point",
           coordinates: [coords.lng, coords.lat],
         });
+        
         const newPhoto = new Photo({
-          creatorId: req.user.id, 
+          creatorId: req.user.id,
           description: req.body.description,
           imageURL: uploadedFileURL,
           coordinates: coords,
           location: locationObject,
           tags: req.body.tags,
+          created: strftime("%b %d, %Y, %l:%M %P"),
         });
         newPhoto.save().then((photo) => res.json(photo));
       })
@@ -160,7 +173,14 @@ router.delete('/:id',
       const currUserId = req.user.id;
       if(currUserId == photo.creatorId) {
         Photo.deleteOne({ _id: photo.id })
-          .then(() => res.json({ successfulDelete: "Deleted successfuly" }))
+          .then(() => Favorite.deleteMany({ photoId: req.params.id }), function(err, result) {
+             if (err) {
+               res.send(err);
+             } else {
+               res.send(result);
+             }
+          })
+          .then(() => res.json({ successfulDelete: "Deleted successfully" }))
           .catch(err => res.status(400).json({ unsuccessfulDelete: "Not deleted" })) 
       } else {
         res.status(404).json({ unauthorizedDelete: "Not authorized to delete" })
@@ -201,6 +221,6 @@ router.patch('/:id', upload.single("file"),
       })
     .catch(err =>
       res.status(422).json({ noPhotoFound: "Photo could not be found" }))
-})
+});
 
 module.exports = router;

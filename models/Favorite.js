@@ -18,16 +18,20 @@ const FavoriteSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "photos",
     index: true,
+    required: true
   },
   favoriterId: {
     type: Schema.Types.ObjectId,
     ref: "users",
     index: true,
+    required: true
   },
   created: {
     type: Date,
     default: Date.now,
   },
 });
+
 FavoriteSchema.index({ photoId: 1, favoriterId: 1 }, { unique: true });
+
 module.exports = Favorite = mongoose.model("Favorite", FavoriteSchema);

@@ -46,11 +46,10 @@ const PhotoSchema = new Schema({
     required: true
   },
   created: {
-    type: Date,
-    default: Date.now,
+    type: String,
+    required: true,
   },
   tags: [],
-  // favoriterIds: [],
 });
 
 module.exports = User = mongoose.model("Photo", PhotoSchema);

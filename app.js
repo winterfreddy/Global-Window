@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const users = require("./routes/api/users");
 const photos = require("./routes/api/photos");
-const favorites = require('./routes/api/favorites');
+const favorites = require("./routes/api/favorites");
 const path = require("path");
 const keys = require("./config/keys");
 const { Client, Status } = require("@googlemaps/google-maps-services-js");
@@ -33,7 +33,7 @@ app.use(bodyParser.json());
 app.get("/", (req, res) => res.send("Hello World"));
 app.use("/api/users", users);
 app.use("/api/photos", photos);
-app.use('/api/favorites', favorites);
+app.use("/api/favorites", favorites);
 
 // CORS
 app.use((req, res, next) => {
