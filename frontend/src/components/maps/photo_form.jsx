@@ -4,13 +4,13 @@ import { withRouter } from 'react-router-dom';
 import '../../stylesheets/image_form.scss'
 // import Dropzone from 'react-dropzone';
 
-class EditImageForm extends React.Component {
+class PhotoForm extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { };
-        this.state["description"] = this.props.photo.description || "";
-        this.state["tags"] = this.props.photo.tags || "";
+        this.state = {};
+        this.state["description"] = "";
+        this.state["tags"] = "";
         this.state["photoFile"] = null;
         this.state['photoUrl'] = null;
         this.state['errors'] = null;
@@ -44,7 +44,7 @@ class EditImageForm extends React.Component {
             formData.append('coordinates', JSON.stringify(coordinates));
             let tagsArray = this.state.tags.split(' ');
             formData.append('tags', tagsArray);
-            axios.patch(`/api/photos/${this.props.match.params.id}`, formData, {
+            axios.post("/api/photos/", formData, {
                 headers: {
                     accept: "application/json",
                     "Accept-Language": "en-US,en;q=0.8",
@@ -83,7 +83,7 @@ class EditImageForm extends React.Component {
         return (
             <div className="image-upload-form-box">
                 {errorsDiv}
-                <label className="image-upload-title">Edit Image Form</label>
+                <label className="image-upload-title">Image Upload Form</label>
                 <label className="image-upload-reminder">Don't forget to place a marker on the map!</label>
                 <div className="image-description">
                     <label>Image Description:</label>
@@ -107,7 +107,7 @@ class EditImageForm extends React.Component {
                 <div>
                     <input type="file" onChange={this.singleFileChangedHandler} />
                     <div>
-                        <button className="btn btn-info" onClick={this.singleFileUploadHandler}>Edit</button>
+                        <button className="btn btn-info" onClick={this.singleFileUploadHandler}>Upload</button>
                     </div>
                 </div>
                 <div className="image-preview">
@@ -118,4 +118,4 @@ class EditImageForm extends React.Component {
     }
 }
 
-export default withRouter(EditImageForm);
+export default withRouter(PhotoForm);
