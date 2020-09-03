@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 // import { Map } from 'google-maps-react';
 import '../../stylesheets/sidebar.scss';
 
@@ -26,10 +27,16 @@ class SidebarItem extends React.Component {
     render() {
         const { currentUserId, photo, fetchPhotos, deletePhoto } = this.props;
         let deleteButton;
+        let editButton;
         if (photo.creatorId === currentUserId) {
             deleteButton = (
                 <button onClick={() => deletePhoto(photo._id).then(() => fetchPhotos())}>Delete</button>
-            )
+            );
+            editButton = (
+                <Link to={`/edit/${photo._id}`}>
+                    <button>Edit Photo and Location</button>
+                </Link>
+            );
         }
         return (
             <div onClick={this.handlePanTo} className='sidebar-item'>
@@ -39,6 +46,7 @@ class SidebarItem extends React.Component {
                 <br/>
                 <div>{photo.created}</div>
                 {deleteButton}
+                {editButton}
             </div>
         );
     }

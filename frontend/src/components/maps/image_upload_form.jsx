@@ -63,15 +63,6 @@ class ImageUploadForm extends React.Component {
       }
     };
     
-    // .then((response) => {
-    //   if (response.status === 200) {
-    //     if (response.data.error) {
-    //       console.log(response.data);
-    //     } else {
-    //       console.log("successful upload");
-    //     }
-    //   }
-    // })
   render() {
     const preview = this.state.photoUrl ? (
       <img src={this.state.photoUrl} className="image-preview" />
