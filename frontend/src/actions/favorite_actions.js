@@ -19,6 +19,6 @@ export const favorite = favorite => dispatch => (
 );
 
 export const unFavorite = id => dispatch => (
-    FavoriteAPIUtil.unfavorite(id)
+    FavoriteAPIUtil.unFavorite(id)
         .then(() => dispatch(removeFavorite(id)))
 );
