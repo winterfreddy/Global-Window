@@ -39,6 +39,7 @@
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "redux-thunk": "^2.3.0",
+    "strftime": "^0.10.0",
     "uuid": "^8.3.0",
     "validator": "^13.1.1"
   },
