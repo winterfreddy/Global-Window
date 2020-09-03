@@ -26,16 +26,21 @@ class SidebarItem extends React.Component {
         //     center: new google.maps.LatLng(lat, lng),
         //     zoom: 5
         // }
-        const map = new google.maps.Map(document.getElementById('google-api-map'))
+
+        // const map = new google.maps.Map(document.getElementById('google-api-map'))
         // console.log(map);
-        const panPoint = new google.maps.LatLng(lat, lng);
-        map.panTo(panPoint);
+        // const panPoint = new google.maps.LatLng(lat, lng);
+        // map.panTo(panPoint);
     }
 
     render() {
-        console.log(this.props.google);
-        // console.log(this.state);
-        const { photo } = this.props;
+        const { currentUserId, photo, fetchPhotos, deletePhoto } = this.props;
+        let deleteButton;
+        if (photo.creatorId === currentUserId) {
+            deleteButton = (
+                <button onClick={() => deletePhoto(photo._id).then(() => fetchPhotos())}>Delete</button>
+            )
+        }
         return (
             <div onClick={() => this.handlePanTo(this.props.google)} className='sidebar-item'>
                 <img className='sidebar-img-item' src={photo.imageURL}/>
@@ -43,6 +48,7 @@ class SidebarItem extends React.Component {
                 <div>{photo.description}</div>
                 <br/>
                 <div>{photo.created}</div>
+                {deleteButton}
             </div>
         );
     }

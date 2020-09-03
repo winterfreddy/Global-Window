@@ -11,3 +11,11 @@ export const fetchPhotos = () => (
 export const fetchPhoto = (id) => (
     axios.get(`/api/photos/${id}`)
 );
+
+export const editPhoto = photoData => (
+    axios.patch(`/api/photos/${photoData.id}`, photoData)
+);
+
+export const deletePhoto = id => (
+    axios.delete(`/api/photos/${id}`)
+)

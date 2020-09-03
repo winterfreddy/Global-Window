@@ -13,8 +13,7 @@ class Sidebar extends React.Component {
     }
 
     render() {
-        console.log(this.props);
-        const { photos, google } = this.props;
+        const { currentUserId, photos, google, fetchPhotos, deletePhoto } = this.props;
         if (!photos) {
             return null;
         } else {
@@ -23,7 +22,13 @@ class Sidebar extends React.Component {
                     <header className='sidebar-header'>THIS IS SIDEBAR</header>
                     <span className='sidebar-content-container'>
                         SIDEBAR CONTENT
-                    {photos.map( (photo, idx) => <SidebarItem key={idx} photo={photo} google={google} />)}
+                    {photos.map( (photo, idx) => <SidebarItem 
+                                            key={idx} 
+                                            currentUserId={currentUserId}
+                                            photo={photo} 
+                                            google={google}
+                                            fetchPhotos={fetchPhotos}
+                                            deletePhoto={deletePhoto} />)}
                     </span>
                 </div>
             );
