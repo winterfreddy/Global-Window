@@ -7,6 +7,7 @@ const keys = require("../../config/keys");
 const Photo = require("../../models/Photo");
 const Point = require("../../models/Point");
 const validatePhotoInput = require("../../validation/photo");
+const getSearchArea = require("./_photos_helper");
 
 const SET_MAX_DISTANCE = 30000000;
 const MAX_SEARCH_LIMIT = 20;
@@ -23,9 +24,8 @@ const s3 = new AWS.S3({
 
 // // get all photos
 router.get('/', (req, res) => {
-    // if(!req.body.coordinatesSet) { // USE THIS ONE FOR PROD
-    console.log('request query: ',req.query);
-    if(!req.query.lng1) {
+    const { lng1, lng2 } = req.query;
+    if(!lng1 && !lng2) {
         console.log("GRAB ALL PHOTOS");
       // TESTING ONLY
       Photo.find()
@@ -34,8 +34,9 @@ router.get('/', (req, res) => {
         .catch((err) =>
           res.status(404).json({ nophotosfound: "No photos found" })
         );
-      // } else if(coordsSet.length === 1) { // USE THIS ONE FOR PROD
-    } else if(req.query.lng1 && !req.query.lng2) {
+        
+    // } else if(req.query.lng1 && !req.query.lng2) { // use this when it works
+    } else if(false) { // temp because it's broken
       console.log("length 1 coordsSet");
       // const coordsSet = JSON.parse(req.body.coordinatesSet);
       let coords = [];
@@ -69,30 +70,11 @@ router.get('/', (req, res) => {
         // });
 
       // } else if(coordsSet.length === 2) { // USE THIS ONE FOR PROD
-    } else if (req.query.lng1 && req.query.lng2) {
-      // const coordsSet = JSON.parse(req.body.coordinatesSet);
-      console.log("2+ coord values found, searchArea");
-      let northValue = req.query.lng2;
-      let southValue = req.query.lng1;
-      let eastValue = req.query.lat2;
-      let westValue = req.query.lat1;
+    } else if (lng1 && lng2) {
 
-      const searchArea = {
-        type: "Polygon",
-        coordinates: [
-          [
-            [northValue, westValue],
-            [southValue, westValue],
-            [southValue, eastValue],
-            [northValue, eastValue],
-            [northValue, westValue],
-          ],
-        ],
-      };
-
-      console.log('serach area: ', searchArea);
-
-      Photo.find({ // or .find()
+      const searchArea = getSearchArea(req.query);
+    
+      Photo.find({ 
         location: {
           $geoWithin: {
             $geometry: searchArea,
@@ -101,12 +83,18 @@ router.get('/', (req, res) => {
       })
         .limit(MAX_SEARCH_LIMIT)
         .sort({ created: -1 })
-        .then((photos) => res.json(photos)) // try .exec() if this doesn't work
+        .then((photos) => res.json(photos)) 
         .catch((err) =>
           res.status(404).json(err)
         );
     }
 });
+
+// one set of coordinates
+// one set of coordinates (with specified tag)
+// OR
+// two sets of coordinates
+// two sets of coordinates (with specified tag)
 
 // get a specific photo
 router.get('/:id', (req, res) => {
@@ -131,6 +119,7 @@ const uploadImage = (file) => {
   console.log("going back to posting photo");
   return uploadPhoto;
 };
+
 // create a new photo - NB: this uses the helper method above
 router.post(
   "/",
