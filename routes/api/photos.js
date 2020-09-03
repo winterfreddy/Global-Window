@@ -8,6 +8,9 @@ const Photo = require("../../models/Photo");
 const Point = require("../../models/Point");
 const validatePhotoInput = require("../../validation/photo");
 
+const SET_MAX_DISTANCE = 30000;
+const MAX_SEARCH_LIMIT = 20;
+
 // Middleware for Form-Data Postman
 const multer = require("multer");
 const upload = multer();
@@ -21,7 +24,9 @@ const s3 = new AWS.S3({
 // // get all photos
 router.get('/', (req, res) => {
     // if(!req.body.coordinatesSet) { // USE THIS ONE FOR PROD
-    if(!req.body.lng1) {
+    console.log('request query: ',req.query);
+    if(!req.query.lng1) {
+        console.log("GRAB ALL PHOTOS");
       // TESTING ONLY
       Photo.find()
         .sort({ date: -1 })
@@ -30,15 +35,40 @@ router.get('/', (req, res) => {
           res.status(404).json({ nophotosfound: "No photos found" })
         );
       // } else if(coordsSet.length === 1) { // USE THIS ONE FOR PROD
-    } else if(!req.body.lng2) {
+    } else if(req.query.lng1 && !req.query.lng2) {
       console.log("length 1 coordsSet");
       // const coordsSet = JSON.parse(req.body.coordinatesSet);
+      let coords = [];
+      coords[0] = parseFloat(req.query.lng1) || 0;
+      coords[1] = parseFloat(req.query.lat1) || 0;
+      const centerPoint = {
+          type: 'Point',
+          coordinates: coords
+      };
+      console.log(coords);
+      Photo.find({
+        location: {
+          $near: centerPoint,
+          $maxDistance: SET_MAX_DISTANCE,
+        },
+      })
+        // .limit(MAX_SEARCH_LIMIT)
+        // .sort({ date: -1 })
+        .then((photos) => res.json(photos)) // try .exec() if this doesn't work
+        .catch((err) =>
+          res.status(404).json(err)
+        );
+        // .exec(function(err, locations) {
+        //     if (err) {
+        //         return res.status(500).json(err);
+        //     }
+        //     res.json(200, locations);
+        // });
 
       // } else if(coordsSet.length === 2) { // USE THIS ONE FOR PROD
-    } else if(req.body.lng1 && req.body.lng2) { 
-        console.log("length 2 coordsSet");
-        // const coordsSet = JSON.parse(req.body.coordinatesSet);
-        
+    } else if (req.query.lng1 && req.query.lng2) {
+      console.log("length 2 coordsSet");
+      // const coordsSet = JSON.parse(req.body.coordinatesSet);
     }
 });
 

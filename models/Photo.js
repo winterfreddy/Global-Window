@@ -2,6 +2,19 @@ const mongoose = require("mongoose")
 require("mongoose-double")(mongoose);
 const Schema = mongoose.Schema;
 const SchemaTypes = mongoose.Schema.Types;
+// const PointSchema = require('./Point');
+
+const PointSchema = new Schema({
+  type: {
+    type: String,
+    enum: ["Point"],
+    required: true,
+  },
+  coordinates: {
+    type: [Number], // [lng, lat] IMPORTANT
+    required: true,
+  },
+});
 
 const PhotoSchema = new Schema({
   creatorId: {
@@ -27,9 +40,8 @@ const PhotoSchema = new Schema({
     },
   },
   location: {
-    type: Schema.Types.ObjectId,
-    ref: "points",
-    index: true,
+    type: PointSchema,
+    required: true
   },
   created: {
     type: Date,
