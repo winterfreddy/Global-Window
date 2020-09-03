@@ -9,10 +9,10 @@ class PhotoForm extends React.Component {
         super(props);
 
         this.state = {};
-        this.state["description"] = "";
-        this.state["tags"] = "";
+        this.state["description"] = this.props.photo.data.description || "";
+        this.state["tags"] = this.props.photo.data.tags.join(' ') || "";
         this.state["photoFile"] = null;
-        this.state['photoUrl'] = null;
+        this.state['photoUrl'] = this.props.photo.data.imageURL || null;
         this.state['errors'] = null;
 
         this.singleFileChangedHandler = this.singleFileChangedHandler.bind(this);
@@ -37,13 +37,32 @@ class PhotoForm extends React.Component {
 
     singleFileUploadHandler = () => {
         const formData = new FormData();
+        formData.append('description', this.state.description);
+        let coordinates = { lat: this.props.lat, lng: this.props.lng };
+        formData.append('coordinates', JSON.stringify(coordinates));
+        let tagsArray = this.state.tags.split(' ');
+        formData.append('tags', tagsArray);
         if (this.state.photoFile) {
-            formData.append('description', this.state.description);
             formData.append('file', this.state.photoFile);
-            let coordinates = { lat: this.props.lat, lng: this.props.lng };
-            formData.append('coordinates', JSON.stringify(coordinates));
-            let tagsArray = this.state.tags.split(' ');
-            formData.append('tags', tagsArray);
+        }
+        if (this.props.formType === 'edit photo') {
+            axios.patch(`/api/photos/${this.props.match.params.id}`, formData, {
+                headers: {
+                    accept: 'application/json',
+                    'Accept-Language': 'en-US,en;q=0.8',
+                    'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
+                    'Access-Control-Allow-Origin': '*',
+                },
+            })
+                .then(response => {
+                    if (response.state === 200) {
+                        console.log(response.data);
+                    } else {
+                        this.props.history.push('/home');
+                    }
+                })
+                .catch(errors => this.setState({ errors: errors }));
+        } else {
             axios.post("/api/photos/", formData, {
                 headers: {
                     accept: "application/json",
@@ -56,11 +75,12 @@ class PhotoForm extends React.Component {
                     if (response.state === 200) {
                         console.log(response.data);
                     } else {
-                        this.props.history.push('/home')
+                        this.props.history.push('/home');
                     }
                 })
                 .catch(errors => this.setState({ errors: errors }));
         }
+    
     };
 
     render() {

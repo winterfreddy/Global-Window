@@ -153,53 +153,59 @@ class EditImageForm extends React.Component {
 
     render() {
         const { photo, formType, fetchPhoto } = this.props;
-      
-        console.log('photo found');
-        return (
-            <div className='google-maps-images-container'>
-                <div>
-                    <Map
-                        className="google-api-map"
-                        google={this.props.google}
-                        zoom={12}
-                        styles={darkMode.styles}
-                        style={mapStyles}
-                        gestureHandling='cooperative'
-                        initialCenter={{
-                            lat: 37.7941135,
-                            lng: -122.4126891,
-                        }}
-                        onClick={this.mapClick}
-                    >
-                        <Marker
-                            onClick={this.onMarkerClick}
-                            name={"App Academy San Francisco Office"}
-                        />
-                        <InfoWindow
-                            marker={this.state.activeMarker}
-                            visible={this.state.showingInfoWindow}
-                            onClose={this.onClose}
+        if (!photo) {
+            return null;
+        } else {
+            console.log(photo);
+            return (
+                <div className='google-maps-images-container'>
+                    <div>
+                        <Map
+                            className="google-api-map"
+                            google={this.props.google}
+                            zoom={12}
+                            styles={darkMode.styles}
+                            style={mapStyles}
+                            gestureHandling='cooperative'
+                            initialCenter={{
+                                lat: photo.data.coordinates.lat,
+                                lng: photo.data.coordinates.lng,
+                            }}
+                            onClick={this.mapClick}
                         >
-                            <div>
-                                <h4>{this.state.selectedPlace.name}</h4>
-                            </div>
-                        </InfoWindow>
-                    </Map>
+                            <Marker
+                                key={photo._id}
+                                position={photo.coordinates}
+                                onClick={this.onMarkerClick}
+                                name={photo.data.description} />
+                            <InfoWindow
+                                marker={this.state.activeMarker}
+                                visible={this.state.showingInfoWindow}
+                                onClose={this.onClose}
+                            >
+                                <div>
+                                    <h4>{this.state.selectedPlace.name}</h4>
+                                </div>
+                            </InfoWindow>
+                        </Map>
+                    </div>
+                    <div className='image-upload-form-container'>
+                        <PhotoForm
+                        lat={this.state.lat}
+                        lng={this.state.lng} 
+                        photo={photo}
+                        formType={formType}
+                        fetchPhoto={fetchPhoto} />
+                    </div>
                 </div>
-                <div className='image-upload-form-container'>
-                    <PhotoForm 
-                    photo={photo}
-                    formType={formType}
-                    fetchPhoto={fetchPhoto} />
-                </div>
-            </div>
-        );
+            );
+        }
     }
 }
 
 const mapStateToProps = (state, ownProps) => ({
-    // photo: state.photos.data.filter(photo => photo._id === ownProps.match.params.id),
-    // formType: 'edit photo'
+    photo: state.photos[ownProps.match.params.id],
+    formType: 'edit photo'
 });
 
 const mapDispatchToProps = dispatch => ({
