@@ -21,27 +21,13 @@ router.get(
   }
 );
 
-// "<!DOCTYPE html>
-// <html lang="en">
-// <head>
-// <meta charset="utf-8">
-// <title>Error</title>
-// </head>
-// <body>
-// <pre>Cannot POST /api/users/register</pre>
-// </body>
-// </html>
-// "
-
 router.post("/register", (req, res) => {
-  // console.log("users controller /register");
   const { errors, isValid } = validateRegisterInput(req.body);
   if(!isValid) {
     return res.status(400).json(errors);
   }
 
   User.findOne({ username: req.body.username }).then((user) => {
-    console.log("found a user: ", user);
     if (user) {
       return res
         .status(400)
@@ -56,11 +42,9 @@ router.post("/register", (req, res) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
           if (err) throw err;
           newUser.password = hash;
-          console.log('hashed password');
           newUser
             .save()
             .then((user) => {
-              console.log('finished hashing password for user');
               const payload = { id: user.id, username: user.username };
 
               jwt.sign(
