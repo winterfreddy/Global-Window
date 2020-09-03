@@ -10,7 +10,8 @@ import './stylesheets/reset.scss';
 // Testing imports:
 import { fetchPhotos, fetchPhoto, editPhoto, deletePhoto } from './util/photos_api_util';
 // import { fetchPhotos, fetchPhoto, editPhoto, deletePhoto } from './actions/photo_actions';
-import { favorite, unfavorite } from './util/favorites_api_util';
+// import { favorite, unfavorite } from './util/favorites_api_util';
+import { favorite, unfavorite } from './actions/favorite_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;

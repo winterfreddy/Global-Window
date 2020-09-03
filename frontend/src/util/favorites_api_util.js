@@ -4,6 +4,6 @@ export const favorite = favoriteData => (
     axios.post('/api/favorites/', favoriteData)
 );
 
-export const unfavorite = id => (
+export const unFavorite = id => (
     axios.delete(`/api/favorites/${id}`)
 );
