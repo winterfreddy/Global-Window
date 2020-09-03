@@ -5,7 +5,8 @@ import NavBarContainer from "./nav/navbar_container";
 import MainPageContainer from "./main/main_page_container";
 import Modal from './modal/modal';
 import SplashContainer from './splash/splash_container';
-import MapsFormContainer from './maps/maps_forms_container';
+// import UploadImageFormContainer from './maps/upload_image_form_container';
+import UploadMapsFormContainer from './maps/upload_maps_forms_container';
 import EditImageFormContainer from './maps/edit_image_form_container';
 
 const App = () => (
@@ -14,8 +15,8 @@ const App = () => (
     <NavBarContainer />
     <Switch>
       <ProtectedRoute exact path="/home" component={MainPageContainer} />
-      <ProtectedRoute exact path='/upload' component={MapsFormContainer} />
-      <ProtectedRoute path='/edit/${id}' component={EditImageFormContainer}/>
+      <ProtectedRoute exact path='/upload' component={UploadMapsFormContainer} />
+      <ProtectedRoute exact path='/edit/:id' component={EditImageFormContainer} />
     </Switch>
     <AuthRoute exact path="/" component={SplashContainer} />
   </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import GoogleMapsContainer from './google_maps_container';
 
-class MapsForms extends React.Component {
+class UploadMapsForms extends React.Component {
     render() {
         return (
             <div>
@@ -11,4 +11,4 @@ class MapsForms extends React.Component {
     }
 }
 
-export default MapsForms;
+export default UploadMapsForms;
