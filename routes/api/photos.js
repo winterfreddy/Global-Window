@@ -26,10 +26,8 @@ const s3 = new AWS.S3({
 router.get('/', (req, res) => {
     const { lng1, lng2 } = req.query;
     if(!lng1 && !lng2) {
-        console.log("GRAB ALL PHOTOS");
-      // TESTING ONLY
       Photo.find()
-        .sort({ date: -1 })
+        .sort({ created: -1 })
         .then((photos) => res.json(photos))
         .catch((err) =>
           res.status(404).json({ nophotosfound: "No photos found" })
@@ -71,7 +69,6 @@ router.get('/', (req, res) => {
 
       // } else if(coordsSet.length === 2) { // USE THIS ONE FOR PROD
     } else if (lng1 && lng2) {
-        console.log("2 coords");
       const searchArea = getSearchArea(req.query);
       let search;
       if (req.query.tag) {
@@ -98,12 +95,6 @@ router.get('/', (req, res) => {
     }
 });
 
-// one set of coordinates
-// one set of coordinates (with specified tag)
-// OR
-// two sets of coordinates
-// two sets of coordinates (with specified tag)
-
 // get a specific photo
 router.get('/:id', (req, res) => {
   Photo.findById(req.params.id)
@@ -114,7 +105,6 @@ router.get('/:id', (req, res) => {
 });
 
 const uploadImage = (file) => {
-  console.log(file);
   const params = {
     Bucket: keys.s3Bucket,
     Key: uuidv4(),
@@ -122,9 +112,7 @@ const uploadImage = (file) => {
     ContentType: file.mimetype,
     ACL: "public-read",
   };
-  console.log("created params");
   const uploadPhoto = s3.upload(params).promise();
-  console.log("going back to posting photo");
   return uploadPhoto;
 };
 
@@ -134,7 +122,6 @@ router.post(
   upload.single("file"),
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    // TODO: ADD THIS BACK AFTER TESTING
     const { errors, isValid } = validatePhotoInput(req.body, req.file);
     if (!isValid) {
       return res.status(400).json(errors);
@@ -142,30 +129,21 @@ router.post(
     // Wait for file to upload, get URL, and then create Photo object
     uploadImage(req.file)
       .then((data) => {
-        console.log("file upload successful");
         const uploadedFileURL = data.Location;
-        // ADD THIS BACK AFTER TESTING
         const coords = JSON.parse(req.body.coordinates);
-        // const coords = { lat: req.body.lat, lng: req.body.lng };
-        console.log("coords: ", coords);
         const locationObject = new Point({
           type: "Point",
           coordinates: [coords.lng, coords.lat],
         });
-        console.log("locationObject: ", locationObject);
-        // locationObject.save().then((point) => {
-          // create Photo object
-          console.log("locationObject saved!");
-          const newPhoto = new Photo({
-            creatorId: req.user.id, // req.user.id
-            description: req.body.description,
-            imageURL: uploadedFileURL,
-            coordinates: coords,
-            location: locationObject,
-            tags: req.body.tags,
-          });
-          newPhoto.save().then((photo) => res.json(photo));
-        // });
+        const newPhoto = new Photo({
+          creatorId: req.user.id, 
+          description: req.body.description,
+          imageURL: uploadedFileURL,
+          coordinates: coords,
+          location: locationObject,
+          tags: req.body.tags,
+        });
+        newPhoto.save().then((photo) => res.json(photo));
       })
       .catch((err) => {
         res.status(400).json({ image: "Image upload did not work" });
@@ -192,7 +170,7 @@ router.delete('/:id',
 ));
 
 // update a photo
-router.patch('/:id',
+router.patch('/:id', upload.single("file"),
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { coordinates, tags, description, lat, lng } = req.body;
@@ -200,18 +178,15 @@ router.patch('/:id',
       .then(photo => {
         const currUserId = req.user.id;
         if(currUserId == photo.creatorId) {
-          const newCoords = (coordinates) ? JSON.parse(coordinates) : photo.coordinates; 
-        // const newCoords = (lat && lng) ? {lat: parseFloat(lat), lng: parseFloat(lng)} : photo.coordinates; // testing w/ postman
-        const newDesc = description || photo.description;
-        const newTags = tags || photo.tags;
+          const newCoords = JSON.parse(coordinates); 
           const locationObject = new Point({
             type: "Point",
             coordinates: [newCoords.lng, newCoords.lat],
           });
           photo.updateOne({ 
-                description: newDesc ,
-                tags: newTags ,
-                coordinates: newCoords ,
+                description: description ,
+                tags: tags ,
+                coordinates: newCoords,
                 location: locationObject 
           })
             .then(() =>
