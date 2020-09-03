@@ -9,6 +9,7 @@ const Point = require("../../models/Point");
 const Favorite = require("../../models/Favorite");
 const validatePhotoInput = require("../../validation/photo");
 const getSearchArea = require("./_photos_helper");
+const strftime = require("strftime");
 
 const SET_MAX_DISTANCE = 30000000;
 const MAX_SEARCH_LIMIT = 20;
@@ -145,13 +146,15 @@ router.post(
           type: "Point",
           coordinates: [coords.lng, coords.lat],
         });
+        
         const newPhoto = new Photo({
-          creatorId: req.user.id, 
+          creatorId: req.user.id,
           description: req.body.description,
           imageURL: uploadedFileURL,
           coordinates: coords,
           location: locationObject,
           tags: req.body.tags,
+          created: strftime("%b %d, %Y, %l:%M %P"),
         });
         newPhoto.save().then((photo) => res.json(photo));
       })
