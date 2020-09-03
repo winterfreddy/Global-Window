@@ -34,7 +34,7 @@ class SidebarItem extends React.Component {
             );
             editButton = (
                 <Link to={`/edit/${photo._id}`}>
-                    <button>Edit Photo and Location</button>
+                    <button>Edit Location</button>
                 </Link>
             );
         }

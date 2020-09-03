@@ -16,7 +16,7 @@ const App = () => (
     <Switch>
       <ProtectedRoute exact path="/home" component={MainPageContainer} />
       <ProtectedRoute exact path='/upload' component={UploadMapsFormContainer} />
-      <ProtectedRoute exact path='/edit/:id' component={EditImageFormContainer} />
+      <ProtectedRoute exact path='/edit/:id' component={EditImageFormContainer} google={window.google} />
     </Switch>
     <AuthRoute exact path="/" component={SplashContainer} />
   </div>
