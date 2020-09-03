@@ -104,6 +104,14 @@ router.get('/:id', (req, res) => {
     );
 });
 
+router.get('/:id/favorites', 
+  (req, res) => {
+    Favorite.find({ photoId: req.params.id })
+      .then(favorites => res.json(favorites))
+      .catch((err) => res.status(400).json({ photoNotFound: "Photo with that id not found" }))
+  }
+)
+
 const uploadImage = (file) => {
   const params = {
     Bucket: keys.s3Bucket,
@@ -112,6 +120,7 @@ const uploadImage = (file) => {
     ContentType: file.mimetype,
     ACL: "public-read",
   };
+  console.log("image params are set");
   const uploadPhoto = s3.upload(params).promise();
   return uploadPhoto;
 };
@@ -201,6 +210,6 @@ router.patch('/:id', upload.single("file"),
       })
     .catch(err =>
       res.status(422).json({ noPhotoFound: "Photo could not be found" }))
-})
+});
 
 module.exports = router;
