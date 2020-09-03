@@ -20,9 +20,12 @@ class SidebarItem extends React.Component {
         // let google = this.state.google;
         // console.log(this.state.google);
         // console.log(this.props.google);
+        const allPhotos = this.props.photos;
+        console.log(allPhotos);
         const { lat, lng } = this.props.photo.coordinates;
-        console.log(lat);
-        console.log(lng);
+        // console.log(lat);
+        // console.log(lng);
+        console.log(this.props.photo.coordinates);
         console.log(window.google);
         const google = window.google;
         const mapProp = { 
@@ -31,10 +34,27 @@ class SidebarItem extends React.Component {
         }
         console.log([...document.getElementsByClassName('google-api-map')][0]);
         const googleAPIMap = [...document.getElementsByClassName('google-api-map')][0];
+
+        // console.log(google.maps.Map.getCenter());
         const map = new google.maps.Map(googleAPIMap, mapProp);
         // const map = new google.maps.Map(document.getElementById('map'), mapProp);
         // if(map) {
         //     console.log("check");
+
+        let markers;
+        markers = allPhotos.map(point => {
+            const marker = new google.maps.Marker({
+                position: point.coordinates,
+                map
+            });
+            const infowindow = new google.maps.InfoWindow({
+                content: point.description
+            });
+            marker.addListener("click", () => {
+                infowindow.open(map, marker);
+            });
+        })
+
         const panPoint = new google.maps.LatLng(lat, lng);
         map.panTo(panPoint);
         // }

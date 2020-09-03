@@ -26,7 +26,8 @@ class Sidebar extends React.Component {
                     {photos.map(photo => <SidebarItem 
                                             key={photo._id} 
                                             currentUserId={currentUserId}
-                                            photo={photo} 
+                                            photo={photo}
+                                            photos={photos} 
                                             google={google}
                                             fetchPhotos={fetchPhotos}
                                             deletePhoto={deletePhoto} />)}
