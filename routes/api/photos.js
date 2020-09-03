@@ -6,6 +6,7 @@ const uuidv4 = require("uuid").v4;
 const keys = require("../../config/keys");
 const Photo = require("../../models/Photo");
 const Point = require("../../models/Point");
+const Favorite = require("../../models/Favorite");
 const validatePhotoInput = require("../../validation/photo");
 const getSearchArea = require("./_photos_helper");
 
@@ -169,7 +170,14 @@ router.delete('/:id',
       const currUserId = req.user.id;
       if(currUserId == photo.creatorId) {
         Photo.deleteOne({ _id: photo.id })
-          .then(() => res.json({ successfulDelete: "Deleted successfuly" }))
+          .then(() => Favorite.deleteMany({ photoId: req.params.id }), function(err, result) {
+             if (err) {
+               res.send(err);
+             } else {
+               res.send(result);
+             }
+          })
+          .then(() => res.json({ successfulDelete: "Deleted successfully" }))
           .catch(err => res.status(400).json({ unsuccessfulDelete: "Not deleted" })) 
       } else {
         res.status(404).json({ unauthorizedDelete: "Not authorized to delete" })
