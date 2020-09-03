@@ -9,11 +9,20 @@ class PhotoForm extends React.Component {
         super(props);
 
         this.state = {};
-        this.state["description"] = this.props.photo.data.description || "";
-        this.state["tags"] = this.props.photo.data.tags.join(' ') || "";
-        this.state["photoFile"] = null;
-        this.state['photoUrl'] = this.props.photo.data.imageURL || null;
-        this.state['errors'] = null;
+        if (this.props.formType === 'edit form') {
+            this.state["description"] = this.props.photo.data.description || "";
+            this.state["tags"] = this.props.photo.data.tags.join(' ') || "";
+            this.state["photoFile"] = null;
+            this.state['photoUrl'] = this.props.photo.data.imageURL || null;
+            this.state['errors'] = null;
+        } else {
+            this.state["description"] = "";
+            this.state["tags"] = "";
+            this.state["photoFile"] = null;
+            this.state['photoUrl'] = null;
+            this.state['errors'] = null;
+        }
+
 
         this.singleFileChangedHandler = this.singleFileChangedHandler.bind(this);
         this.singleFileUploadHandler = this.singleFileUploadHandler.bind(this);
@@ -100,11 +109,17 @@ class PhotoForm extends React.Component {
                 </div>
             );
         }
+        let inputFile;
+        if (this.props.formType === 'edit form') {
+            inputFile = (
+                <input type="file" onChange={this.singleFileChangedHandler} />
+            );
+        }
         return (
             <div className="image-upload-form-box">
                 {errorsDiv}
-                <label className="image-upload-title">Image Upload Form</label>
-                <label className="image-upload-reminder">Don't forget to place a marker on the map!</label>
+                <label className="image-upload-title">Image Upload</label>
+                <label className="image-upload-reminder">Please place a marker on the map!</label>
                 <div className="image-description">
                     <label>Image Description:</label>
                     <br />
@@ -125,7 +140,7 @@ class PhotoForm extends React.Component {
                         onChange={this.update('tags')} />
                 </div>
                 <div>
-                    <input type="file" onChange={this.singleFileChangedHandler} />
+                    {inputFile}
                     <div>
                         <button className="btn btn-info" onClick={this.singleFileUploadHandler}>Upload</button>
                     </div>

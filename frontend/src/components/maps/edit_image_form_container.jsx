@@ -156,7 +156,6 @@ class EditImageForm extends React.Component {
         if (!photo) {
             return null;
         } else {
-            console.log(photo);
             return (
                 <div className='google-maps-images-container'>
                     <div>
