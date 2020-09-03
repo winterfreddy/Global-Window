@@ -73,13 +73,21 @@ router.get('/', (req, res) => {
     } else if (lng1 && lng2) {
 
       const searchArea = getSearchArea(req.query);
-    
+      let search;
+      if (req.query.tag) {
+        search = req.query.tag
+      } else {
+        search = { $exists: true }
+      }
+
       Photo.find({ 
         location: {
           $geoWithin: {
             $geometry: searchArea,
           },
         },
+        tags: search
+        
       })
         .limit(MAX_SEARCH_LIMIT)
         .sort({ created: -1 })
