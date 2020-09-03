@@ -10,7 +10,7 @@ class MainPage extends React.Component {
       <div className="main-page">
         <div className="left-aside">
             SIDE BAR GOES HERE
-            <SidebarContainer />
+            <SidebarContainer google={window.google} />
         </div>
         <div className="google-maps-container">
           <GoogleMapsContainer google={window.google} photos={photos} fetchPhotos={fetchPhotos} />

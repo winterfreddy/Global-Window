@@ -106,9 +106,9 @@ export class MapContainer extends Component {
     this.mapClick = this.mapClick.bind(this);
   }
 
-  componentDidMount() {
-    this.props.fetchPhotos();
-  }
+  // componentDidMount() {
+  //   this.props.fetchPhotos();
+  // }
 
   onMarkerClick = (props, marker, e) => 
     this.setState({
@@ -158,9 +158,13 @@ export class MapContainer extends Component {
     }
     let markers;
     if (this.props.photos) {
-      markers = this.props.photos.map(photo => <Marker position={photo.coordinates} onClick={this.onMarkerClick} name={photo.description}/>)
+      markers = this.props.photos.map(photo => <Marker 
+        key={photo.id} 
+        position={photo.coordinates} 
+        onClick={this.onMarkerClick} 
+        name={photo.description}/>)
     }
-    // console.log(this.props);
+
     return (
       <div className='google-maps-images-container'>
         <div>
