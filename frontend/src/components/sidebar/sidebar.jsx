@@ -13,6 +13,7 @@ class Sidebar extends React.Component {
     }
 
     render() {
+        console.log(this.props);
         const { photos, google } = this.props;
         if (!photos) {
             return null;

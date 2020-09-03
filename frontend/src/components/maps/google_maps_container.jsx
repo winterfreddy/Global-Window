@@ -150,6 +150,7 @@ export class MapContainer extends Component {
   }
 
   render() {
+    // console.log(this.props);
     let uploadForm;
     if (this.props.location.pathname === '/upload') {
       uploadForm = (<div className='image-upload-form-container'>
@@ -169,6 +170,7 @@ export class MapContainer extends Component {
       <div className='google-maps-images-container'>
         <div>
           <Map
+            id="google-api-map"
             className="google-api-map"
             google={this.props.google}
             zoom={12}
