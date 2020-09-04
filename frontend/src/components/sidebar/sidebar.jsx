@@ -25,7 +25,7 @@ class Sidebar extends React.Component {
             favorites,
             fetchUserFave
         } = this.props;
-        if (!photos || !favorites) {
+        if (!photos) {
             return null;
         } else {
             return (

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import '../../stylesheets/sidebar.scss';
 
 const darkMode = {
@@ -139,13 +140,32 @@ class SidebarItem extends React.Component {
         let clickAction;
         console.log(favorites);
         console.log(photo);
-        // if (favorites[photo._id].favoriterId === currentUserId) {
-        //     console.log('hitting unfave')
-        //     clickAction = () => unFavorite(photo._id).then(fetchPhotos());
-        // } else {
-        //     console.log('hitting fave');
-        //     clickAction = () => makeFavorite({photoId: photo._id}).then(fetchPhotos());
-        // }
+        if (favorites[photo._id] !== undefined) {
+            if (favorites[photo._id].favoriterId === currentUserId) {
+                console.log('hitting unfave')
+                console.log(favorites[photo._id].photoId);
+                // clickAction = unFavorite(favorites[photo._id].photoId).then(() => fetchPhotos()).catch(err => console.log(err));
+                let formData = new FormData()
+                formData.append('photoId', favorites[photo._id].photoId)
+                return axios.delete('api/favorites/', formData, {
+                    headers: {
+                        accept: 'application/json',
+                        'Accept-Language': 'en-US,en;q=0.8',
+                        'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
+                        'Access-Control-Allow-Origin': '*',
+                    }})
+                    .then(() => fetchPhotos())
+                    .catch(err => console.log(err.response));
+                // clickAction = unFavorite({ photoId: favorites[photo._id].photoId})
+                //     .then(() => fetchPhotos()).catch(err => console.log(err));
+            } else {
+            }
+        } else {
+            console.log(favorites[photo._id]);
+            console.log('hitting fave');
+            clickAction = makeFavorite({ photoId: photo._id })
+                .then(() => fetchPhotos()).catch(err => console.log(err));
+        } 
         return clickAction;
     }
 
