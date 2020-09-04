@@ -54,13 +54,13 @@ function seedEvents(req, res) {
         },
         {
           description: "Golden Gate Bridge",
-          coordinates: { lat: 37.78678804194593, lng: -122.39041603634031 },
+          coordinates: { lat: 37.820175, lng: -122.478981},
           tags: ["sf", "architecture"],
           imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/02-photo.jpeg`,
         },
         {
           description: "Berkeley Trails",
-          coordinates: { lat: 37.78678804194593, lng: -122.39041603634031 },
+          coordinates: { lat: 37.905441, lng: -122.244532},
           tags: ["nature", "berkeley"],
           imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/03-photo.jpeg`,
         },
@@ -72,7 +72,7 @@ function seedEvents(req, res) {
         },
         {
           description: "Fall Weather in Boston",
-          coordinates: { lat: 37.78678804194593, lng: -122.39041603634031 },
+          coordinates: { lat: 42.354886, lng: -71.064742},
           tags: ["boston", "nature"],
           imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/05-photo.jpeg`,
         },
@@ -237,7 +237,7 @@ function seedEvents(req, res) {
         },
         {
           description: "The Bean",
-          coordinates: { lat: 41.882468, lng: 87.623095 },
+          coordinates: { lat: 41.882468, lng: -87.623095 },
           tags: ["sights", "tourist", "landmark"],
           imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/032-photo.jpeg`,
         },
@@ -281,7 +281,7 @@ function seedEvents(req, res) {
           description: "Ultra Miami",
           coordinates: { lat: 26.328992, lng: -80.094986 },
           tags: ["party", "music", "edm"],
-          imageURL: "https://global-window-project-dev.s3-us-west-1.amazonaws.com/0039-photo.jpeg",
+          imageURL: "https://global-window-project-dev.s3-us-west-1.amazonaws.com/039-photo.jpeg",
         },
         {
           description: "Freeways",
@@ -308,8 +308,8 @@ function seedEvents(req, res) {
           imageURL: "https://global-window-project-dev.s3-us-west-1.amazonaws.com/043-photo.jpeg",
         },
         {
-          description: "Brooklyn Bridge",
-          coordinates: { lat: 40.705771, lng: 73.996356 },
+          description: "View from Brooklyn Bridge",
+          coordinates: { lat: 40.705771, lng: -73.996356 },
           tags: ["bridge, landmark"],
           imageURL: "https://global-window-project-dev.s3-us-west-1.amazonaws.com/044-photo.jpeg",
         },
@@ -369,24 +369,19 @@ function seedEvents(req, res) {
           tags: photoInfo.tags,
           created: strftime("%b %d, %Y, %l:%M %P"),
         });
-        console.log("photoId: ", newPhoto._id);
+        // console.log("photoId: ", newPhoto._id);
         newPhoto.save();
         createdPhotos.push(newPhoto);
       });
 
-    //   console.log(createdUsers);
-    //   console.log(createdPhotos);
-    //   console.log(Math.floor(Math.random() * createdUsers.length));
-    //   console.log(Math.floor(Math.random() * createdPhotos.length));
-
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < 200; i++) {
         const photoId =
           createdPhotos[Math.floor(Math.random() * createdPhotos.length)]._id;
         const favoriterId =
           createdUsers[Math.floor(Math.random() * createdUsers.length)]._id;
 
-        console.log("photoid: ", photoId);
-        console.log("favid: ", favoriterId);
+        // console.log("photoid: ", photoId);
+        // console.log("favid: ", favoriterId);
 
         Favorite.find({ photoId: photoId, favoriterId: favoriterId }).then(
           (fav) => {
