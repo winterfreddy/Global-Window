@@ -14,7 +14,6 @@ class Sidebar extends React.Component {
 
     render() {
         const { currentUserId, photos, google, fetchPhotos, deletePhoto } = this.props;
-        console.log(this.props);
         if (!photos) {
             return null;
         } else {

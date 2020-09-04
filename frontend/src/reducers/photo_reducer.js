@@ -22,10 +22,21 @@ export default function (state = {}, action) {
             delete newState[action.id];
             return newState;
         case RECEIVE_PHOTO_FAVORITES:
-            console.log(action.favorites)
-            // newState[newState.photos.data.length] = action.favorites.data.length;
+            let photoObj;
+            let favoritesLength;
+            let appendedObj;
+            if (action.favorites.data instanceof Object) {
+                photoObj = newState[action.favorites.data.photoId];
+                favoritesLength = 0;
+                appendedObj = { ...photoObj, numFavorites: favoritesLength };
+                newState[action.favorites.data.photoId] = appendedObj;            
+            } else {
+                photoObj = newState[action.favorites.data[0].photoId]
+                favoritesLength = action.favorites.data.length
+                appendedObj = { ...photoObj, numFavorites: favoritesLength };
+                newState[action.favorites.data[0].photoId] = appendedObj;       
+            }
             return newState;
-            // return action.favorites.data.length;
         default:
             return state;
     }
