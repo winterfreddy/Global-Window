@@ -118,6 +118,54 @@ function seedEvents(req, res) {
           tags: ["barcelona", "spain", "architecture"],
           imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/012-photo.jpeg`,
         },
+        {
+          description: "Santorini",
+          coordinates: { lat: 36.461668, lng: 25.37624 },
+          tags: ["oia", "greece", "architecture"],
+          imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/013-photo.jpeg`,
+        },
+        {
+          description: "Painted Ladies",
+          coordinates: { lat: 37.776168, lng: -122.432809 },
+          tags: ["sf", "buildings", "architecture"],
+          imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/014-photo.jpeg`,
+        },
+        {
+          description: "Strawberry Hill",
+          coordinates: { lat: 37.768773, lng: -122.475506 },
+          tags: ["sf", "nature"],
+          imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/015-photo.jpeg`,
+        },
+        {
+          description: "Fishermna's Wharf",
+          coordinates: { lat: 37.80915, lng: -122.415714 },
+          tags: ["sf", "pier"],
+          imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/016-photo.jpeg`,
+        },
+        {
+          description: "Baker Beach",
+          coordinates: { lat: 37.793511, lng: -122.483811 },
+          tags: ["sf", "beach"],
+          imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/017-photo.jpeg`,
+        },
+        {
+          description: "Lake Merritt",
+          coordinates: { lat: 37.808554, lng: -122.249783 },
+          tags: ["oakland", "lake", "merritt"],
+          imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/018-photo.jpeg`,
+        },
+        {
+          description: "Oakland Zoo",
+          coordinates: { lat: 37.750094, lng: -122.146736 },
+          tags: ["oakland", "lake", "merritt"],
+          imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/019-photo.jpeg`,
+        },
+        {
+          description: "Evil Corp",
+          coordinates: { lat: 37.483132, lng: -122.150063 },
+          tags: ["facebook", "capitalism", "tech"],
+          imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/020-photo.jpeg`,
+        },
 
         // {
         //   description: "",
@@ -232,9 +280,100 @@ function seedEvents(req, res) {
         {
           description: "Freeways",
           coordinates: { lat: 26.118581, lng: -80.339856 },
-          tags: ['signs'],
+          tags: ["signs"],
           imageURL:
             "https://global-window-project-dev.s3-us-west-1.amazonaws.com/040-photo.jpeg",
+        },
+        {
+          description: "Sunsets",
+          coordinates: { lat: 26.135427, lng: -80.142019 },
+          tags: ["sunset", "roads"],
+          imageURL:
+            "https://global-window-project-dev.s3-us-west-1.amazonaws.com/041-photo.jpeg",
+        },
+        {
+          description: "Subway",
+          coordinates: { lat: 40.769085, lng: -73.95814 },
+          tags: ["subway", "train"],
+          imageURL:
+            "https://global-window-project-dev.s3-us-west-1.amazonaws.com/042-photo.jpeg",
+        },
+        {
+          description: "Brooklyn Bridge",
+          coordinates: { lat: 40.702566, lng: -73.99095 },
+          tags: ["sightseeing", "tourist"],
+          imageURL:
+            "https://global-window-project-dev.s3-us-west-1.amazonaws.com/043-photo.jpeg",
+        },
+        {
+          description: "Brooklyn Bridge",
+          coordinates: { lat: 40.705771, lng: 73.996356 },
+          tags: ["bridge, landmark"],
+          imageURL:
+            "https://global-window-project-dev.s3-us-west-1.amazonaws.com/044-photo.jpeg",
+        },
+        {
+          description: "Night Skyline",
+          coordinates: { lat: 40.724664, lng: -73.994253 },
+          tags: ["night", "skyline", "ny"],
+          imageURL:
+            "https://global-window-project-dev.s3-us-west-1.amazonaws.com/045-photo.jpeg",
+        },
+        {
+          description: "Times Square",
+          coordinates: { lat: 40.757678, lng: -73.985806 },
+          tags: ["ny", "sunset"],
+          imageURL:
+            "https://global-window-project-dev.s3-us-west-1.amazonaws.com/046-photo.jpeg",
+        },
+        {
+          description: "Empire State in the Fog",
+          coordinates: { lat: 40.748179, lng: -73.986072 },
+          tags: ["building", "fog"],
+          imageURL:
+            "https://global-window-project-dev.s3-us-west-1.amazonaws.com/047-photo.jpeg",
+        },
+        {
+          description: "Flatiron Building",
+          coordinates: { lat: 40.740914, lng: -73.990235 },
+          tags: ["building", "ny"],
+          imageURL:
+            "https://global-window-project-dev.s3-us-west-1.amazonaws.com/048-photo.jpeg",
+        },
+        {
+          description: "Chips",
+          coordinates: { lat: 39.965712, lng: -83.001815 },
+          tags: ["food", "salsa"],
+          imageURL:
+            "https://global-window-project-dev.s3-us-west-1.amazonaws.com/049-photo.jpeg",
+        },
+        {
+          description: "Fogged Atlanta Skyline",
+          coordinates: { lat: 33.743709, lng: -84.424312 },
+          tags: ["skyline", "atlanta"],
+          imageURL:
+            "https://global-window-project-dev.s3-us-west-1.amazonaws.com/050-photo.jpeg",
+        },
+        {
+          description: "Coffe Shop",
+          coordinates: { lat: 33.75472, lng: -84.381577 },
+          tags: ["coffee", "atlanta"],
+          imageURL:
+            "https://global-window-project-dev.s3-us-west-1.amazonaws.com/051-photo.jpeg",
+        },
+        {
+          description: "Ponce City Market",
+          coordinates: { lat: 33.772834, lng: -84.364636 },
+          tags: ["market", "shopping"],
+          imageURL:
+            "https://global-window-project-dev.s3-us-west-1.amazonaws.com/052-photo.jpeg",
+        },
+        {
+          description: "Graduation",
+          coordinates: { lat: 33.766026, lng: -84.356592 },
+          tags: ['graduation', 'portrait'],
+          imageURL:
+            "https://global-window-project-dev.s3-us-west-1.amazonaws.com/053-photo.jpeg",
         },
       ];
 
