@@ -179,7 +179,7 @@ export class MapContainer extends Component {
             google={this.props.google}
             zoom={12}
             styles={darkMode.styles}
-            style={mapStyles}
+            // style={mapStyles}
             gestureHandling='cooperative'
             initialCenter={{
               lat: 37.7941135,

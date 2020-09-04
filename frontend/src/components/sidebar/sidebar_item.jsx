@@ -140,12 +140,10 @@ class SidebarItem extends React.Component {
         if (photo.creatorId === currentUserId) {
             deleteButton = (
                 <i className="far fa-trash-alt" onClick={() => deletePhoto(photo._id).then(() => fetchPhotos())}></i>
-                // {<button onClick={() => deletePhoto(photo._id).then(() => fetchPhotos())}>Delete</button>}
             );
             editButton = (
                 <Link to={`/edit/${photo._id}`}>
                     <i className="far fa-edit"></i>
-                    {/* {<button>Edit Location</button>} */}
                 </Link>
             );
         }
@@ -153,13 +151,15 @@ class SidebarItem extends React.Component {
             <div className='sidebar-item'>
                 <img className='sidebar-img-item' src={photo.imageURL}/>
                 <br/>
-                <div>{photo.description}</div>
+                <div className="sidebar-item-description">"{photo.description}"</div>
                 <br/>
-                <div>{photo.created}</div>
-                {deleteButton}
-                {editButton}
-                <i className="fas fa-map-marker-alt" onClick={this.handlePanTo}></i>
-                {/* {<button onClick={this.handlePanTo}>Locate me!</button>} */}
+                <div className="sidebar-item-timestamp">{photo.created}</div>
+                <br/>
+                <div className="sidebar-item-actions">
+                    {deleteButton}
+                    {editButton}
+                    <i className="fas fa-map-marker-alt" onClick={this.handlePanTo}></i>
+                </div>
             </div>
         );
     }
