@@ -153,6 +153,7 @@ class EditImageForm extends React.Component {
 
     render() {
         const { photo, formType, fetchPhoto } = this.props;
+        console.log("photo", photo);
         if (!photo) {
             return null;
         } else {
@@ -167,8 +168,8 @@ class EditImageForm extends React.Component {
                         style={mapStyles}
                         gestureHandling="cooperative"
                         initialCenter={{
-                            lat: photo.data.coordinates.lat,
-                            lng: photo.data.coordinates.lng,
+                            lat: photo.coordinates.lat,
+                            lng: photo.coordinates.lng,
                         }}
                         onClick={this.mapClick}
                         >
@@ -176,7 +177,7 @@ class EditImageForm extends React.Component {
                             key={photo._id}
                             position={photo.coordinates}
                             onClick={this.onMarkerClick}
-                            name={photo.data.description}
+                            name={photo.description}
                         />
                         <InfoWindow
                             marker={this.state.activeMarker}
