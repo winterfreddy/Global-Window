@@ -107,10 +107,6 @@ export class MapContainer extends Component {
     this.mapClick = this.mapClick.bind(this);
   }
 
-  // componentDidMount() {
-  //   this.props.fetchPhotos();
-  // }
-
   onMarkerClick = (props, marker, e) => {
     this.setState({
       selectedPlace: props,
@@ -183,13 +179,11 @@ export class MapContainer extends Component {
             google={this.props.google}
             zoom={12}
             styles={darkMode.styles}
-            // style={mapStyles}
-            gestureHandling='cooperative'
             initialCenter={{
               lat: 37.7941135,
               lng: -122.4126891,
             }}
-            onClick={this.mapClick}
+            onClick={this.props.location.pathname === '/upload' ? this.mapClick : () => console.log('click inactive')}
           >
             <Marker
               onClick={this.onMarkerClick}
