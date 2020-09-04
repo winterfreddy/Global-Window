@@ -1,4 +1,5 @@
 import * as PhotoAPIUtil from '../util/photos_api_util';
+import { fetchPhotoFavorites } from './favorite_actions';
 
 export const RECEIEVE_ALL_PHOTOS = "RECEIEVE_ALL_PHOTOS";
 export const RECEIVE_PHOTO = "RECEIVE_PHOTO";
@@ -20,11 +21,15 @@ const removePhoto = id => ({
     id
 })
 
-export const fetchPhotos = () => dispatch => (
-    PhotoAPIUtil.fetchPhotos()
-    .then(photos => dispatch(receivePhotos(photos)))
-    .catch(error => console.log(error))
-);
+export const fetchPhotos = () => (dispatch) =>
+  PhotoAPIUtil.fetchPhotos()
+    .then((photos) => dispatch(receivePhotos(photos)))
+    .then((res) =>
+      res.photos.data.forEach((photo) => {
+        dispatch(fetchPhotoFavorites(photo._id));
+      })
+    )
+    .catch((error) => console.log(error));
     
 export const fetchPhoto = id => dispatch => (
     PhotoAPIUtil.fetchPhoto(id)

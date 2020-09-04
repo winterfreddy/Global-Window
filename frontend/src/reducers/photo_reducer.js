@@ -25,16 +25,18 @@ export default function (state = {}, action) {
             let photoObj;
             let favoritesLength;
             let appendedObj;
-            if (action.favorites.data instanceof Object) {
-                photoObj = newState[action.favorites.data.photoId];
-                favoritesLength = 0;
-                appendedObj = { ...photoObj, numFavorites: favoritesLength };
-                newState[action.favorites.data.photoId] = appendedObj;            
+            console.log(typeof action.favorites.data === "object");
+            console.log(action.favorites.data)
+            if (!action.favorites.data[0]) {
+              photoObj = newState[action.favorites.data.photoId];
+              favoritesLength = 0;
+              appendedObj = { ...photoObj, numFavorites: favoritesLength };
+              newState[action.favorites.data.photoId] = appendedObj;
             } else {
-                photoObj = newState[action.favorites.data[0].photoId]
-                favoritesLength = action.favorites.data.length
-                appendedObj = { ...photoObj, numFavorites: favoritesLength };
-                newState[action.favorites.data[0].photoId] = appendedObj;       
+              photoObj = newState[action.favorites.data[0].photoId];
+              favoritesLength = action.favorites.data.length;
+              appendedObj = { ...photoObj, numFavorites: favoritesLength };
+              newState[action.favorites.data[0].photoId] = appendedObj;
             }
             return newState;
         default:
