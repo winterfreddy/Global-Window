@@ -1,17 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 .image-upload-form-box,
 .image-description,
 .image-tags {
     display: flex;
     flex-direction: column;
     padding: 10px;
+    font-family: 'Roboto', sans-serif;
     // width: 100%;
 }
 
 .image-upload-form-box {
     border: 1px solid black;
-    box-shadow: 2px 2px 5px black;
-    max-width: 300px !important;
-    min-height: 530px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 1%;
     background: rgb(37, 37, 37);
     color: white;
 }
@@ -37,11 +42,13 @@
 
 .image-preview {
     margin: 10px 0 5px 0;
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
 
 .image-preview > img {
-    max-height: 250px;
-    max-width: 250px;
+    width: 100%;
 }
 
 
@@ -64,4 +71,23 @@
 
 #closebtn:hover {
   color: black;
+}
+
+.submit-button {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    padding: 10px;
+    margin: 5px 5px 5px 5px;
+    border-radius: 3px;
+    border: none;
+    width: 100%;
+}
+
+.submit-button:hover {
+    background-color: #daa520;
+    cursor: pointer;
+}
+
+.input-file {
+    margin: 10px 5px 10px 5px;
 }

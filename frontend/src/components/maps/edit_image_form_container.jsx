@@ -157,44 +157,48 @@ class EditImageForm extends React.Component {
             return null;
         } else {
             return (
-                <div className='google-maps-images-container'>
-                    <div>
+                <div className="google-maps">
+                    <div className={
+                            formType === 'upload photo' ? "upload-form-container" : "google-maps-images-container"
+                        }>
                         <Map
-                            className="google-api-map"
-                            google={this.props.google}
-                            zoom={12}
-                            styles={darkMode.styles}
-                            style={mapStyles}
-                            gestureHandling='cooperative'
-                            initialCenter={{
-                                lat: photo.data.coordinates.lat,
-                                lng: photo.data.coordinates.lng,
-                            }}
-                            onClick={this.mapClick}
+                        className="google-api-map"
+                        google={this.props.google}
+                        zoom={12}
+                        styles={darkMode.styles}
+                        style={mapStyles}
+                        gestureHandling="cooperative"
+                        initialCenter={{
+                            lat: photo.data.coordinates.lat,
+                            lng: photo.data.coordinates.lng,
+                        }}
+                        onClick={this.mapClick}
                         >
-                            <Marker
-                                key={photo._id}
-                                position={photo.coordinates}
-                                onClick={this.onMarkerClick}
-                                name={photo.data.description} />
-                            <InfoWindow
-                                marker={this.state.activeMarker}
-                                visible={this.state.showingInfoWindow}
-                                onClose={this.onClose}
-                            >
-                                <div>
-                                    <h4>{this.state.selectedPlace.name}</h4>
-                                </div>
-                            </InfoWindow>
+                        <Marker
+                            key={photo._id}
+                            position={photo.coordinates}
+                            onClick={this.onMarkerClick}
+                            name={photo.data.description}
+                        />
+                        <InfoWindow
+                            marker={this.state.activeMarker}
+                            visible={this.state.showingInfoWindow}
+                            onClose={this.onClose}
+                        >
+                            <div>
+                            <h4>{this.state.selectedPlace.name}</h4>
+                            </div>
+                        </InfoWindow>
                         </Map>
                     </div>
-                    <div className='image-upload-form-container'>
+                    <div className="image-upload-form-container">
                         <PhotoForm
                         lat={this.state.lat}
-                        lng={this.state.lng} 
+                        lng={this.state.lng}
                         photo={photo}
                         formType={formType}
-                        fetchPhoto={fetchPhoto} />
+                        fetchPhoto={fetchPhoto}
+                        />
                     </div>
                 </div>
             );
