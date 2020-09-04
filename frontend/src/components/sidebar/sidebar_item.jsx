@@ -140,12 +140,10 @@ class SidebarItem extends React.Component {
         if (photo.creatorId === currentUserId) {
             deleteButton = (
                 <i className="far fa-trash-alt" onClick={() => deletePhoto(photo._id).then(() => fetchPhotos())}></i>
-                // {<button onClick={() => deletePhoto(photo._id).then(() => fetchPhotos())}>Delete</button>}
             );
             editButton = (
                 <Link to={`/edit/${photo._id}`}>
                     <i className="far fa-edit"></i>
-                    {/* {<button>Edit Location</button>} */}
                 </Link>
             );
         }
