@@ -9,6 +9,7 @@
     border: 3px solid black;
     // border-radius: 5px;
     overflow: scroll;
+    overflow-x: hidden;
     color: white;
     top: 67px;
     right: 80%;
@@ -28,18 +29,34 @@
 }
 
 .sidebar-item:hover {
-    background: lightblue;
+    background-color: white;
+    color: black;
 }
 
 .sidebar-img-item {
-    max-width: 100px;
-    max-height: 100px; 
+    width: 100%;
+}
+
+.sidebar-item-description {
+    padding: 10px 0 5px 10px;
+    font-size: 20px;
+}
+
+.sidebar-item-timestamp {
+    padding: 5px 0 10px 10px;
+    color: rgb(100, 100, 100);
+}
+
+.sidebar-item-actions {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 10px 10px 10px;
 }
 
 .fa-trash-alt,
 .fa-edit,
 .fa-map-marker-alt {
-    font-size: 20px;
+    font-size: 25px;
     margin-right: 15px;
 }
 
