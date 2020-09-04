@@ -30,7 +30,16 @@
     border: 3px solid black;
 }
 
-.google-api-map:active {
+.google-api-map-upload,
+.google-api-map-edit {
+    height: 92.5% !important;
+    width: 75% !important;
+    border: 3px solid black;
+}
+
+.google-api-map:active,
+.google-api-map-upload:active,
+.google-api-map-edit:active {
     border: 3px solid green;
 }
 

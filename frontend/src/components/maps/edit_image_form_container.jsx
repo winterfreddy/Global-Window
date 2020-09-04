@@ -149,7 +149,7 @@ class EditImageForm extends React.Component {
             let tmpLng = latLng.lng();
             return [tmpLat, tmpLng];
         }
-    }dd
+    }
 
     render() {
         const { photo, formType, fetchPhoto } = this.props;
@@ -160,7 +160,7 @@ class EditImageForm extends React.Component {
                 <div className="google-maps">
                     <div className="google-maps-images-container">
                         <Map
-                        className="google-api-map"
+                        className="google-api-map-edit"
                         google={this.props.google}
                         zoom={12}
                         styles={darkMode.styles}

@@ -5,7 +5,7 @@ class UploadMapsForms extends React.Component {
     render() {
         return (
             <div>
-                <GoogleMapsContainer />
+                <GoogleMapsContainer formType={this.props.formType}/>
             </div>
         );
     }
