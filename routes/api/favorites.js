@@ -46,15 +46,12 @@ router.post(
 //   }
 // );
 
-// upload.single('file'),
 router.delete(
   "/:photoId",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    debugger
     const photoId = req.params.photoId;
     const currUserId = req.user.id;
-    console.log(req.body)
     Favorite.findOneAndRemove({ photoId, favoriterId: currUserId })
       .then((favorite) =>
         res.json(favorite.photoId)
