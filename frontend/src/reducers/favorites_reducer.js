@@ -1,4 +1,4 @@
-gimport {
+import {
   RECEIVE_FAVORITE,
   REMOVE_FAVORITE,
   RECEIVE_USER_FAVES,
