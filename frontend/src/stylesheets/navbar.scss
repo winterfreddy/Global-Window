@@ -8,13 +8,13 @@
 }
 
 .logo-title:hover {
-    color: lightblue
+    // color: navy;
+    color: white;
 }
 
 .nav-bar {
     display: flex;
     background-color: #daa520;
-    border-radius: 3px;
     justify-content: space-between;
     border-bottom: 1px solid black;
 }
@@ -43,8 +43,11 @@
 .navbar-signup:hover,
 .logout-btn:hover,
 .navbar-upload-btn:hover {
-    background: lightblue;
-    color: blue;
+    // background: lightblue;
+    // color: blue;
+    border: 1px solid white;
+    color: white;
+    cursor: pointer;
 }
 
 .navbar-upload {
