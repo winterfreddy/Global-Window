@@ -46,36 +46,36 @@ function seedEvents(req, res) {
 
     const createEverythingElse = () => {
       const photos = [
-        {
-          description: "SF Skyline",
-          coordinates: { lat: 37.78678804194593, lng: -122.39041603634031 },
-          tags: ["buildings", "skyline", "sf"],
-          imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/01-photo.jpeg`,
-        },
-        {
-          description: "Golden Gate Bridge",
-          coordinates: { lat: 37.820175, lng: -122.478981},
-          tags: ["sf", "architecture"],
-          imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/02-photo.jpeg`,
-        },
-        {
-          description: "Berkeley Trails",
-          coordinates: { lat: 37.905441, lng: -122.244532},
-          tags: ["nature", "berkeley"],
-          imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/03-photo.jpeg`,
-        },
-        {
-          description: "Statue of Liberty",
-          coordinates: { lat: 37.78678804194593, lng: -122.39041603634031 },
-          tags: ["ny", "monuments"],
-          imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/04-photo.jpeg`,
-        },
-        {
-          description: "Fall Weather in Boston",
-          coordinates: { lat: 42.354886, lng: -71.064742},
-          tags: ["boston", "nature"],
-          imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/05-photo.jpeg`,
-        },
+        // {
+        //   description: "SF Skyline",
+        //   coordinates: { lat: 37.78678804194593, lng: -122.39041603634031 },
+        //   tags: ["buildings", "skyline", "sf"],
+        //   imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/01-photo.jpeg`,
+        // },
+        // {
+        //   description: "Golden Gate Bridge",
+        //   coordinates: { lat: 37.820175, lng: -122.478981},
+        //   tags: ["sf", "architecture"],
+        //   imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/02-photo.jpeg`,
+        // },
+        // {
+        //   description: "Berkeley Trails",
+        //   coordinates: { lat: 37.905441, lng: -122.244532},
+        //   tags: ["nature", "berkeley"],
+        //   imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/03-photo.jpeg`,
+        // },
+        // {
+        //   description: "Statue of Liberty",
+        //   coordinates: { lat: 37.78678804194593, lng: -122.39041603634031 },
+        //   tags: ["ny", "monuments"],
+        //   imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/04-photo.jpeg`,
+        // },
+        // {
+        //   description: "Fall Weather in Boston",
+        //   coordinates: { lat: 42.354886, lng: -71.064742},
+        //   tags: ["boston", "nature"],
+        //   imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/05-photo.jpeg`,
+        // },
         // {
         //   description: "Space Needle",
         //   coordinates: { lat: 47.620487, lng: -122.349333 },
@@ -166,39 +166,39 @@ function seedEvents(req, res) {
         //   tags: ["facebook", "capitalism", "tech"],
         //   imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/020-photo.jpeg`,
         // },
-        // {
-        //   description: "Redwood Hikes",
-        //   coordinates: { lat: 38.031316, lng: -122.733937 },
-        //   tags: ["nature", "redwoods", "marin"],
-        //   imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/021-photo.jpeg`,
-        // },
-        // {
-        //   description: "Napa Vineyards",
-        //   coordinates: { lat: 38.031316, lng: -122.733937 },
-        //   tags: ["nature", "napa", "winery", "vineyard"],
-        //   imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/022-photo.jpeg`,
-        // },
-        // {
-        //   description: "Coffee Shop",
-        //   coordinates: { lat: 33.75472, lng: -84.381577 },
-        //   tags: ["coffee", "atlanta"],
-        //   imageURL:
-        //     "https://global-window-project-dev.s3-us-west-1.amazonaws.com/023-photo.jpeg",
-        // },
-        // {
-        //   description: "Ponce City Market",
-        //   coordinates: { lat: 33.772834, lng: -84.364636 },
-        //   tags: ["market", "shopping"],
-        //   imageURL:
-        //     "https://global-window-project-dev.s3-us-west-1.amazonaws.com/024-photo.jpeg",
-        // },
-        // {
-        //   description: "Graduation",
-        //   coordinates: { lat: 33.766026, lng: -84.356592 },
-        //   tags: ["graduation", "portrait"],
-        //   imageURL:
-        //     "https://global-window-project-dev.s3-us-west-1.amazonaws.com/025-photo.jpeg",
-        // },
+        {
+          description: "Redwood Hikes",
+          coordinates: { lat: 38.031316, lng: -122.733937 },
+          tags: ["nature", "redwoods", "marin"],
+          imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/021-photo.jpeg`,
+        },
+        {
+          description: "Napa Vineyards",
+          coordinates: { lat: 38.031316, lng: -122.733937 },
+          tags: ["nature", "napa", "winery", "vineyard"],
+          imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/022-photo.jpeg`,
+        },
+        {
+          description: "Coffee Shop",
+          coordinates: { lat: 33.75472, lng: -84.381577 },
+          tags: ["coffee", "atlanta"],
+          imageURL:
+            "https://global-window-project-dev.s3-us-west-1.amazonaws.com/023-photo.jpeg",
+        },
+        {
+          description: "Ponce City Market",
+          coordinates: { lat: 33.772834, lng: -84.364636 },
+          tags: ["market", "shopping"],
+          imageURL:
+            "https://global-window-project-dev.s3-us-west-1.amazonaws.com/024-photo.jpeg",
+        },
+        {
+          description: "Graduation",
+          coordinates: { lat: 33.766026, lng: -84.356592 },
+          tags: ["graduation", "portrait"],
+          imageURL:
+            "https://global-window-project-dev.s3-us-west-1.amazonaws.com/025-photo.jpeg",
+        },
         // {
         //   description: "Rivers and building",
         //   coordinates: { lat: 41.838214, lng: -87.684365 },
