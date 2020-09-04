@@ -181,9 +181,9 @@ class SidebarItem extends React.Component {
                 <div className="sidebar-item-timestamp">{photo.created}</div>
                 <br/>
                 <div className="sidebar-item-actions">
-                    <div>
+                    <div className="item-favorites">
                         <i className="fas fa-heart" onClick={this.handleFavorites}></i>
-                        <div>{photo.numFavorites}</div>
+                        <div className="numFavorites">{photo.numFavorites}</div>
                     </div>
                     {deleteButton}
                     {editButton}
