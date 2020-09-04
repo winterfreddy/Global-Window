@@ -1,16 +1,17 @@
-.sidebar-header {
-    background: orange;
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 .sidebar-content-container {
+    position: absolute;
     display: block;
     background: #252525;
-    height: 520px;
-    width: 250px;
     border: 3px solid black;
-    border-radius: 5px;
     overflow: scroll;
+    overflow-x: hidden;
     color: white;
+    top: 67px;
+    right: 80%;
+    bottom: 0;
+    left: 0;
 }
 
 .sidebar-content-container:active {
@@ -21,21 +22,45 @@
 .sidebar-item {
     border: 1px solid black;
     padding: 5px;
+    font-family: 'Roboto', sans-serif;
 }
 
 .sidebar-item:hover {
-    background: lightblue;
+    background-color: white;
+    color: black;
 }
 
 .sidebar-img-item {
-    max-width: 100px;
-    max-height: 100px; 
+    width: 100%;
+}
+
+.sidebar-item-description {
+    padding: 10px 0 5px 10px;
+    font-size: 20px;
+}
+
+.sidebar-item-timestamp {
+    padding: 5px 0 10px 10px;
+    color: rgb(100, 100, 100);
+}
+
+.sidebar-item-actions {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 10px 10px 10px;
+}
+
+.item-favorites {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-size: 20px;
 }
 
 .fa-trash-alt,
 .fa-edit,
 .fa-map-marker-alt {
-    font-size: 20px;
+    font-size: 25px;
     margin-right: 15px;
 }
 
@@ -49,4 +74,17 @@
 
 .fa-map-marker-alt:hover {
     color: green;
+}
+
+.fa-heart {
+    font-size: 25px;
+    padding-right: 10px;
+}
+
+.fa-heart:hover {
+    color: pink;
+}
+
+.numFavorites {
+    padding-top: 3px;
 }

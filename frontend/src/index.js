@@ -10,8 +10,13 @@ import './stylesheets/reset.scss';
 // Testing imports:
 // import { fetchPhotos, fetchPhoto, editPhoto, deletePhoto } from './util/photos_api_util';
 import { fetchPhotos, fetchPhoto, editPhoto, deletePhoto } from './actions/photo_actions';
-// import { favorite, unFavorite } from './util/favorites_api_util';
-import { favorite, unFavorite } from './actions/favorite_actions';
+// import { makeFavorite, unFavorite, fetchUserFaves } from './util/favorites_api_util';
+import {
+  makeFavorite,
+  unFavorite,
+  fetchPhotoFavorites,
+  fetchUserFaves,
+} from "./actions/favorite_actions";
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -42,6 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
   window.fetchPhoto = fetchPhoto;
   window.editPhoto = editPhoto;
   window.deletePhoto = deletePhoto;
-  window.favorite = favorite;
+  window.makeFavorite = makeFavorite;
   window.unFavorite = unFavorite;
+  // window.fetchPhotoFavorites = fetchPhotoFavorites;
+  window.fetchUserFaves = fetchUserFaves;
 });

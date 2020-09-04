@@ -4,17 +4,16 @@
 .logo-title {
     font-family: 'Courgette', cursive;
     font-size: 40px;
-    padding: 10px;
+    padding: 12px 10px 10px 20px;
 }
 
 .logo-title:hover {
-    color: lightblue
+    color: white;
 }
 
 .nav-bar {
     display: flex;
     background-color: #daa520;
-    border-radius: 3px;
     justify-content: space-between;
     border-bottom: 1px solid black;
 }
@@ -43,8 +42,10 @@
 .navbar-signup:hover,
 .logout-btn:hover,
 .navbar-upload-btn:hover {
-    background: lightblue;
-    color: blue;
+    // background: lightblue;
+    // color: blue;
+    border: 1px solid white;
+    color: white;
     cursor: pointer;
 }
 

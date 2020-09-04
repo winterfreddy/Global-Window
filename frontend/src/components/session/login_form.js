@@ -92,7 +92,7 @@ class LoginForm extends React.Component {
             <br />
             <button className='session-btn' onClick={this.handleDemoLogin}>Demo Login</button>
             <br />
-            <div>Join for free!{this.props.otherForm}</div>
+            <div className="other-form-text">Join for free!{this.props.otherForm}</div>
             {this.renderErrors()}
           </div>
         </form>

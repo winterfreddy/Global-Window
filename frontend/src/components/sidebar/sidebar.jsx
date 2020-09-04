@@ -9,30 +9,45 @@ class Sidebar extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchPhotos();
+        this.props.fetchPhotos()
+            .then(() => this.props.fetchUserFaves(this.props.currentUserId));
     }
 
     render() {
-        const { currentUserId, photos, google, fetchPhotos, deletePhoto } = this.props;
-        console.log(google);
-        if (!photos) {
+        const { 
+            currentUserId, 
+            photos, 
+            google, 
+            fetchPhotos, 
+            deletePhoto, 
+            makeFavorite, 
+            unFavorite,
+            favorites,
+            fetchUserFave
+        } = this.props;
+        if (!photos || !favorites) {
             return null;
         } else {
             return (
-                <div>
-                    <header className='sidebar-header'>THIS IS SIDEBAR</header>
-                    <span className='sidebar-content-container'>
-                        SIDEBAR CONTENT
-                    {photos.map(photo => <SidebarItem 
-                                            key={photo._id} 
-                                            currentUserId={currentUserId}
-                                            photo={photo}
-                                            photos={photos} 
-                                            google={google}
-                                            fetchPhotos={fetchPhotos}
-                                            deletePhoto={deletePhoto} />)}
-                    </span>
-                </div>
+              <div>
+                <span className="sidebar-content-container">
+                    {photos.map((photo) => (
+                        <SidebarItem
+                        key={photo._id}
+                        currentUserId={currentUserId}
+                        photo={photo}
+                        photos={photos}
+                        google={google}
+                        fetchPhotos={fetchPhotos}
+                        deletePhoto={deletePhoto}
+                        makeFavorite={makeFavorite}
+                        unFavorite={unFavorite}
+                        favorites={favorites}
+                        fetchUserFave={fetchUserFave}
+                        />
+                    ))}
+                </span>
+              </div>
             );
         }
     }

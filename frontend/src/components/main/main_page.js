@@ -7,11 +7,9 @@ class MainPage extends React.Component {
   render() {
     const { photos, fetchPhotos } = this.props;
     const google = window.google;
-    console.log(google);
     return (
       <div className="main-page">
         <div className="left-aside">
-            SIDE BAR GOES HERE
             <SidebarContainer google={google} />
         </div>
         <div className="google-maps-container">

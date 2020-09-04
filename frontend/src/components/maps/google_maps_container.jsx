@@ -112,7 +112,6 @@ export class MapContainer extends Component {
   // }
 
   onMarkerClick = (props, marker, e) => {
-    console.log(this.state);
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
@@ -154,10 +153,8 @@ export class MapContainer extends Component {
   }
 
   render() {
-    console.log(this.props);
     let uploadForm;
     let editForm;
-    console.log(this.props);
     if (this.props.location.pathname === '/upload') {
       uploadForm = (
       <div className='image-upload-form-container'>
@@ -175,14 +172,14 @@ export class MapContainer extends Component {
 
     return (
       <div className='google-maps-images-container'>
-        <div id="map">
+        <div id="mainpage-google-map">
           <Map
             id="google-api-map"
-            className="google-api-map"
+            className={this.props.formType === 'upload' ? "google-api-map-upload" : "google-api-map"}
             google={this.props.google}
             zoom={12}
             styles={darkMode.styles}
-            style={mapStyles}
+            // style={mapStyles}
             gestureHandling='cooperative'
             initialCenter={{
               lat: 37.7941135,
