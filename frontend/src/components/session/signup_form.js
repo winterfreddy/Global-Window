@@ -87,7 +87,7 @@ class SignupForm extends React.Component {
             <br />
             <input type="submit" value="Submit" className="session-btn" />
             <br />
-            <div>Already have an account?{this.props.otherForm}</div>
+            <div className="other-form-text">Already have an account?{this.props.otherForm}</div>
             {this.renderErrors()}
           </div>
         </form>

@@ -50,6 +50,13 @@
     padding: 0 10px 10px 10px;
 }
 
+.item-favorites {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-size: 20px;
+}
+
 .fa-trash-alt,
 .fa-edit,
 .fa-map-marker-alt {
@@ -70,9 +77,14 @@
 }
 
 .fa-heart {
-    font-size: 20px;
+    font-size: 25px;
+    padding-right: 10px;
 }
 
 .fa-heart:hover {
     color: pink;
+}
+
+.numFavorites {
+    padding-top: 3px;
 }
