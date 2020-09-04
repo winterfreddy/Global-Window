@@ -24,7 +24,8 @@ export default function (state = {}, action) {
             console.log('hitting unfave reducer')
             console.log(action.id)
             console.log(newState[action.id])
-            delete newState[action.id];
+            // debugger
+            delete newState[action.id.data];
             return newState;
         default:
             return state;

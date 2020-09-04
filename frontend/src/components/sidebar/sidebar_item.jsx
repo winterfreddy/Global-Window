@@ -145,19 +145,20 @@ class SidebarItem extends React.Component {
                 console.log('hitting unfave')
                 console.log(favorites[photo._id].photoId);
                 // clickAction = unFavorite(favorites[photo._id].photoId).then(() => fetchPhotos()).catch(err => console.log(err));
-                let formData = new FormData()
-                formData.append('photoId', favorites[photo._id].photoId)
-                return axios.delete('api/favorites/', formData, {
-                    headers: {
-                        accept: 'application/json',
-                        'Accept-Language': 'en-US,en;q=0.8',
-                        'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
-                        'Access-Control-Allow-Origin': '*',
-                    }})
+                // let formData = new FormData()
+                // formData.append('photoId', favorites[photo._id].photoId)
+                // return axios.delete('api/favorites/', formData, {
+                //     headers: {
+                //         accept: 'application/json',
+                //         'Accept-Language': 'en-US,en;q=0.8',
+                //         'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
+                //         'Access-Control-Allow-Origin': '*',
+                //     }})
+                //     .then(() => fetchPhotos())
+                //     .catch(err => console.log(err.response));
+                clickAction = unFavorite(favorites[photo._id].photoId)
                     .then(() => fetchPhotos())
                     .catch(err => console.log(err.response));
-                // clickAction = unFavorite({ photoId: favorites[photo._id].photoId})
-                //     .then(() => fetchPhotos()).catch(err => console.log(err));
             } else {
             }
         } else {
