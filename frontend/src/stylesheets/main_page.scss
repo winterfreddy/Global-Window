@@ -116,5 +116,18 @@
 
 .search-button:hover {
     cursor: pointer;
-    color: white;
+}
+
+.search-button:hover {
+    background: #dfaf36
+}
+
+.search-bar-input:hover {
+    background: white;
+    color: black;
+}
+
+.search-bar-input:focus {
+    background: white;
+    color: black;
 }
