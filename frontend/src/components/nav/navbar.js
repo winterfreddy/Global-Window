@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import '../../stylesheets/navbar.scss'
 import '../../stylesheets/modal.scss';
 import '../../stylesheets/session.scss';
@@ -43,13 +43,21 @@ class NavBar extends React.Component {
   }
 
   render() {
+      let logoButton;
+      if(this.props.location.pathname === '/home') {
+            logoButton = (<div className="logo-title" onClick={() => window.location.reload()}>globalWindow</div>)
+      } else {
+        logoButton = (<Link to="/home" className="logo-title">
+          globalWindow
+        </Link>);
+      }
     return (
       <div className="nav-bar">
-        <Link to="/home" className="logo-title">globalWindow</Link>
+        {logoButton}
         {this.getLinks()}
       </div>
     );
   }
 }
 
-export default NavBar;
+export default withRouter(NavBar);
