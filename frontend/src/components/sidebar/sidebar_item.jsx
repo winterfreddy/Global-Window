@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import { Map } from 'google-maps-react';
 import '../../stylesheets/sidebar.scss';
 
 const darkMode = {
@@ -92,7 +91,6 @@ class SidebarItem extends React.Component {
 
         this.state = {
             photo: this.props.photo,
-            // google: this.props.google
         }
 
         this.handlePanTo = this.handlePanTo.bind(this);
@@ -101,15 +99,11 @@ class SidebarItem extends React.Component {
     handlePanTo() {
         const allPhotos = this.props.photos;
         const { lat, lng } = this.props.photo.coordinates;
-        // console.log(allPhotos);
-        // console.log(this.props.photo.coordinates);
-        // console.log(window.google);
         const google = window.google;
         const mapProp = { 
             center: new google.maps.LatLng(lat, lng),
             zoom: 12
         }
-        // console.log([...document.getElementsByClassName('google-api-map')][0]);
         const googleAPIMap = [...document.getElementsByClassName('google-api-map')][0];
         const map = new google.maps.Map(googleAPIMap, mapProp);
         map.setOptions({ styles: darkMode.styles });
@@ -134,7 +128,6 @@ class SidebarItem extends React.Component {
 
     render() {
         const { currentUserId, photo, fetchPhotos, deletePhoto } = this.props;
-        // console.log(this.props);
         let deleteButton;
         let editButton;
         if (photo.creatorId === currentUserId) {
