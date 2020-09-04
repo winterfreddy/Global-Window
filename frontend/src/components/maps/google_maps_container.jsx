@@ -107,9 +107,9 @@ export class MapContainer extends Component {
     this.mapClick = this.mapClick.bind(this);
   }
 
-  // componentDidMount() {
-  //   this.props.fetchPhotos();
-  // }
+  componentDidMount() {
+    this.props.fetchPhotos();
+  }
 
   onMarkerClick = (props, marker, e) => {
     this.setState({

@@ -4,6 +4,10 @@ import SidebarContainer from '../sidebar/sidebar_container';
 import '../../stylesheets/main_page.scss';
 
 class MainPage extends React.Component {
+  componentDidMount() {
+    this.props.fetchPhotos();
+  }
+
   render() {
     const { photos, fetchPhotos } = this.props;
     const google = window.google;

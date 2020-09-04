@@ -3,7 +3,7 @@ import MainPage from './main_page';
 import { fetchPhotos } from '../../actions/photo_actions';
 
 const mapStateToProps = state => ({
-    photos: state.photos.data
+   photos: Object.values(state.photos)
 });
 
 const mapDispatchToProps = dispatch =>  ({
