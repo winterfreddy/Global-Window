@@ -1,16 +1,20 @@
 import { connect } from 'react-redux';
 import Sidebar from './sidebar';
 import { fetchPhotos, deletePhoto } from '../../actions/photo_actions';
-import { fetchPhotoFavorites } from '../../actions/favorite_actions';
+import { fetchPhotoFavorites, makeFavorite, unFavorite, fetchUserFaves } from '../../actions/favorite_actions';
 const mapStateToProps = state => ({
     photos: Object.values(state.photos),
-    currentUserId: state.session.user.id
+    currentUserId: state.session.user.id,
+    favorites: state.favorites
 });
 
 const mapDispatchToProps = dispatch => ({
     fetchPhotos: () => dispatch(fetchPhotos()),
     deletePhoto: id => dispatch(deletePhoto(id)),
-    fetchPhotoFavorites: id => dispatch(fetchPhotoFavorites(id))
+    fetchPhotoFavorites: id => dispatch(fetchPhotoFavorites(id)),
+    makeFavorite: favorite => dispatch(makeFavorite(favorite)),
+    unFavorite: id => dispatch(unFavorite(id)),
+    fetchUserFaves: id => dispatch(fetchUserFaves(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

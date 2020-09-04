@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import { Map } from 'google-maps-react';
 import '../../stylesheets/sidebar.scss';
 
 const darkMode = {
@@ -92,24 +91,20 @@ class SidebarItem extends React.Component {
 
         this.state = {
             photo: this.props.photo,
-            // google: this.props.google
         }
 
         this.handlePanTo = this.handlePanTo.bind(this);
+        this.handleFavorites = this.handleFavorites.bind(this);
     }
 
     handlePanTo() {
         const allPhotos = this.props.photos;
         const { lat, lng } = this.props.photo.coordinates;
-        // console.log(allPhotos);
-        // console.log(this.props.photo.coordinates);
-        // console.log(window.google);
         const google = window.google;
         const mapProp = { 
             center: new google.maps.LatLng(lat, lng),
             zoom: 12
         }
-        // console.log([...document.getElementsByClassName('google-api-map')][0]);
         const googleAPIMap = [...document.getElementsByClassName('google-api-map')][0];
         const map = new google.maps.Map(googleAPIMap, mapProp);
         map.setOptions({ styles: darkMode.styles });
@@ -132,9 +127,38 @@ class SidebarItem extends React.Component {
         map.panTo(panPoint);
     }
 
+    handleFavorites() {
+        const { 
+            favorites, 
+            photo, 
+            currentUserId, 
+            makeFavorite, 
+            unFavorite, 
+            fetchPhotos
+        } = this.props;
+        let clickAction;
+        console.log(favorites);
+        console.log(photo);
+        // if (favorites[photo._id].favoriterId === currentUserId) {
+        //     console.log('hitting unfave')
+        //     clickAction = () => unFavorite(photo._id).then(fetchPhotos());
+        // } else {
+        //     console.log('hitting fave');
+        //     clickAction = () => makeFavorite({photoId: photo._id}).then(fetchPhotos());
+        // }
+        return clickAction;
+    }
+
     render() {
-        const { currentUserId, photo, fetchPhotos, deletePhoto } = this.props;
-        // console.log(this.props);
+        const { 
+            currentUserId, 
+            photo, 
+            fetchPhotos, 
+            deletePhoto, 
+            makeFavorite, 
+            unFavorite,
+            favorites 
+        } = this.props;
         let deleteButton;
         let editButton;
         if (photo.creatorId === currentUserId) {
@@ -147,6 +171,7 @@ class SidebarItem extends React.Component {
                 </Link>
             );
         }
+
         return (
             <div className='sidebar-item'>
                 <img className='sidebar-img-item' src={photo.imageURL}/>
@@ -156,6 +181,10 @@ class SidebarItem extends React.Component {
                 <div className="sidebar-item-timestamp">{photo.created}</div>
                 <br/>
                 <div className="sidebar-item-actions">
+                    <div>
+                        <i className="fas fa-heart" onClick={this.handleFavorites}></i>
+                        <div>{photo.numFavorites}</div>
+                    </div>
                     {deleteButton}
                     {editButton}
                     <i className="fas fa-map-marker-alt" onClick={this.handlePanTo}></i>
