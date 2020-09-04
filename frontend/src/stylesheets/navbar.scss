@@ -5,6 +5,11 @@
     font-family: 'Courgette', cursive;
     font-size: 40px;
     padding: 12px 10px 10px 20px;
+    margin-top: 1px;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 
 .logo-title:hover {
@@ -21,6 +26,17 @@
 .navbar-links {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.welcome {
+    font-family: 'Courgette', cursive;
+    font-size: 27px;
+    margin-right: 15px;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 
 .navbar-login,
@@ -34,8 +50,12 @@
     border: 1px solid black;
     background-color: transparent;
     padding: 10px;
-    margin: 10px;
-    width: 100%;
+    margin: 10px 10px;
+    width: 100px;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 
 .navbar-login:hover,
@@ -49,7 +69,6 @@
     cursor: pointer;
 }
 
-.navbar-upload {
+.logout-btn, .navbar-signup {
     margin-right: 20px;
- 
 }

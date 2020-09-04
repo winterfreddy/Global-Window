@@ -25,7 +25,7 @@
     height: 87% !important;
     width: 69.7% !important;
     position: absolute;
-    top: 123px;
+    top: 110px;
     left: 30%;
     border: 3px solid black;
 }
@@ -37,14 +37,15 @@
     border: 3px solid black;
 }
 
-.google-api-map:active,
-.google-api-map-upload:active,
-.google-api-map-edit:active {
-    border: 3px solid green;
-}
+// .google-api-map:active,
+// .google-api-map-upload:active,
+// .google-api-map-edit:active {
+//     // border: 3px solid green;
+// }
 
 .google-maps-images-container {
     display: flex !important;
+    flex-direction: column;
 }
 
 .image-upload-form-container { 
@@ -71,33 +72,49 @@
     top: 67px;
     right: 0;
     left: 30%;
-    height: 50px;
-    // width: 69.7% !important;
+    height: 40px;
+    background:#252525;
+    color: #252525;
+    background-color: #252525;
+    border: 1px solid black;
 }
+
+// .search-bar-input:focus {
+//     background: white;
+//     background-color: white;
+// }
+
+// .search-bar-input:active .search-button {
+//     background: white;
+//     background-color: white;
+// }
 
 .search-bar-input {
-    border: 2px solid black;
-    font-size: 24px;
-    height: 50px;
+    border: none;
+    font-size: 16.5px;
+    height: 100%;
     width: 100%;
-    background: #252525;
-    color: white;
+    text-indent: 15px;
+    color: rgb(125, 125, 125);
+    background-color: #252525;
 }
 
-.search-bar-input::placeholder {
-    font-size: 24px;
+.search-bar-input:focus {
+    outline: none;
 }
 
 .search-button {
-    border-left: 1px solid black;
-    border-right: 2px solid black;
-    border-top: 2px solid black;
-    border-bottom: 2px solid black;
-    height: 60px;
-    width: 100px;
-    background-color: #daa520;
     font-family: 'Roboto', sans-serif;
-    font-size: 25px;
+    font-size: 19px;
+    height: 43px;
+    width: 100px;
+    border: none;
+    color: rgb(125, 125, 125);
+    background: #252525;
+    border-left: 1px solid rgb(125, 125, 125);
+}
+
+.search-button:hover {
     cursor: pointer;
 }
 
