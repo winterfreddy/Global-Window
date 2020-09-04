@@ -166,14 +166,10 @@ export class MapContainer extends Component {
   }
   
   handleSearch() {
-    console.log(this.state);
     const { neLatBound, neLngBound, swLatBound, swLngBound } = this.state;
-    // make request to backend with the coordinates
-    // needs to be formatted
     const url = `?lat1=${neLatBound}&lng1=${neLngBound}&lat2=${swLatBound}&lng2=${swLngBound}`;
-    // console.log(url);
+    console.log("url", url);
     this.props.fetchPhotosInArea(url);
-    // console.log(this.props);
   }
 
   render() {

@@ -27,7 +27,7 @@ const s3 = new AWS.S3({
 // // get all photos
 router.get('/', (req, res) => {
     const { lng1, lng2 } = req.query;
-    console.log('REQ QUERY ALL PHOTOS: ', req.query);
+    console.log(req.query);
     if(!lng1 && !lng2) {
       Photo.find()
         .sort({ created: -1 })
