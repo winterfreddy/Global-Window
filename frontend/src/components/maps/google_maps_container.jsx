@@ -108,7 +108,7 @@ export class MapContainer extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchPhotos().then(() => console.log(this.props));
+    this.props.fetchPhotos();
   }
 
   onMarkerClick = (props, marker, e) => {

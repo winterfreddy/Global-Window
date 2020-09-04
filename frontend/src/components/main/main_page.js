@@ -5,14 +5,12 @@ import '../../stylesheets/main_page.scss';
 
 class MainPage extends React.Component {
   componentDidMount() {
-    this.props.fetchPhotos().then(() => console.log(this.props));
-
+    this.props.fetchPhotos();
   }
 
   render() {
     const { photos, fetchPhotos } = this.props;
     const google = window.google;
-    console.log(this.props);
     return (
       <div className="main-page">
         <div className="left-aside">
