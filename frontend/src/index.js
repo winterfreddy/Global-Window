@@ -18,6 +18,8 @@ import { makeFavorite, unFavorite, fetchUserFaves } from './util/favorites_api_u
 //   fetchUserFaves,
 // } from "./actions/favorite_actions";
 
+import { fetchUsers } from './actions/user_actions';
+
 document.addEventListener('DOMContentLoaded', () => {
   let store;
 
@@ -51,4 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
   window.unFavorite = unFavorite;
   // window.fetchPhotoFavorites = fetchPhotoFavorites;
   window.fetchUserFaves = fetchUserFaves;
+
+  window.fetchUsers = fetchUsers;
 });
