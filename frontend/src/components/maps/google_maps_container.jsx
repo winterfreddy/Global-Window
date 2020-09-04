@@ -198,8 +198,10 @@ export class MapContainer extends Component {
       <div className='google-maps-images-container'>
         <div id="mainpage-google-map">
           <div className="search-bar">
-            <input type="text" className="search-bar-input" placeholder="Search here"/>
-            <button className="search-button" onClick={this.handleSearch}>Search</button>
+            <input type="text" className="search-bar-input" placeholder="Find photos by tag or just press search to update"/>
+            <button className="search-button" onClick={this.handleSearch}>
+              <i className="fas fa-search"></i>
+            </button>
           </div>
           <Map
             id="google-api-map"

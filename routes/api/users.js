@@ -70,7 +70,7 @@ router.post("/register", (req, res) => {
 
 router.post("/login", (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
-//   seedEvents();
+  // seedEvents();
   if (!isValid) {
     return res.status(400).json(errors);
   }
@@ -103,6 +103,14 @@ router.post("/login", (req, res) => {
       }
     });
   });
+});
+
+// Users Index
+// No params
+router.get("/", (req, res) => {
+  User.find()
+    .then(users => res.json(users))
+    .catch(err => res.status(404).json(err))
 });
 
 router.get("/:id/photos", (req, res) => {

@@ -7,7 +7,10 @@
     flex-direction: column;
     padding: 10px;
     font-family: 'Roboto', sans-serif;
-    // width: 100%;
+}
+
+.image-tags {
+    line-height: 1.5;
 }
 
 .image-upload-form-box {
@@ -80,7 +83,7 @@
     margin: 5px 5px 5px 5px;
     border-radius: 3px;
     border: none;
-    width: 100%;
+    width: 96%;
 }
 
 .submit-button:hover {
