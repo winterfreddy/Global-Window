@@ -10,11 +10,13 @@ class Sidebar extends React.Component {
 
     componentDidMount() {
         this.props.fetchPhotos()
+            .then(() => this.props.fetchUsers())
             .then(() => this.props.fetchUserFaves(this.props.currentUserId));
     }
 
     render() {
         const { 
+            users,
             currentUserId, 
             photos, 
             google, 
@@ -25,7 +27,7 @@ class Sidebar extends React.Component {
             favorites,
             fetchUserFave
         } = this.props;
-        if (!photos || !favorites) {
+        if (!photos) {
             return null;
         } else {
             return (
@@ -34,6 +36,7 @@ class Sidebar extends React.Component {
                     {photos.map((photo) => (
                         <SidebarItem
                         key={photo._id}
+                        users={users}
                         currentUserId={currentUserId}
                         photo={photo}
                         photos={photos}

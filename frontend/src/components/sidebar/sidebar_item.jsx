@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import '../../stylesheets/sidebar.scss';
 
 const darkMode = {
@@ -139,18 +140,38 @@ class SidebarItem extends React.Component {
         let clickAction;
         console.log(favorites);
         console.log(photo);
-        // if (favorites[photo._id].favoriterId === currentUserId) {
-        //     console.log('hitting unfave')
-        //     clickAction = () => unFavorite(photo._id).then(fetchPhotos());
-        // } else {
-        //     console.log('hitting fave');
-        //     clickAction = () => makeFavorite({photoId: photo._id}).then(fetchPhotos());
-        // }
+        if (favorites[photo._id] !== undefined) {
+            if (favorites[photo._id].favoriterId === currentUserId) {
+                console.log('hitting unfave')
+                console.log(favorites[photo._id].photoId);
+                // clickAction = unFavorite(favorites[photo._id].photoId).then(() => fetchPhotos()).catch(err => console.log(err));
+                let formData = new FormData()
+                formData.append('photoId', favorites[photo._id].photoId)
+                return axios.delete('api/favorites/', formData, {
+                    headers: {
+                        accept: 'application/json',
+                        'Accept-Language': 'en-US,en;q=0.8',
+                        'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
+                        'Access-Control-Allow-Origin': '*',
+                    }})
+                    .then(() => fetchPhotos())
+                    .catch(err => console.log(err.response));
+                // clickAction = unFavorite({ photoId: favorites[photo._id].photoId})
+                //     .then(() => fetchPhotos()).catch(err => console.log(err));
+            } else {
+            }
+        } else {
+            console.log(favorites[photo._id]);
+            console.log('hitting fave');
+            clickAction = makeFavorite({ photoId: photo._id })
+                .then(() => fetchPhotos()).catch(err => console.log(err));
+        } 
         return clickAction;
     }
 
     render() {
         const { 
+            users,
             currentUserId, 
             photo, 
             fetchPhotos, 
@@ -172,25 +193,31 @@ class SidebarItem extends React.Component {
             );
         }
 
-        return (
-            <div className='sidebar-item'>
-                <img className='sidebar-img-item' src={photo.imageURL}/>
-                <br/>
-                <div className="sidebar-item-description">"{photo.description}"</div>
-                <br/>
-                <div className="sidebar-item-timestamp">{photo.created}</div>
-                <br/>
-                <div className="sidebar-item-actions">
-                    <div className="item-favorites">
-                        <i className="fas fa-heart" onClick={this.handleFavorites}></i>
-                        <div className="numFavorites">{photo.numFavorites}</div>
+        if (!users[photo.creatorId]) {
+            return null;
+        } else {
+            console.log(users);
+            return (
+                <div className='sidebar-item'>
+                    <div className='sidebar-username'>{users[photo.creatorId].username}</div>
+                    <img className='sidebar-img-item' src={photo.imageURL}/>
+                    <br/>
+                    <div className="sidebar-item-description">"{photo.description}"</div>
+                    <br/>
+                    <div className="sidebar-item-timestamp">{photo.created}</div>
+                    <br/>
+                    <div className="sidebar-item-actions">
+                        <div className="item-favorites">
+                            <i className="fas fa-heart" onClick={this.handleFavorites}></i>
+                            <div className="numFavorites">{photo.numFavorites}</div>
+                        </div>
+                        {deleteButton}
+                        {editButton}
+                        <i className="fas fa-map-marker-alt" onClick={this.handlePanTo}></i>
                     </div>
-                    {deleteButton}
-                    {editButton}
-                    <i className="fas fa-map-marker-alt" onClick={this.handlePanTo}></i>
                 </div>
-            </div>
-        );
+            );
+        }     
     }
 }
 

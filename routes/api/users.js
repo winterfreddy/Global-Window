@@ -105,6 +105,14 @@ router.post("/login", (req, res) => {
   });
 });
 
+// Users Index
+// No params
+router.get("/", (req, res) => {
+  User.find()
+    .then(users => res.json(users))
+    .catch(err => res.status(404).json(err))
+});
+
 router.get("/:id/photos", (req, res) => {
   Photo.find({ creatorId: req.params.id }, "_id")
     .sort({ date: -1 })
