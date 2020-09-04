@@ -107,9 +107,9 @@ export class MapContainer extends Component {
     this.mapClick = this.mapClick.bind(this);
   }
 
-  componentDidMount() {
-    this.props.fetchPhotos();
-  }
+  // componentDidMount() {
+  //   this.props.fetchPhotos();
+  // }
 
   onMarkerClick = (props, marker, e) => {
     this.setState({
@@ -169,10 +169,11 @@ export class MapContainer extends Component {
         onClick={this.onMarkerClick} 
         name={photo.description}/>)
     }
-
+    console.log("latLngBounds: ", this.props.google.maps.getBounds());
     return (
       <div className='google-maps-images-container'>
         <div id="mainpage-google-map">
+          <form className="search-bar">SEARCH</form>
           <Map
             id="google-api-map"
             className={this.props.formType === 'upload' ? "google-api-map-upload" : "google-api-map"}

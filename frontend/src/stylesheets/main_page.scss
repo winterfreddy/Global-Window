@@ -21,11 +21,28 @@
     margin-left: 50px;
 }
 
-.google-api-map {
-    height: 92.5% !important;
-    width: 79.7% !important;
+.mainpage-google-map {
+    display: flex;
+    flex-direction: column;
     position: absolute;
+    left: 20%;
+}
+
+.search-bar {
+    // display: block;
+    height: 50px;
+    z-index: 999;
     top: 67px;
+    right: 0;
+}
+
+.google-api-map {
+    // height: 92.5% !important;
+    // width: 79.7% !important;
+     height: 92.5%;
+    width: 79.7%;
+    // position: absolute;
+    top: 117px;
     left: 20%;
     border: 3px solid black;
 }
@@ -45,6 +62,7 @@
 
 .google-maps-images-container {
     display: flex !important;
+    flex-direction: column;
 }
 
 .image-upload-form-container { 
