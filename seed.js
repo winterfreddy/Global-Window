@@ -8,7 +8,7 @@ const Favorite = require("./models/Favorite");
 function seedEvents(req, res) {
     console.log("starting seeding");
     const users = [
-        {username: 'demo', password: '123456'},
+        {username: 'DemoUser', password: '123456'},
         {username: 'AdamK', password: 'password'},
         {username: 'KevinZ', password: 'password'},
         {username: 'WinfredH', password: 'password'},

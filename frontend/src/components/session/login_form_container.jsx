@@ -18,7 +18,7 @@ const mapDispatchToProps = (dispatch) => {
         className="other-form"
         onClick={() => dispatch(openModal("signup"))}
       >
-        Signup
+        Sign Up
       </button>
     ),
     closeModal: () => dispatch(closeModal()),

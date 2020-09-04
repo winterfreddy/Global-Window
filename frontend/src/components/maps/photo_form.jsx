@@ -119,7 +119,7 @@ class PhotoForm extends React.Component {
             <div className="image-upload-form-box">
                 {errorsDiv}
                 <label className="image-upload-title">Image Upload</label>
-                <label className="image-upload-reminder">Please place a marker on the map!</label>
+                <label className="image-upload-reminder">Click on the map to place a marker!</label>
                 <div className="image-description">
                     <label>Image Description:</label>
                     <br />
@@ -130,7 +130,7 @@ class PhotoForm extends React.Component {
                         onChange={this.update('description')} />
                 </div>
                 <div className="image-tags">
-                    <label>Tags (separate by space for multiple tags):</label>
+                    <label>Tags (multiple tags should be separated with a space):</label>
                     <br />
                     <input
                         type="text"
