@@ -94,6 +94,7 @@ class SidebarItem extends React.Component {
         }
 
         this.handlePanTo = this.handlePanTo.bind(this);
+        this.handleFavorites = this.handleFavorites.bind(this);
     }
 
     handlePanTo() {
@@ -126,36 +127,64 @@ class SidebarItem extends React.Component {
         map.panTo(panPoint);
     }
 
+    handleFavorites() {
+        const { 
+            favorites, 
+            photo, 
+            currentUserId, 
+            makeFavorite, 
+            unFavorite, 
+            fetchPhotos
+        } = this.props;
+        let clickAction;
+        console.log(favorites);
+        console.log(photo);
+        // if (favorites[photo._id].favoriterId === currentUserId) {
+        //     console.log('hitting unfave')
+        //     clickAction = () => unFavorite(photo._id).then(fetchPhotos());
+        // } else {
+        //     console.log('hitting fave');
+        //     clickAction = () => makeFavorite({photoId: photo._id}).then(fetchPhotos());
+        // }
+        return clickAction;
+    }
+
     render() {
-        const { currentUserId, photo, fetchPhotos, deletePhoto } = this.props;
+        const { 
+            currentUserId, 
+            photo, 
+            fetchPhotos, 
+            deletePhoto, 
+            makeFavorite, 
+            unFavorite,
+            favorites 
+        } = this.props;
         let deleteButton;
         let editButton;
         if (photo.creatorId === currentUserId) {
             deleteButton = (
                 <i className="far fa-trash-alt" onClick={() => deletePhoto(photo._id).then(() => fetchPhotos())}></i>
-                // {<button onClick={() => deletePhoto(photo._id).then(() => fetchPhotos())}>Delete</button>}
             );
             editButton = (
                 <Link to={`/edit/${photo._id}`}>
                     <i className="far fa-edit"></i>
-                    {/* {<button>Edit Location</button>} */}
                 </Link>
             );
         }
+
         return (
           <div className="sidebar-item">
             <img className="sidebar-img-item" src={photo.imageURL} />
             <br />
             <div>{photo.description}</div>
             <br />
-            <i className="far fa-heart"></i>
+            <i className="fas fa-heart" onClick={this.handleFavorites}></i>
             <div>{photo.numFavorites}</div>
             <br />
             <div>{photo.created}</div>
             {deleteButton}
             {editButton}
             <i className="fas fa-map-marker-alt" onClick={this.handlePanTo}></i>
-            {/* {<button onClick={this.handlePanTo}>Locate me!</button>} */}
           </div>
         );
     }

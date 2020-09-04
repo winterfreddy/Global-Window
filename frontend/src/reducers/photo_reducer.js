@@ -25,8 +25,6 @@ export default function (state = {}, action) {
             let photoObj;
             let favoritesLength;
             let appendedObj;
-            console.log(typeof action.favorites.data === "object");
-            console.log(action.favorites.data)
             if (!action.favorites.data[0]) {
               photoObj = newState[action.favorites.data.photoId];
               favoritesLength = 0;
