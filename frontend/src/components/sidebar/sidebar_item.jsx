@@ -171,6 +171,7 @@ class SidebarItem extends React.Component {
 
     render() {
         const { 
+            users,
             currentUserId, 
             photo, 
             fetchPhotos, 
@@ -192,25 +193,31 @@ class SidebarItem extends React.Component {
             );
         }
 
-        return (
-            <div className='sidebar-item'>
-                <img className='sidebar-img-item' src={photo.imageURL}/>
-                <br/>
-                <div className="sidebar-item-description">"{photo.description}"</div>
-                <br/>
-                <div className="sidebar-item-timestamp">{photo.created}</div>
-                <br/>
-                <div className="sidebar-item-actions">
-                    <div className="item-favorites">
-                        <i className="fas fa-heart" onClick={this.handleFavorites}></i>
-                        <div className="numFavorites">{photo.numFavorites}</div>
+        if (!users[photo.creatorId]) {
+            return null;
+        } else {
+            console.log(users);
+            return (
+                <div className='sidebar-item'>
+                    {<div>{users[photo.creatorId].username}</div>}
+                    <img className='sidebar-img-item' src={photo.imageURL}/>
+                    <br/>
+                    <div className="sidebar-item-description">"{photo.description}"</div>
+                    <br/>
+                    <div className="sidebar-item-timestamp">{photo.created}</div>
+                    <br/>
+                    <div className="sidebar-item-actions">
+                        <div className="item-favorites">
+                            <i className="fas fa-heart" onClick={this.handleFavorites}></i>
+                            <div className="numFavorites">{photo.numFavorites}</div>
+                        </div>
+                        {deleteButton}
+                        {editButton}
+                        <i className="fas fa-map-marker-alt" onClick={this.handlePanTo}></i>
                     </div>
-                    {deleteButton}
-                    {editButton}
-                    <i className="fas fa-map-marker-alt" onClick={this.handlePanTo}></i>
                 </div>
-            </div>
-        );
+            );
+        }     
     }
 }
 
