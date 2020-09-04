@@ -12,6 +12,7 @@ export const makeFavorite = favoriteData => (
     axios.post('/api/favorites/', favoriteData)
 );
 
-export const unFavorite = id => (
-    axios.delete(`/api/favorites/${id}`)
-);
+export const unFavorite = favoriteData => {
+    console.log('hitting unfave utils')
+    return axios.delete('/api/favorites/', favoriteData)
+};

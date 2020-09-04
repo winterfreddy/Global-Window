@@ -30,10 +30,12 @@ export const makeFavorite = favorite => dispatch => (
         .then(favorite => dispatch(receiveFavorite(favorite)))
 );
 
-export const unFavorite = id => dispatch => (
-    FavoriteAPIUtil.unFavorite(id)
-        .then(() => dispatch(removeFavorite(id)))
-);
+export const unFavorite = favorite => dispatch => {
+    console.log('hitting unfave actions')
+    return FavoriteAPIUtil.unFavorite(favorite)
+        .then(id => dispatch(removeFavorite(id)))
+        .catch(err => console.log(err))
+};
 
 export const fetchPhotoFavorites = id => dispatch => (
     FavoriteAPIUtil.fetchPhotoFavorites(id)
