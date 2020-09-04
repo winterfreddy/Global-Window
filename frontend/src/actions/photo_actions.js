@@ -30,7 +30,19 @@ export const fetchPhotos = () => (dispatch) =>
       })
     )
     .catch((error) => console.log(error));
-    
+
+export const fetchPhotosInArea = (coorsUrlPath) => (dispatch) => {
+    console.log(coorsUrlPath);
+    return PhotoAPIUtil.fetchPhotosInArea(coorsUrlPath)
+        .then((photos) => dispatch(receivePhotos(photos)))
+        .then((res) => 
+          res.photos.data.forEach((photo) => {
+            dispatch(fetchPhotoFavorites(photo._id));
+        })
+        )
+        .catch((error) => console.log(error));
+}
+
 export const fetchPhoto = id => dispatch => (
     PhotoAPIUtil.fetchPhoto(id)
     .then((photo) => dispatch(receivePhoto(photo)))

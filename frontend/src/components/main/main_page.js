@@ -9,7 +9,7 @@ class MainPage extends React.Component {
   }
 
   render() {
-    const { photos, fetchPhotos } = this.props;
+    const { photos, fetchPhotos, fetchPhotosInArea } = this.props;
     const google = window.google;
     return (
       <div className="main-page">
@@ -17,7 +17,12 @@ class MainPage extends React.Component {
             <SidebarContainer google={google} />
         </div>
         <div className="google-maps-container">
-          <GoogleMapsContainer google={google} photos={photos} fetchPhotos={fetchPhotos} />
+          <GoogleMapsContainer
+            google={google}
+            photos={photos}
+            fetchPhotos={fetchPhotos}
+            fetchPhotosInArea={fetchPhotosInArea}
+            />
         </div>
       </div>
     );

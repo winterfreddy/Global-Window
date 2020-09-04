@@ -101,10 +101,15 @@ export class MapContainer extends Component {
       activeMarker: {}, //Shows the active marker upon click
       selectedPlace: {}, //Shows the infoWindow to the selected place upon a marker
       lat: "",
-      lng: ""
+      lng: "",
+      neLatBound: "",
+      neLngBound: "",
+      swLatBound: "",
+      swLngBound: ""
     };
 
     this.mapClick = this.mapClick.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   onMarkerClick = (props, marker, e) => {
@@ -148,6 +153,25 @@ export class MapContainer extends Component {
     }
   }
 
+  centerMoved = (mapProps, map) => {
+    // console.log(map.getBounds().getNorthEast().lat());
+    // console.log(map.getBounds().getNorthEast().lng());
+    // console.log(map.getBounds().getSouthWest().lat()); 
+    // console.log(map.getBounds().getSouthWest().lng());
+    
+    this.setState({ neLatBound: map.getBounds().getNorthEast().lat()});
+    this.setState({ neLngBound: map.getBounds().getNorthEast().lng()});
+    this.setState({ swLatBound: map.getBounds().getSouthWest().lat()});
+    this.setState({ swLngBound: map.getBounds().getSouthWest().lng()}); 
+  }
+  
+  handleSearch() {
+    const { neLatBound, neLngBound, swLatBound, swLngBound } = this.state;
+    const url = `?lat1=${neLatBound}&lng1=${neLngBound}&lat2=${swLatBound}&lng2=${swLngBound}`;
+    console.log("url", url);
+    this.props.fetchPhotosInArea(url);
+  }
+
   render() {
     let uploadForm;
     let editForm;
@@ -171,7 +195,7 @@ export class MapContainer extends Component {
         <div id="mainpage-google-map">
           <div className="search-bar">
             <input type="text" className="search-bar-input" placeholder="Find photos by tag or just press search to update"/>
-            <button className="search-button">
+            <button className="search-button" onClick={this.handleSearch}>
               <i className="fas fa-search"></i>
             </button>
           </div>
@@ -186,6 +210,8 @@ export class MapContainer extends Component {
               lng: -122.4126891,
             }}
             onClick={this.props.location.pathname === '/upload' ? this.mapClick : () => console.log('click inactive')}
+            onDragend={this.centerMoved}
+            onZoomChanged={this.centerMoved}
           >
             <Marker
               onClick={this.onMarkerClick}
