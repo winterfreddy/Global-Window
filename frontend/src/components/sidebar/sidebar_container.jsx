@@ -3,7 +3,7 @@ import Sidebar from './sidebar';
 import { fetchPhotos, deletePhoto } from '../../actions/photo_actions';
 
 const mapStateToProps = state => ({
-    photos: state.photos.data,
+    photos: Object.values(state.photos),
     currentUserId: state.session.user.id
 });
 
