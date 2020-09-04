@@ -50,6 +50,6 @@ table {
 
 html, body {margin: 0; height: 100%; overflow: hidden}
 
-button:focus {
+input:focus, button:focus {
 	outline: none;
 }
