@@ -179,7 +179,7 @@ export class MapContainer extends Component {
               lat: 37.7941135,
               lng: -122.4126891,
             }}
-            onClick={this.mapClick}
+            onClick={this.props.location.pathname === '/upload' ? this.mapClick : () => console.log('click inactive')}
           >
             <Marker
               onClick={this.onMarkerClick}
