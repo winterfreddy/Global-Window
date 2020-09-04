@@ -101,10 +101,15 @@ export class MapContainer extends Component {
       activeMarker: {}, //Shows the active marker upon click
       selectedPlace: {}, //Shows the infoWindow to the selected place upon a marker
       lat: "",
-      lng: ""
+      lng: "",
+      neLatBound: "",
+      neLngBound: "",
+      swLatBound: "",
+      swLngBound: ""
     };
 
     this.mapClick = this.mapClick.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   onMarkerClick = (props, marker, e) => {
@@ -148,6 +153,29 @@ export class MapContainer extends Component {
     }
   }
 
+  centerMoved = (mapProps, map) => {
+    // console.log(map.getBounds().getNorthEast().lat());
+    // console.log(map.getBounds().getNorthEast().lng());
+    // console.log(map.getBounds().getSouthWest().lat()); 
+    // console.log(map.getBounds().getSouthWest().lng());
+    
+    this.setState({ neLatBound: map.getBounds().getNorthEast().lat()});
+    this.setState({ neLngBound: map.getBounds().getNorthEast().lng()});
+    this.setState({ swLatBound: map.getBounds().getSouthWest().lat()});
+    this.setState({ swLngBound: map.getBounds().getSouthWest().lng()}); 
+  }
+  
+  handleSearch() {
+    console.log(this.state);
+    const { neLatBound, neLngBound, swLatBound, swLngBound } = this.state;
+    // make request to backend with the coordinates
+    // needs to be formatted
+    const url = `?lat1=${neLatBound}&lng1=${neLngBound}&lat2=${swLatBound}&lng2=${swLngBound}`;
+    // console.log(url);
+    this.props.fetchPhotosInArea(url);
+    // console.log(this.props);
+  }
+
   render() {
     let uploadForm;
     let editForm;
@@ -171,7 +199,7 @@ export class MapContainer extends Component {
         <div id="mainpage-google-map">
           <div className="search-bar">
             <input type="text" className="search-bar-input" placeholder="Search here"/>
-            <button className="search-button">Search</button>
+            <button className="search-button" onClick={this.handleSearch}>Search</button>
           </div>
           <Map
             id="google-api-map"
@@ -184,6 +212,8 @@ export class MapContainer extends Component {
               lng: -122.4126891,
             }}
             onClick={this.props.location.pathname === '/upload' ? this.mapClick : () => console.log('click inactive')}
+            onDragend={this.centerMoved}
+            onZoomChanged={this.centerMoved}
           >
             <Marker
               onClick={this.onMarkerClick}
