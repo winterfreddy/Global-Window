@@ -143,19 +143,20 @@ class SidebarItem extends React.Component {
             );
         }
         return (
-            <div className='sidebar-item'>
-                <img className='sidebar-img-item' src={photo.imageURL}/>
-                <br/>
-                <div>{photo.description}</div>
-                <br/>
-                <div>{photo.numFavorites}</div>
-                <br/>
-                <div>{photo.created}</div>
-                {deleteButton}
-                {editButton}
-                <i className="fas fa-map-marker-alt" onClick={this.handlePanTo}></i>
-                {/* {<button onClick={this.handlePanTo}>Locate me!</button>} */}
-            </div>
+          <div className="sidebar-item">
+            <img className="sidebar-img-item" src={photo.imageURL} />
+            <br />
+            <div>{photo.description}</div>
+            <br />
+            <i className="far fa-heart"></i>
+            <div>{photo.numFavorites}</div>
+            <br />
+            <div>{photo.created}</div>
+            {deleteButton}
+            {editButton}
+            <i className="fas fa-map-marker-alt" onClick={this.handlePanTo}></i>
+            {/* {<button onClick={this.handlePanTo}>Locate me!</button>} */}
+          </div>
         );
     }
 }
