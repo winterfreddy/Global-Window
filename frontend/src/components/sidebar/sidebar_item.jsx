@@ -148,6 +148,8 @@ class SidebarItem extends React.Component {
                 <br/>
                 <div>{photo.description}</div>
                 <br/>
+                <div>{photo.numFavorites}</div>
+                <br/>
                 <div>{photo.created}</div>
                 {deleteButton}
                 {editButton}
