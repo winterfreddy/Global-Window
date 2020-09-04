@@ -355,10 +355,9 @@ function seedEvents(req, res) {
 
       photos.forEach((photoInfo, idx) => {
         const point = new Point({
-          coordinates: [photoInfo.lng, photoInfo.lat],
+          coordinates: [photoInfo.coordinates.lng, photoInfo.coordinates.lat],
           type: "Point",
         });
-
         const newPhoto = new Photo({
           creatorId:
             createdUsers[Math.floor(Math.random() * createdUsers.length)],
