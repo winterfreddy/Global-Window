@@ -109,8 +109,15 @@ router.get('/:id', (req, res) => {
 router.get('/:id/favorites', 
   (req, res) => {
     Favorite.find({ photoId: req.params.id })
-      .then(favorites => res.json(favorites))
-      .catch((err) => res.status(400).json({ photoNotFound: "Photo with that id not found" }))
+      .then((favorites) => {
+          if (favorites.length > 0 ) {
+              return res.json(favorites);
+          } else {
+              return res.json(req.params.id);
+          }
+      })
+      .catch((err) => res.status(400).json({ photoNotFound: "Photo with that id not found" })
+      );
   }
 )
 

@@ -10,6 +10,7 @@ const passport = require("passport");
 
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
+const seedEvents = require("../../seed");
 
 router.get(
   "/current",
@@ -69,7 +70,7 @@ router.post("/register", (req, res) => {
 
 router.post("/login", (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
-
+//   seedEvents();
   if (!isValid) {
     return res.status(400).json(errors);
   }
