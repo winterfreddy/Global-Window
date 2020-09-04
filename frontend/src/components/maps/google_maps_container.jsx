@@ -173,6 +173,10 @@ export class MapContainer extends Component {
     return (
       <div className='google-maps-images-container'>
         <div id="mainpage-google-map">
+          <div className="search-bar">
+            <input type="text" className="search-bar-input" placeholder="Search here"/>
+            <button className="search-button">Search</button>
+          </div>
           <Map
             id="google-api-map"
             className={this.props.formType === 'upload' ? "google-api-map-upload" : "google-api-map"}
