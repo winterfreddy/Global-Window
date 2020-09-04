@@ -4,7 +4,7 @@
     position: absolute;
     display: block;
     background: #252525;
-    border: 3px solid black;
+    // border: 3px solid black;
     overflow: scroll;
     overflow-x: hidden;
     color: white;
@@ -13,10 +13,13 @@
     bottom: 0;
     left: 0;
     min-width: 200px !important;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 
 .sidebar-content-container:active {
-    border: 3px solid green;
     cursor: pointer;
 }
 
@@ -37,19 +40,25 @@
 }
 
 .sidebar-item-description {
-    padding: 10px 0 5px 10px;
+    // padding: 10px 0 5px 10px;
     font-size: 20px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+    
 }
 
 .sidebar-item-timestamp {
-    padding: 5px 0 10px 10px;
+    // padding: 5px 0 10px 10px;
     color: rgb(100, 100, 100);
+    display: flex;
+    justify-content: center;
 }
 
 .sidebar-item-actions {
     display: flex;
     justify-content: space-around;
-    padding: 0 10px 10px 10px;
+    padding: 0 10px 11px 10px;
 }
 
 .item-favorites {
@@ -67,14 +76,17 @@
 }
 
 .fa-trash-alt:hover {
+    cursor: pointer;
     color: red;
 }
 
 .fa-edit:hover {
+    cursor: pointer;
     color: blue;
 }
 
 .fa-map-marker-alt:hover {
+    cursor: pointer;
     color: green;
 }
 
@@ -85,8 +97,10 @@
 
 .fa-heart:hover {
     color: pink;
+    cursor: pointer;
 }
 
 .numFavorites {
-    padding-top: 3px;
+    font-size: 17px;
+    padding: 5px 0 0 2px;
 }

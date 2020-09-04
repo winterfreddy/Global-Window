@@ -36,7 +36,7 @@ class LoginForm extends React.Component {
 
   handleDemoLogin(e) {
     e.persist();
-    this.setState({ username: 'demo', password: '123456' }, () => this.handleSubmit(e));
+    this.setState({ username: 'DemoUser', password: '123456' }, () => this.handleSubmit(e));
   }
 
   // Handle form submission

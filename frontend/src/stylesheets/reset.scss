@@ -49,3 +49,7 @@ table {
 }
 
 html, body {margin: 0; height: 100%; overflow: hidden}
+
+button:focus {
+	outline: none;
+}
