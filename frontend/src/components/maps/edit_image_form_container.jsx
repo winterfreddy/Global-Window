@@ -158,9 +158,7 @@ class EditImageForm extends React.Component {
         } else {
             return (
                 <div className="google-maps">
-                    <div className={
-                            formType === 'upload photo' ? "upload-form-container" : "google-maps-images-container"
-                        }>
+                    <div className="google-maps-images-container">
                         <Map
                         className="google-api-map"
                         google={this.props.google}

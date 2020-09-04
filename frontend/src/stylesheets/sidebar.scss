@@ -1,6 +1,4 @@
-.sidebar-header {
-    background: orange;
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 .sidebar-content-container {
     display: block;
@@ -21,6 +19,7 @@
 .sidebar-item {
     border: 1px solid black;
     padding: 5px;
+    font-family: 'Roboto', sans-serif;
 }
 
 .sidebar-item:hover {

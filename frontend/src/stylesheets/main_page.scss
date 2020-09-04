@@ -30,21 +30,13 @@
     border: 3px solid black;
 }
 
-.upload-form-container {
-    position: absolute;
-    top: 67px;
-    left: 0;
-    bottom: 0;
-    width: 75% !important;
-    z-index: 100;
-}
-
 .google-api-map:active {
     border: 3px solid green;
 }
 
 .google-maps-images-container {
     display: flex !important;
+
 }
 
 .image-upload-form-container { 
