@@ -1,3 +1,5 @@
+// MOVING THIS TO PHOTOS REDUCER
+
 import { RECEIVE_FAVORITE, REMOVE_FAVORITE } from '../actions/favorite_actions';
 
 export default function (state = {}, action) {
@@ -14,6 +16,3 @@ export default function (state = {}, action) {
             return state;
     }
 };
-
-
-

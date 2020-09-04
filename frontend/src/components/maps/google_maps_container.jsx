@@ -112,7 +112,6 @@ export class MapContainer extends Component {
   // }
 
   onMarkerClick = (props, marker, e) => {
-    console.log(this.state);
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
@@ -156,7 +155,6 @@ export class MapContainer extends Component {
   render() {
     let uploadForm;
     let editForm;
-    console.log(this.props);
     if (this.props.location.pathname === '/upload') {
       uploadForm = (
       <div className='image-upload-form-container'>

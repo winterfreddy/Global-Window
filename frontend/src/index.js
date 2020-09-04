@@ -11,7 +11,7 @@ import './stylesheets/reset.scss';
 // import { fetchPhotos, fetchPhoto, editPhoto, deletePhoto } from './util/photos_api_util';
 import { fetchPhotos, fetchPhoto, editPhoto, deletePhoto } from './actions/photo_actions';
 // import { favorite, unFavorite } from './util/favorites_api_util';
-import { favorite, unFavorite } from './actions/favorite_actions';
+import { favorite, unFavorite, fetchPhotoFavorites } from './actions/favorite_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -44,4 +44,5 @@ document.addEventListener('DOMContentLoaded', () => {
   window.deletePhoto = deletePhoto;
   window.favorite = favorite;
   window.unFavorite = unFavorite;
+  window.fetchPhotoFavorites = fetchPhotoFavorites;
 });

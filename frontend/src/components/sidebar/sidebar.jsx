@@ -9,12 +9,11 @@ class Sidebar extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchPhotos();
+        this.props.fetchPhotos()
     }
 
     render() {
         const { currentUserId, photos, google, fetchPhotos, deletePhoto } = this.props;
-        console.log(google);
         if (!photos) {
             return null;
         } else {
