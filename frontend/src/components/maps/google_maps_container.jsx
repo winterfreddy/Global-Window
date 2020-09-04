@@ -172,10 +172,10 @@ export class MapContainer extends Component {
 
     return (
       <div className='google-maps-images-container'>
-        <div id="map">
+        <div id="mainpage-google-map">
           <Map
             id="google-api-map"
-            className="google-api-map"
+            className={this.props.formType === 'upload' ? "google-api-map-upload" : "google-api-map"}
             google={this.props.google}
             zoom={12}
             styles={darkMode.styles}

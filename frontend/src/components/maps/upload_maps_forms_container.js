@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import UploadMapsForms from './upload_maps_form';
 
 const mapStateToProps = state => ({
-
+    formType: 'upload'
 });
 
 const mapDispatchToProps = dispatch => ({

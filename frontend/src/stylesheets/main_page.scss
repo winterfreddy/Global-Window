@@ -30,21 +30,22 @@
     border: 3px solid black;
 }
 
-.upload-form-container {
-    position: absolute;
-    top: 67px;
-    left: 0;
-    bottom: 0;
+.google-api-map-upload,
+.google-api-map-edit {
+    height: 92.5% !important;
     width: 75% !important;
-    z-index: 100;
+    border: 3px solid black;
 }
 
-.google-api-map:active {
+.google-api-map:active,
+.google-api-map-upload:active,
+.google-api-map-edit:active {
     border: 3px solid green;
 }
 
 .google-maps-images-container {
     display: flex !important;
+
 }
 
 .image-upload-form-container { 
