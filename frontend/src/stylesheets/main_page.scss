@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 .main-page {
     display: flex;
     margin-top: 20px;
@@ -10,6 +12,10 @@
     width: 200px;
 }
 
+.google-maps {
+    width: 100%;
+}
+
 .google-maps-container {
     display: block;
     margin-left: 50px;
@@ -18,10 +24,19 @@
 .google-api-map {
     // height: 0px !important;
     // width: 0px !important;
-    height: 550px !important;
+    height: 92.5% !important;
     width: 75% !important;
-    border-radius: 5px !important;
+    // border-radius: 5px !important;
     border: 3px solid black;
+}
+
+.upload-form-container {
+    position: absolute;
+    top: 67px;
+    left: 0;
+    bottom: 0;
+    width: 75% !important;
+    z-index: 100;
 }
 
 .google-api-map:active {
@@ -34,5 +49,9 @@
 
 .image-upload-form-container { 
     position: absolute;
-    right: 0px;
+    overflow: auto;
+    top: 67px;
+    right: 0;
+    bottom: 0;
+    left: 75%;
 }

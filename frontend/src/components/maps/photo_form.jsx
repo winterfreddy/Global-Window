@@ -112,7 +112,7 @@ class PhotoForm extends React.Component {
         let inputFile;
         if (this.props.formType === 'upload photo') {
             inputFile = (
-                <input type="file" onChange={this.singleFileChangedHandler} />
+                <input type="file" className="input-file" onChange={this.singleFileChangedHandler} />
             );
         }
         return (
@@ -142,7 +142,7 @@ class PhotoForm extends React.Component {
                 <div>
                     {inputFile}
                     <div>
-                        <button className="btn btn-info" onClick={this.singleFileUploadHandler}>Upload</button>
+                        <button className="submit-button" onClick={this.singleFileUploadHandler}>Upload</button>
                     </div>
                 </div>
                 <div className="image-preview">
