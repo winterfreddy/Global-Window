@@ -199,7 +199,7 @@ class SidebarItem extends React.Component {
             console.log(users);
             return (
                 <div className='sidebar-item'>
-                    {<div>{users[photo.creatorId].username}</div>}
+                    <div className='sidebar-username'>{users[photo.creatorId].username}</div>
                     <img className='sidebar-img-item' src={photo.imageURL}/>
                     <br/>
                     <div className="sidebar-item-description">"{photo.description}"</div>

@@ -22,11 +22,11 @@
 }
 
 .google-api-map {
-    height: 92.5% !important;
-    width: 79.7% !important;
+    height: 87% !important;
+    width: 69.7% !important;
     position: absolute;
-    top: 67px;
-    left: 20%;
+    top: 123px;
+    left: 30%;
     border: 3px solid black;
 }
 
@@ -62,4 +62,31 @@
     background-position: center;
     background-repeat: no-repeat;
     height: 1000px;
+}
+
+.search-bar {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    top: 67px;
+    right: 0;
+    left: 30%;
+    height: 50px;
+    // width: 69.7% !important;
+}
+
+.search-bar-input {
+    border: 2px solid black;
+    font-size: 20px;
+    height: 50px;
+    width: 100%;
+}
+
+.search-button {
+    height: 60px;
+    width: 100px;
+    background-color: #daa520;
+    font-family: 'Roboto', sans-serif;
+    font-size: 25px;
+    cursor: pointer;
 }

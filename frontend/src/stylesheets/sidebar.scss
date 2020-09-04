@@ -9,9 +9,10 @@
     overflow-x: hidden;
     color: white;
     top: 67px;
-    right: 80%;
+    right: 70%;
     bottom: 0;
     left: 0;
+    min-width: 200px !important;
 }
 
 .sidebar-content-container:active {
@@ -31,7 +32,8 @@
 }
 
 .sidebar-img-item {
-    width: 100%;
+    width: 90%;
+    margin: 20px 25px 20px 20px;
 }
 
 .sidebar-item-description {
