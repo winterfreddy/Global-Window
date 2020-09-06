@@ -45,7 +45,20 @@ class NavBar extends React.Component {
   render() {
     return (
       <div className="nav-bar">
-        <Link to="/home" className="logo-title">globalWindow</Link>
+        <div className="logo-title">
+          <div className="dropdown">
+            <i className="fas fa-globe"></i>
+            <div class="dropdown-content">
+              <a href="https://github.com/winterfreddy">Winfred Huang (Frontend lead)</a>
+              <a href="https://github.com/alex-choy">Alex Choy (Backend lead)</a>
+              <a href="https://github.com/AdamKlimmek">Adam Klimmek (Flex backend)</a>
+              <a href="https://github.com/kxwzhang">Kevin Zhang (Flex frontend)</a>
+            </div>
+          </div>
+          <Link to="/home" className="logo-title">
+            globalWindow
+          </Link>
+        </div>
         {this.getLinks()}
       </div>
     );
