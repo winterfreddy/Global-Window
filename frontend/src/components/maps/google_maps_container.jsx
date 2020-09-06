@@ -105,10 +105,12 @@ export class MapContainer extends Component {
       neLatBound: "",
       neLngBound: "",
       swLatBound: "",
-      swLngBound: ""
+      swLngBound: "",
+      searchInput: "",
     };
 
     this.mapClick = this.mapClick.bind(this);
+    this.handleInput = this.handleInput.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
   }
 
@@ -164,11 +166,17 @@ export class MapContainer extends Component {
     this.setState({ swLatBound: map.getBounds().getSouthWest().lat()});
     this.setState({ swLngBound: map.getBounds().getSouthWest().lng()}); 
   }
+
+  handleInput(e) {
+    this.setState({ searchInput: e.currentTarget.value });
+  }
   
   handleSearch() {
-    const { neLatBound, neLngBound, swLatBound, swLngBound } = this.state;
-    const url = `?lat1=${neLatBound}&lng1=${neLngBound}&lat2=${swLatBound}&lng2=${swLngBound}`;
-    console.log("url", url);
+    const { neLatBound, neLngBound, swLatBound, swLngBound, searchInput } = this.state;
+    let url = `?lat1=${neLatBound}&lng1=${neLngBound}&lat2=${swLatBound}&lng2=${swLngBound}`;
+    if (searchInput !== "") {
+      url += `&tags=${searchInput}`
+    }
     this.props.fetchPhotosInArea(url);
   }
 
@@ -194,7 +202,7 @@ export class MapContainer extends Component {
       <div className='google-maps-images-container'>
         <div id="mainpage-google-map">
           <div className="search-bar">
-            <input type="text" className="search-bar-input" placeholder="Find photos by tag or just press search to update"/>
+            <input type="text" className="search-bar-input" value={this.state.searchInput} onChange={this.handleInput} placeholder="Find photos by tag or just press search to update"/>
             <button className="search-button" onClick={this.handleSearch}>
               <i className="fas fa-search"></i>
             </button>

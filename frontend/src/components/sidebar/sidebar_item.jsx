@@ -197,12 +197,14 @@ class SidebarItem extends React.Component {
         } else {
             return (
                 <div className='sidebar-item'>
-                    <div className='sidebar-username'>{users[photo.creatorId].username}</div>
                     <img className='sidebar-img-item' src={photo.imageURL}/>
                     <br/>
                     <div className="sidebar-item-description">"{photo.description}"</div>
                     <br/>
-                    <div className="sidebar-item-timestamp">{photo.created}</div>
+                    <div className="sidebar-item-other-info">
+                        <div className='sidebar-username'>@{users[photo.creatorId].username}</div>
+                        <div className="sidebar-item-timestamp">{photo.created}</div>
+                    </div>
                     <br/>
                     <div className="sidebar-item-actions">
                         <div className="item-favorites">

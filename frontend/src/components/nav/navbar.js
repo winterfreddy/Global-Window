@@ -56,10 +56,10 @@ class NavBar extends React.Component {
             <i className="fas fa-globe"></i>
             <div class="dropdown-content">
               <a>Global Window Developers</a>
-              <a href="https://github.com/winterfreddy">Winfred Huang (Frontend lead)</a>
-              <a href="https://github.com/alex-choy">Alex Choy (Backend lead)</a>
-              <a href="https://github.com/AdamKlimmek">Adam Klimmek (Flex backend)</a>
-              <a href="https://github.com/kxwzhang">Kevin Zhang (Flex frontend)</a>
+              <a href="https://github.com/winterfreddy">Winfred Huang (Frontend Flex)</a>
+              <a href="https://github.com/alex-choy">Alex Choy (Backend Lead)</a>
+              <a href="https://github.com/AdamKlimmek">Adam Klimmek (Backend Flex)</a>
+              <a href="https://github.com/kxwzhang">Kevin Zhang (Frontend Lead)</a>
             </div>
           </div>
           {logoButton}
