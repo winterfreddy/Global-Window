@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import '../../stylesheets/navbar.scss'
 import '../../stylesheets/modal.scss';
 import '../../stylesheets/session.scss';
@@ -43,21 +43,26 @@ class NavBar extends React.Component {
   }
 
   render() {
+      let logoButton;
+      if(this.props.location.pathname === '/home') {
+        logoButton = (<div className="logo-title" onClick={() => window.location.reload()}>globalWindow</div>)
+      } else {
+        logoButton = (<Link to="/home" className="logo-title">globalWindow</Link>);
+      }
     return (
       <div className="nav-bar">
-        <div className="logo-title">
+        <div className="logo-section">
           <div className="dropdown">
             <i className="fas fa-globe"></i>
             <div class="dropdown-content">
+              <a>Global Window Developers</a>
               <a href="https://github.com/winterfreddy">Winfred Huang (Frontend lead)</a>
               <a href="https://github.com/alex-choy">Alex Choy (Backend lead)</a>
               <a href="https://github.com/AdamKlimmek">Adam Klimmek (Flex backend)</a>
               <a href="https://github.com/kxwzhang">Kevin Zhang (Flex frontend)</a>
             </div>
           </div>
-          <Link to="/home" className="logo-title">
-            globalWindow
-          </Link>
+          {logoButton}
         </div>
         {this.getLinks()}
       </div>
@@ -65,4 +70,4 @@ class NavBar extends React.Component {
   }
 }
 
-export default NavBar;
+export default withRouter(NavBar);
