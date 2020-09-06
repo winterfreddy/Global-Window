@@ -20,7 +20,8 @@ class Sidebar extends React.Component {
             currentUserId, 
             photos, 
             google, 
-            fetchPhotos, 
+            fetchPhotos,
+            fetchPhoto, 
             deletePhoto, 
             makeFavorite, 
             unFavorite,
@@ -42,6 +43,7 @@ class Sidebar extends React.Component {
                         photos={photos}
                         google={google}
                         fetchPhotos={fetchPhotos}
+                        fetchPhoto={fetchPhoto}
                         deletePhoto={deletePhoto}
                         makeFavorite={makeFavorite}
                         unFavorite={unFavorite}

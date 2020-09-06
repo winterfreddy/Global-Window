@@ -134,13 +134,14 @@ class SidebarItem extends React.Component {
             currentUserId, 
             makeFavorite, 
             unFavorite, 
-            fetchPhotos
+            fetchPhotos,
+            fetchPhoto
         } = this.props;
         let clickAction;
         if (favorites[photo._id] !== undefined) {
             if (favorites[photo._id].favoriterId === currentUserId) {
                 clickAction = unFavorite(favorites[photo._id].photoId)
-                    .then(photoId => fetchPhoto(photoId))
+                    .then(photoId => fetchPhoto(photoId.id.data))
                     .catch(err => console.log(err.response));
             } else {
             }

@@ -46,7 +46,7 @@ export const fetchPhotosInArea = (coorsUrlPath) => (dispatch) => {
 export const fetchPhoto = id => dispatch => (
     PhotoAPIUtil.fetchPhoto(id)
     .then((photo) => dispatch(receivePhoto(photo)))
-    .then(photo => dispatch(fetchPhotoFavorites(photo._id)))
+    .then(photo => dispatch(fetchPhotoFavorites(photo.photo.data._id)))
     .catch(error => console.log(error))
 );
 
