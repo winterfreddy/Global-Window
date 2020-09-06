@@ -66,7 +66,7 @@ class PhotoForm extends React.Component {
                     if (response.state === 200) {
                         console.log(response.data);
                     } else {
-                        // this.props.history.push('/home');
+                        this.props.history.push('/home');
                         console.log(response);
                     }
                 })
