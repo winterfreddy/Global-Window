@@ -141,7 +141,8 @@ class PhotoForm extends React.Component {
                 </div>
                 <div>
                     {inputFile}
-                    <div>
+                    <div className="submit-actions">
+                        <button className="submit-button" onClick={() => this.props.history.push('/home')}>Cancel</button>
                         <button className="submit-button" onClick={this.singleFileUploadHandler}>Upload</button>
                     </div>
                 </div>

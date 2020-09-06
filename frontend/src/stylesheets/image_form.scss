@@ -22,6 +22,7 @@
     left: 1%;
     background: rgb(37, 37, 37);
     color: white;
+    overflow-y: hidden;
 }
 
 .image-description {
@@ -51,7 +52,8 @@
 }
 
 .image-preview > img {
-    width: 100%;
+    max-width: 100%;
+    max-height: 70%;
 }
 
 
@@ -76,6 +78,11 @@
   color: black;
 }
 
+.submit-actions {
+    display: flex;
+    flex-direction: row;
+}
+
 .submit-button {
     font-family: 'Roboto', sans-serif;
     font-size: 15px;
@@ -88,6 +95,7 @@
 
 .submit-button:hover {
     background-color: #daa520;
+    font-weight: bold;
     cursor: pointer;
 }
 
