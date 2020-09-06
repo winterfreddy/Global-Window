@@ -137,12 +137,10 @@ class SidebarItem extends React.Component {
             fetchPhotos
         } = this.props;
         let clickAction;
-        console.log(favorites);
-        console.log(photo);
         if (favorites[photo._id] !== undefined) {
             if (favorites[photo._id].favoriterId === currentUserId) {
                 clickAction = unFavorite(favorites[photo._id].photoId)
-                    .then(() => fetchPhotos())
+                    .then(photoId => fetchPhoto(photoId))
                     .catch(err => console.log(err.response));
             } else {
             }
@@ -182,7 +180,6 @@ class SidebarItem extends React.Component {
         if (!users[photo.creatorId]) {
             return null;
         } else {
-            console.log(users);
             return (
                 <div className='sidebar-item'>
                     <div className='sidebar-username'>{users[photo.creatorId].username}</div>
