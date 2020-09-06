@@ -86,29 +86,37 @@
     display: none;
     position: absolute;
     background-color: #f1f1f1;
-    min-width: 200px;
+    min-width: 250px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     border-radius: 3px;
     z-index: 1;
     font-family: 'Roboto', sans-serif;
     font-size: 20px;
     left: 20px;
+    text-align: center;
 }
 
-.dropdown-content a {
+.dropdown-content div {
+    display: flex;
+    // flex-direction: column-reverse;
     color: black;
     padding: 12px 16px;
     text-decoration: none;
-    display: block;
+    // display: block;
 }
 
-.dropdown-content a:first-child {
+.dropdown-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown-content div:first-child {
     font-weight: bold;
     background-color: #ddd;
     border-radius: 3px 3px 0 0;
 }
 
-.dropdown-content a:hover {
+.dropdown-content div:hover {
     background-color: #ddd;
     border-radius: 3px;
     cursor: pointer;
@@ -116,6 +124,29 @@
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+.global-window-devs {
+    font-size: 24px;
+    color: black;
+}
+
+.social-btns {
+    justify-content: space-evenly;
+}
+
+.fa-github-square {
+    font-size: 30px;
+    margin-right: 5px;
+}
+
+.fa-linkedin {
+    color: rgb(83, 139, 160);
+    font-size: 30px;
+}
+
+.fa-github-square:hover, .fa-linkedin:hover {
+    color: blue;
 }
 
 .fa-globe {
