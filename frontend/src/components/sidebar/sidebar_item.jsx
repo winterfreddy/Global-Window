@@ -178,6 +178,20 @@ class SidebarItem extends React.Component {
             );
         }
 
+        let favoriteButton = (
+            <div>
+                <i className="fas fa-heart" onClick={this.handleFavorites}></i>
+            </div>
+        )
+
+        if(favorites[photo._id] && (favorites[photo._id].favoriterId === currentUserId)) {
+            favoriteButton = (
+                <div className="favorite-like">
+                    <i className="fas fa-heart" onClick={this.handleFavorites}></i>
+                </div>
+            );
+        }
+
         if (!users[photo.creatorId]) {
             return null;
         } else {
@@ -192,7 +206,8 @@ class SidebarItem extends React.Component {
                     <br/>
                     <div className="sidebar-item-actions">
                         <div className="item-favorites">
-                            <i className="fas fa-heart" onClick={this.handleFavorites}></i>
+                            {favoriteButton}
+                            {/* <i className="fas fa-heart" onClick={this.handleFavorites}></i> */}
                             <div className="numFavorites">{photo.numFavorites}</div>
                         </div>
                         {deleteButton}
