@@ -9,6 +9,7 @@ class NavBar extends React.Component {
     super(props);
     this.logoutUser = this.logoutUser.bind(this);
     this.getLinks = this.getLinks.bind(this);
+    this.handleSocial = this.handleSocial.bind(this);
   }
 
   logoutUser(e) {
@@ -42,6 +43,10 @@ class NavBar extends React.Component {
     }
   }
 
+  handleSocial(social) {
+    return () => window.open(`https://github.com/${social}`);
+  }
+
   render() {
       let logoButton;
       if(this.props.location.pathname === '/home') {
@@ -54,12 +59,17 @@ class NavBar extends React.Component {
         <div className="logo-section">
           <div className="dropdown">
             <i className="fas fa-globe"></i>
-            <div class="dropdown-content">
+            <div className="dropdown-content">
               <a>Global Window Developers</a>
-              <a href="https://github.com/winterfreddy">Winfred Huang (Frontend lead)</a>
+              {/* {<a href="https://github.com/winterfreddy">Winfred Huang (Frontend lead)</a>
               <a href="https://github.com/alex-choy">Alex Choy (Backend lead)</a>
               <a href="https://github.com/AdamKlimmek">Adam Klimmek (Flex backend)</a>
-              <a href="https://github.com/kxwzhang">Kevin Zhang (Flex frontend)</a>
+              <a href="https://github.com/kxwzhang">Kevin Zhang (Flex frontend)</a>} */}
+              <a onClick={this.handleSocial('winterfreddy')} target="_blank">Winfred Huang (Project Lead)</a>
+              <a onClick={this.handleSocial('alex-choy')} target="_blank">Alex Choy (Backend Lead)</a>
+              <a onClick={this.handleSocial('AdamKlimmek')} target="_blank">Adam Klimmek (Backend Developer)</a>
+              <a onClick={this.handleSocial('kxwzhang')} target="_blank">Kevin Zhang (Frontend Lead)</a>
+              <div></div>
             </div>
           </div>
           {logoButton}
