@@ -149,7 +149,7 @@ class SidebarItem extends React.Component {
             console.log(favorites[photo._id]);
             console.log('hitting fave');
             clickAction = makeFavorite({ photoId: photo._id })
-                .then(() => fetchPhotos()).catch(err => console.log(err));
+                .then(photo => fetchPhoto(photo.favorite.data.photoId)).catch(err => console.log(err));
         } 
         return clickAction;
     }
