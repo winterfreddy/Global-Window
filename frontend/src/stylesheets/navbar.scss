@@ -109,7 +109,7 @@
     display: flex;
     // flex-direction: column-reverse;
     color: black;
-    padding: 12px 16px;
+    padding: 10px 0 5px 0;
     text-decoration: none;
     // display: block;
 }
@@ -119,10 +119,11 @@
     flex-direction: column;
 }
 
-.dropdown-content div:first-child {
-    font-weight: bold;
-    background-color: #ddd;
+.dropdown-content a {
+    display: inline-block;
+    font-weight: 700;
     border-radius: 3px 3px 0 0;
+    padding: 10px;
 }
 
 .dropdown-content div:hover {
@@ -138,6 +139,7 @@
 .global-window-devs {
     font-size: 24px;
     color: black;
+    padding-top: 10px;
 }
 
 .social-btns {
