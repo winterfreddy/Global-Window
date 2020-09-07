@@ -53,7 +53,6 @@
     border: none;
     background: none;
     padding: 10px;
-    // margin: 10px 10px;
     width: 100%;
     -webkit-user-select: none; /* Safari */        
     -moz-user-select: none; /* Firefox */
@@ -64,6 +63,13 @@
 .navbar-signup {
     display: inline-block;
     white-space: nowrap;
+}
+
+.navbar-login,
+.navbar-signup {
+    border: 1px solid black;
+    color: black;
+    margin: 10px 10px;
 }
 
 .navbar-login:hover,
