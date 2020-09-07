@@ -16,7 +16,8 @@ class Sidebar extends React.Component {
             // photoEnd: 10,
             // photosSet: []
             // statePages: null
-            currPage: 0
+            currPage: 0,
+            filter: 'All Content'
         }
         // this.handleNext = this.handleNext.bind(this);
         // this.handlePrev = this.handlePrev.bind(this);
@@ -90,7 +91,7 @@ class Sidebar extends React.Component {
         let numPages = Math.floor(photos.length / 10);
         // let currPage = 0;
         let pages = {};
-
+        let sidebarFilter;
 
         let copyPhotos = [...photos];
         for (let i = 0; i <= numPages; i++) {
@@ -112,17 +113,38 @@ class Sidebar extends React.Component {
                 <button className='prev-btn' onClick={() => this.setState({ currPage: {...this.state}.currPage -= 1})}>Previous</button>
                 );
         }
+
+        const dropdown = () => {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        sidebarFilter = (
+            <div className="dropdown">
+                <button onClick={() => dropdown()} className="dropdown-button" type="button">Filter</button>
+                <div id="myDropdown" className="dropdown-content">
+                    <button onClick={() => this.setState({ filter: 'All Content' })}>All content</button>
+                    <button onClick={() => this.setState({ filter: 'Favorites' })}>Favorites</button>
+                </div>
+            </div>
+        )
+
                 
-        console.log('numPages', numPages);
-        console.log('pages', pages);
-        console.log('currPage', this.state.currPage);
-        console.log('pages[currPage]', pages[this.state.currPage]);
+        // console.log('numPages', numPages);
+        // console.log('pages', pages);
+        // console.log('currPage', this.state.currPage);
+        // console.log('pages[currPage]', pages[this.state.currPage]);
+        // console.log(fetchUserFave(currentUserId));
+        // if photo.favoriteId matches currentUserId, include this.
         
         if (pages[this.state.currPage] === undefined) {
             return null;
         } else {
             return (
               <div>
+                <div>
+                    <label>{this.state.filter}</label>
+                    {sidebarFilter}
+                </div>
                 <span className="sidebar-content-container">
                     {pages[this.state.currPage].map((photo) => (
                         <SidebarItem
@@ -139,6 +161,7 @@ class Sidebar extends React.Component {
                         unFavorite={unFavorite}
                         favorites={favorites}
                         fetchUserFave={fetchUserFave}
+                        filter={this.state.filter}
                         />
                     ))}
                 </span>
