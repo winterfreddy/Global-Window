@@ -131,7 +131,7 @@
     background-color: #252525;
 }
 
-.next-btn, .prev-btn {
+.next-btn, .prev-btn, .all-results {
     font-size: 22px;
     width: 50%;
     background-color: #252525;
@@ -217,6 +217,11 @@
     background-color: #ddd;
     cursor: pointer;
     border-radius: 5px;
+}
+
+.sidebar-item-tags {
+    padding: 10px;
+    color: burlywood;
 }
 
 @media screen and (max-height: 550px) {

@@ -12,65 +12,42 @@ class Sidebar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            // photoStart: 0,
-            // photoEnd: 10,
-            // photosSet: []
-            // statePages: null
             currPage: 0,
             filter: 'All Content'
         }
-        // this.handleNext = this.handleNext.bind(this);
-        // this.handlePrev = this.handlePrev.bind(this);
+        this.handleNext = this.handleNext.bind(this);
+        this.handlePrev = this.handlePrev.bind(this);
     }
 
     componentDidMount() {
+        if(this.props.currentUserId !== undefined) {
+            let test = this.props.fetchUserFaves(this.props.currentUserId);
+            console.log(test);
+        }
         const url = `?lat1=${INIT_NE_LAT}&lng1=${INIT_NE_LNG}&lat2=${INIT_SW_LAT}&lng2=${INIT_SW_LNG}`;
         this.props.fetchPhotosInArea(url)
             .then(() => this.props.fetchUsers())
             .then(() => this.props.fetchUserFaves(this.props.currentUserId))
-            // .then(() => this.setState({ 
-            //     photosSet: this.props.photos.slice(this.state.photoStart, this.state.photoEnd) 
-            // }));
     }
 
-    // componentDidUpdate(prevProps) {
-    //     if (prevProps.photos.length !== this.props.photos.length) {
-    //         this.setState({ 
-    //             photosSet: this.props.photos.slice(this.state.photoStart, this.state.photoEnd 
-    //         )});
-    //     }
-    // }
+    componentDidUpdate(prevProps) {
+        if (this.props.photos !== prevProps.photos) {
+            const renderedSideBar = document.getElementsByClassName("sidebar-content-container")[0];
+            if (renderedSideBar !== undefined) renderedSideBar.scrollTop = 0;
+            if (this.state.currPage > 0) this.setState({ currPage: 0 });
+        }
+    }
 
-    // handleNext() {
-    //     let copyPhotoStart = {...this.state}.photoStart;
-    //     let copyPhotoEnd = {...this.state}.photoEnd;
-    //     debugger
-    //     this.setState({ 
-    //         photoStart: copyPhotoStart += 10, 
-    //         photoEnd: copyPhotoEnd += 10,
-    //         photosSet: this.props.photos.slice(copyPhotoStart += 10, copyPhotoEnd += 10) 
-    //     }, () => this.state.photosSet.forEach(photo => {
-    //         debugger
-    //         this.props.fetchPhoto(photo._id)
-    //     }));
-    // }
+    handleNext() {
+        this.setState({ currPage: { ...this.state }.currPage += 1 })
+        document.getElementsByClassName("sidebar-content-container")[0].scrollTop = 0;
+    }
 
-    // handlePrev() {
-    //     let copyPhotoStart = {...this.state}.photoStart;
-    //     let copyPhotoEnd = {...this.state}.photoEnd;
-    //     let prevTenStart = (copyPhotoStart - 10 < 0) ? (0) : (copyPhotoStart -= 10);
-    //     let prevTenEnd = (copyPhotoEnd - 10 < 10) ? (10) : (copyPhotoEnd -= 10);
-    //     this.setState({ 
-    //         photoStart: prevTenStart,
-    //         photoEnd: prevTenEnd,
-    //         photosSet: this.props.photos.slice(prevTenStart, prevTenEnd)
-    //     }, () => {
-    //         console.log(this.state.photosSet);
-    //         this.state.photosSet.forEach(photo => {
-    //         this.props.fetchPhoto(photo._id)
-    //     })});  
-    // }
-
+    handlePrev() {
+        this.setState({ currPage: { ...this.state }.currPage -= 1 })
+        document.getElementsByClassName("sidebar-content-container")[0].scrollTop = 0;
+    }
+    
     render() {
         const { 
             users,
@@ -85,13 +62,13 @@ class Sidebar extends React.Component {
             favorites,
             fetchUserFave
         } = this.props;
-        // console.log(photos);
+        console.log(favorites);
         // console.log(Object.values(this.props.favorites).length);
 
         let prevBtn;
         let nextBtn;
-        let numPages = Math.floor(photos.length / 10);
-        // let currPage = 0;
+        let allResults;
+        let numPages = (Math.floor((photos.length - 1) / 10) < 0) ? (0) : (Math.floor((photos.length - 1) / 10));
         let pages = {};
         let sidebarFilter;
         let allContent;
@@ -106,15 +83,13 @@ class Sidebar extends React.Component {
 
         if (numPages > 0 && this.state.currPage < numPages) {
             nextBtn = (
-                // <button className='next-btn' onClick={this.handleNext}>Next</button>
-                <button className='next-btn' onClick={() => this.setState({ currPage: {...this.state}.currPage +=1 })}>Next</button>
+                <button className='next-btn' onClick={this.handleNext}>Next</button>
                 ); 
         }
             
         if (this.state.currPage > 0) {
             prevBtn = (
-                // <button className='prev-btn' onClick={this.handlePrev}>Prev</button>
-                <button className='prev-btn' onClick={() => this.setState({ currPage: {...this.state}.currPage -= 1})}>Previous</button>
+                <button className='prev-btn' onClick={this.handlePrev}>Previous</button>
                 );
         }
 
@@ -132,6 +107,19 @@ class Sidebar extends React.Component {
             </div>
         )
 
+        if (photos.length <= 10) {
+            allResults = <button disabled className="all-results">All Results</button>
+        }
+
+        // console.log('numPages', numPages);
+        // console.log('pages', pages);
+        // console.log('currPage', this.state.currPage);
+        // console.log('pages[currPage]', pages[this.state.currPage]);
+
+        // if (pages[this.state.currPage] === undefined) {
+        //     return null;
+        // } else {
+            
         allContent = (
             <span className="sidebar-content-container">
                 {pages[this.state.currPage].map((photo) => (
@@ -156,13 +144,33 @@ class Sidebar extends React.Component {
 
         favoriteContent = (
             <span className="sidebar-content-container">
-                {/* {Object.values(this.props.favorites).map( (favoriteId) => {
-                    console.log(favoriteId);
-                    console.log(favoriteId.photoId);
-                    console.log(photos);
-                })} */}
+                {Object.values(favorites).map( (favorite) => {
+                    // console.log(favoriteId);
+                    // console.log(favoriteId.photoId);
+                    // console.log(photos);
+                    return (
+                        <SidebarItem
+                            key={favorite._id}
+                            users={users}
+                            currentUserId={currentUserId}
+                            photo={favorite}
+                            photos={photos}
+                            favorites={favorites}
+                            google={google}
+                            fetchPhotos={fetchPhotos}
+                            fetchPhoto={fetchPhoto}
+                            deletePhoto={deletePhoto}
+                            makeFavorite={makeFavorite}
+                            unFavorite={unFavorite}
+                            favorites={favorites}
+                            fetchUserFave={fetchUserFave}
+                            filter="favorite"
+                        />
+                        )
+                })}
 
-                {pages[this.state.currPage].map((photo) => {
+                {/* {pages[this.state.currPage].map((photo) => {
+                    console.log(photo);
                     if (favorites[photo._id]) {
                         return (
                         <SidebarItem
@@ -182,7 +190,7 @@ class Sidebar extends React.Component {
                         />
                         )}
                     }
-                )}
+                )} */}
             </span>
         )
                 
@@ -204,6 +212,7 @@ class Sidebar extends React.Component {
                 </div>
                 {this.state.filter === 'Favorites' ? favoriteContent : allContent}
                 <div className="sidebar-buttons">
+                    {allResults}
                     {prevBtn}
                     {nextBtn}
                 </div>

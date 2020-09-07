@@ -204,6 +204,7 @@ class SidebarItem extends React.Component {
                     <div className="sidebar-item-other-info">
                         <div className='sidebar-username'>@{users[photo.creatorId].username}</div>
                         <div className="sidebar-item-timestamp">{photo.created}</div>
+                        <div className='sidebar-item-tags'>Tags: {photo.tags.join(', ')}</div>
                     </div>
                     <br/>
                     <div className="sidebar-item-actions">

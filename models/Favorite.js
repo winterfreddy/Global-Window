@@ -16,13 +16,14 @@ const Schema = mongoose.Schema;
 const FavoriteSchema = new Schema({
   photoId: {
     type: Schema.Types.ObjectId,
-    ref: "photos",
+    // ref: "photos"
+    ref: "Photo",
     index: true,
     required: true
   },
   favoriterId: {
     type: Schema.Types.ObjectId,
-    ref: "users",
+    ref: "User",
     index: true,
     required: true
   },

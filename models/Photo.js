@@ -21,7 +21,7 @@ PointSchema.index({ location: '2dsphere' });
 const PhotoSchema = new Schema({
   creatorId: {
     type: Schema.Types.ObjectId,
-    ref: "users",
+    ref: "User",
   },
   description: {
     type: String,

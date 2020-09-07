@@ -174,7 +174,7 @@ function seedEvents(req, res) {
         },
         {
           description: "Napa Vineyards",
-          coordinates: { lat: 38.031316, lng: -122.733937 },
+          coordinates: { lat: 38.430799, lng: -122.405915 },
           tags: ["nature", "napa", "winery", "vineyard"],
           imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/022-photo.jpeg`,
         },
@@ -379,18 +379,13 @@ function seedEvents(req, res) {
         const favoriterId =
           createdUsers[Math.floor(Math.random() * createdUsers.length)]._id;
 
-        // console.log("photoid: ", photoId);
-        // console.log("favid: ", favoriterId);
-
         Favorite.find({ photoId: photoId, favoriterId: favoriterId }).then(
           (fav) => {
-            console.log("fav: ", fav);
             if (!fav.length) {
               newFav = new Favorite({
                 photoId: photoId,
                 favoriterId: favoriterId,
               });
-              console.log(newFav);
               newFav.save();
             }
           }
