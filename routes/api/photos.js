@@ -12,7 +12,7 @@ const getSearchArea = require("./_photos_helper");
 const strftime = require("strftime");
 
 const SET_MAX_DISTANCE = 30000000;
-const MAX_SEARCH_LIMIT = 20;
+const MAX_SEARCH_LIMIT = 51;
 
 // Middleware for Form-Data Postman
 const multer = require("multer");

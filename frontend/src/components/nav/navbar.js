@@ -9,6 +9,8 @@ class NavBar extends React.Component {
     super(props);
     this.logoutUser = this.logoutUser.bind(this);
     this.getLinks = this.getLinks.bind(this);
+    this.handleGitHub = this.handleGitHub.bind(this);
+    this.handleLinkedIn = this.handleLinkedIn.bind(this);
   }
 
   logoutUser(e) {
@@ -42,6 +44,14 @@ class NavBar extends React.Component {
     }
   }
 
+  handleGitHub(social) {
+    return () => window.open(`https://github.com/${social}`);
+  }
+
+  handleLinkedIn(social) {
+    return () => window.open(`https://www.linkedin.com/in/${social}`)
+  }
+
   render() {
       let logoButton;
       if(this.props.location.pathname === '/home') {
@@ -54,12 +64,36 @@ class NavBar extends React.Component {
         <div className="logo-section">
           <div className="dropdown">
             <i className="fas fa-globe"></i>
-            <div class="dropdown-content">
-              <a>Global Window Developers</a>
-              <a href="https://github.com/winterfreddy">Winfred Huang (Frontend Flex)</a>
-              <a href="https://github.com/alex-choy">Alex Choy (Backend Lead)</a>
-              <a href="https://github.com/AdamKlimmek">Adam Klimmek (Backend Flex)</a>
-              <a href="https://github.com/kxwzhang">Kevin Zhang (Frontend Lead)</a>
+            <div className="dropdown-content">
+              <a className='global-window-devs'>Global Window Developers</a>
+              <div className='dropdown-item'>Winfred Huang
+                <span>Project Lead</span>
+                <div className='social-btns'>
+                  <i className="fab fa-github-square" onClick={this.handleGitHub('winterfreddy')}></i>
+                  <i className="fab fa-linkedin" onClick={this.handleLinkedIn('winfred-huang')}></i>
+                </div>
+              </div>
+              <div className='dropdown-item'>Alex Choy
+                <span>Backend Lead</span>
+                <div className='social-btns'>
+                  <i className="fab fa-github-square" onClick={this.handleGitHub('alex-choy')}></i>
+                  <i className="fab fa-linkedin" onClick={this.handleLinkedIn('alexchoy179')}></i>
+                </div>
+              </div>
+              <div className='dropdown-item'>Adam Klimmek
+                <span>Backend Developer</span> 
+                <div className='social-btns'>
+                  <i className="fab fa-github-square" onClick={this.handleGitHub('AdamKlimmek')}></i>
+                  <i className="fab fa-linkedin" onClick={this.handleLinkedIn('adamklimmek')}></i>
+                </div>
+              </div>
+              <div className='dropdown-item'>Kevin Zhang
+                <span>Frontend Lead</span> 
+                <div className='social-btns'>
+                  <i className="fab fa-github-square" onClick={this.handleGitHub('kxwzhang')}></i>
+                  <i className="fab fa-linkedin" onClick={this.handleLinkedIn('kevinxzhang')}></i>
+                </div>
+              </div>
             </div>
           </div>
           {logoButton}

@@ -5,16 +5,59 @@ import '../../stylesheets/sidebar.scss';
 class Sidebar extends React.Component {
     constructor(props) {
         super(props);
-
+        this.state = {
+            photoStart: 0,
+            photoEnd: 10,
+            photosSet: [],
+        }
+        this.handleNext = this.handleNext.bind(this);
+        this.handlePrev = this.handlePrev.bind(this);
     }
 
     componentDidMount() {
         this.props.fetchPhotos()
             .then(() => this.props.fetchUsers())
-            .then(() => this.props.fetchUserFaves(this.props.currentUserId));
+            .then(() => this.props.fetchUserFaves(this.props.currentUserId))
+            .then(() => this.setState({ 
+                photosSet: this.props.photos.slice(this.state.photoStart, this.state.photoEnd) 
+            }));
+    }
+
+    handleNext() {
+        let copyPhotoStart = {...this.state}.photoStart;
+        let copyPhotoEnd = {...this.state}.photoEnd;
+        this.setState({ 
+            photoStart: copyPhotoStart += 10, 
+            photoEnd: copyPhotoEnd += 10,
+            photosSet: this.props.photos.slice(copyPhotoStart+=10, copyPhotoEnd+=10) 
+        }, () => this.state.photosSet.forEach(photo => {
+            this.props.fetchPhoto(photo._id)
+        }));
+    }
+
+    handlePrev() {
+        let copyPhotoStart = {...this.state}.photoStart;
+        let copyPhotoEnd = {...this.state}.photoEnd;
+        let prevTenStart = (copyPhotoStart - 10 < 0) ? (0) : (copyPhotoStart -= 10);
+        let prevTenEnd = (copyPhotoEnd - 10 < 10) ? (10) : (copyPhotoEnd -= 10);
+        this.setState({ 
+            photoStart: prevTenStart,
+            photoEnd: prevTenEnd,
+            // photoStart: copyPhotoStart -= 10,
+            // photoEnd: copyPhotoEnd -= 10,
+            photosSet: this.props.photos.slice(prevTenStart, prevTenEnd)
+        }, () => {
+            console.log(this.state.photosSet);
+            this.state.photosSet.forEach(photo => {
+            this.props.fetchPhoto(photo._id)
+        })});  
     }
 
     render() {
+        console.log('photoStart ', this.state.photoStart);
+        console.log('photoEnd ', this.state.photoEnd);
+        console.log(this.state.photosSet);
+
         const { 
             users,
             currentUserId, 
@@ -28,7 +71,23 @@ class Sidebar extends React.Component {
             favorites,
             fetchUserFave
         } = this.props;
-        if (!photos) {
+
+        let prevBtn;
+        let nextBtn;
+
+        if (photos.length > 10 && this.state.photoEnd + 10 < photos.length ) {
+           nextBtn = (
+                <button className='next-btn' onClick={this.handleNext}>Next</button>
+           ); 
+        };
+
+        if (this.state.photoStart > 0) {
+            prevBtn = (
+                <button className='prev-btn' onClick={this.handlePrev}>Prev</button>
+            );
+        }
+        
+        if (!photos || !this.state.photosSet) {
             return null;
         } else {
             return (
@@ -52,6 +111,10 @@ class Sidebar extends React.Component {
                         />
                     ))}
                 </span>
+                <div className="sidebar-buttons">
+                    {prevBtn}
+                    {nextBtn}
+                </div>
               </div>
             );
         }

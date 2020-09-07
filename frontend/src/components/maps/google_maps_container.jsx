@@ -156,11 +156,6 @@ export class MapContainer extends Component {
   }
 
   centerMoved = (mapProps, map) => {
-    // console.log(map.getBounds().getNorthEast().lat());
-    // console.log(map.getBounds().getNorthEast().lng());
-    // console.log(map.getBounds().getSouthWest().lat()); 
-    // console.log(map.getBounds().getSouthWest().lng());
-    
     this.setState({ neLatBound: map.getBounds().getNorthEast().lat()});
     this.setState({ neLngBound: map.getBounds().getNorthEast().lng()});
     this.setState({ swLatBound: map.getBounds().getSouthWest().lat()});

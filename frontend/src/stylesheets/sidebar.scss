@@ -10,7 +10,7 @@
     color: white;
     top: 67px;
     right: 70%;
-    bottom: 0;
+    bottom: 50px;
     left: 0;
     min-width: 200px !important;
     -webkit-user-select: none; /* Safari */        
@@ -116,4 +116,29 @@
 
 .numFavorites {
     padding-top: 3px;
+}
+
+.sidebar-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 50px;
+    min-width: 200px !important;
+    right: 70%;
+    background-color: #252525;
+}
+
+.next-btn, .prev-btn {
+    font-size: 22px;
+    width: 50%;
+    background-color: #252525;
+    border: none;
+    color: rgb(100, 100, 100); 
+}
+
+.next-btn:hover, .prev-btn:hover {
+    color: white;
 }
