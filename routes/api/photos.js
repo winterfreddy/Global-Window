@@ -12,7 +12,7 @@ const getSearchArea = require("./_photos_helper");
 const strftime = require("strftime");
 
 const SET_MAX_DISTANCE = 30000000;
-const MAX_SEARCH_LIMIT = 20;
+const MAX_SEARCH_LIMIT = 51;
 
 // Middleware for Form-Data Postman
 const multer = require("multer");
@@ -27,7 +27,6 @@ const s3 = new AWS.S3({
 // // get all photos
 router.get('/', (req, res) => {
     const { lng1, lng2 } = req.query;
-    console.log(req.query);
     if(!lng1 && !lng2) {
       Photo.find()
         .sort({ created: -1 })
@@ -35,47 +34,11 @@ router.get('/', (req, res) => {
         .catch((err) =>
           res.status(404).json({ nophotosfound: "No photos found" })
         );
-        
-    // } else if(req.query.lng1 && !req.query.lng2) { // use this when it works
-    } else if(false) { // temp because it's broken
-      console.log("length 1 coordsSet");
-      // const coordsSet = JSON.parse(req.body.coordinatesSet);
-      let coords = [];
-      coords[0] = parseFloat(req.query.lng1) || 0;
-      coords[1] = parseFloat(req.query.lat1) || 0;
-    //   const centerPoint = {
-    //       type: 'Point',
-    //       coordinates: coords
-    //   };
-      console.log(coords);
-      Photo.find({
-        location: {
-          $near: {
-            $geometry: {
-                type: "Point",
-                coordinates: coords,
-            },
-            $maxDistance: SET_MAX_DISTANCE,
-          },
-        },
-      })
-        // .limit(MAX_SEARCH_LIMIT)
-        // .sort({ date: -1 })
-        .then((photos) => res.json(photos)) // try .exec() if this doesn't work
-        .catch((err) => res.status(404).json(err));
-        // .exec(function(err, locations) {
-        //     if (err) {
-        //         return res.status(500).json(err);
-        //     }
-        //     res.json(200, locations);
-        // });
-
-      // } else if(coordsSet.length === 2) { // USE THIS ONE FOR PROD
     } else if (lng1 && lng2) {
       const searchArea = getSearchArea(req.query);
       let search;
-      if (req.query.tag) {
-        search = req.query.tag
+      if (req.query.tags) {
+        search = req.query.tags
       } else {
         search = { $exists: true }
       }

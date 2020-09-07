@@ -74,21 +74,21 @@ class NavBar extends React.Component {
                 </div>
               </div>
               <div className='dropdown-item'>Alex Choy
-                <span>Backend Lead</span>
+                <span>Backend Dev</span>
                 <div className='social-btns'>
                   <i className="fab fa-github-square" onClick={this.handleGitHub('alex-choy')}></i>
                   <i className="fab fa-linkedin" onClick={this.handleLinkedIn('alexchoy179')}></i>
                 </div>
               </div>
               <div className='dropdown-item'>Adam Klimmek
-                <span>Backend Developer</span> 
+                <span>Backend Dev</span> 
                 <div className='social-btns'>
                   <i className="fab fa-github-square" onClick={this.handleGitHub('AdamKlimmek')}></i>
                   <i className="fab fa-linkedin" onClick={this.handleLinkedIn('adamklimmek')}></i>
                 </div>
               </div>
               <div className='dropdown-item'>Kevin Zhang
-                <span>Frontend Lead</span> 
+                <span>Frontend Dev</span> 
                 <div className='social-btns'>
                   <i className="fab fa-github-square" onClick={this.handleGitHub('kxwzhang')}></i>
                   <i className="fab fa-linkedin" onClick={this.handleLinkedIn('kevinxzhang')}></i>

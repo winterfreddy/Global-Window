@@ -115,9 +115,11 @@ export class MapContainer extends Component {
       neLngBound: INIT_NE_LNG,
       swLatBound: INIT_SW_LAT,
       swLngBound: INIT_SW_LNG,
+      searchInput: "",
     };
 
     this.mapClick = this.mapClick.bind(this);
+    this.handleInput = this.handleInput.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
   }
 
@@ -162,22 +164,22 @@ export class MapContainer extends Component {
   }
 
   centerMoved = (mapProps, map) => {
-    // console.log(map.getBounds().getNorthEast().lat());
-    // console.log(map.getBounds().getNorthEast().lng());
-    // console.log(map.getBounds().getSouthWest().lat()); 
-    // console.log(map.getBounds().getSouthWest().lng());
-    
-    this.setState({ 
-        neLatBound: map.getBounds().getNorthEast().lat(), 
-        neLngBound: map.getBounds().getNorthEast().lng(),
-        swLatBound: map.getBounds().getSouthWest().lat(),
-        swLngBound: map.getBounds().getSouthWest().lng()
-    }); 
+    this.setState({ neLatBound: map.getBounds().getNorthEast().lat()});
+    this.setState({ neLngBound: map.getBounds().getNorthEast().lng()});
+    this.setState({ swLatBound: map.getBounds().getSouthWest().lat()});
+    this.setState({ swLngBound: map.getBounds().getSouthWest().lng()}); 
+  }
+
+  handleInput(e) {
+    this.setState({ searchInput: e.currentTarget.value });
   }
   
   handleSearch() {
-    const { neLatBound, neLngBound, swLatBound, swLngBound } = this.state;
-    const url = `?lat1=${neLatBound}&lng1=${neLngBound}&lat2=${swLatBound}&lng2=${swLngBound}`;
+    const { neLatBound, neLngBound, swLatBound, swLngBound, searchInput } = this.state;
+    let url = `?lat1=${neLatBound}&lng1=${neLngBound}&lat2=${swLatBound}&lng2=${swLngBound}`;
+    if (searchInput !== "") {
+      url += `&tags=${searchInput}`
+    }
     this.props.fetchPhotosInArea(url);
   }
 
@@ -203,11 +205,7 @@ export class MapContainer extends Component {
       <div className="google-maps-images-container">
         <div id="mainpage-google-map">
           <div className="search-bar">
-            <input
-              type="text"
-              className="search-bar-input"
-              placeholder="Find photos by tag or just press search to update"
-            />
+            <input type="text" className="search-bar-input" value={this.state.searchInput} onChange={this.handleInput} placeholder="Find photos by tag or just press search to update"/>
             <button className="search-button" onClick={this.handleSearch}>
               <i className="fas fa-search"></i>
             </button>

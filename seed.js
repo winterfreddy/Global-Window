@@ -66,7 +66,7 @@ function seedEvents(req, res) {
         },
         {
           description: "Statue of Liberty",
-          coordinates: { lat: 37.78678804194593, lng: -122.39041603634031 },
+          coordinates: { lat: 40.689282, lng: -74.044597},
           tags: ["ny", "monuments"],
           imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/04-photo.jpeg`,
         },
