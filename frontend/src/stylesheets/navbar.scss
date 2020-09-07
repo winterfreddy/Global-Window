@@ -61,6 +61,11 @@
     user-select: none; /* Standard */
 }
 
+.navbar-signup {
+    display: inline-block;
+    white-space: nowrap;
+}
+
 .navbar-login:hover,
 .navbar-signup:hover {
     border: 1px solid white;
