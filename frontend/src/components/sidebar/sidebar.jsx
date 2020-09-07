@@ -86,12 +86,16 @@ class Sidebar extends React.Component {
             fetchUserFave
         } = this.props;
 
+        console.log(Object.values(this.props.favorites).length);
+
         let prevBtn;
         let nextBtn;
         let numPages = Math.floor(photos.length / 10);
         // let currPage = 0;
         let pages = {};
         let sidebarFilter;
+        let allContent;
+        let favoriteContent;
 
         let copyPhotos = [...photos];
         for (let i = 0; i <= numPages; i++) {
@@ -128,6 +132,54 @@ class Sidebar extends React.Component {
             </div>
         )
 
+        allContent = (
+            <span className="sidebar-content-container">
+                {pages[this.state.currPage].map((photo) => (
+                    <SidebarItem
+                        key={photo._id}
+                        users={users}
+                        currentUserId={currentUserId}
+                        photo={photo}
+                        photos={photos}
+                        google={google}
+                        fetchPhotos={fetchPhotos}
+                        fetchPhoto={fetchPhoto}
+                        deletePhoto={deletePhoto}
+                        makeFavorite={makeFavorite}
+                        unFavorite={unFavorite}
+                        favorites={favorites}
+                        fetchUserFave={fetchUserFave}
+                    />
+                ))}
+            </span>
+        )
+
+        favoriteContent = (
+            <span className="sidebar-content-container">
+                {Object.values(this.props.favorites).map( (favoriteId) => {
+                    console.log(favoriteId);
+                    console.log(photos);
+                })}
+
+                {/* {pages[this.state.currPage].map((photo) => (
+                    <SidebarItem
+                        key={photo._id}
+                        users={users}
+                        currentUserId={currentUserId}
+                        photo={photo}
+                        photos={photos}
+                        google={google}
+                        fetchPhotos={fetchPhotos}
+                        fetchPhoto={fetchPhoto}
+                        deletePhoto={deletePhoto}
+                        makeFavorite={makeFavorite}
+                        unFavorite={unFavorite}
+                        favorites={favorites}
+                        fetchUserFave={fetchUserFave}
+                    />
+                ))} */}
+            </span>
+        )
                 
         // console.log('numPages', numPages);
         // console.log('pages', pages);
@@ -145,26 +197,7 @@ class Sidebar extends React.Component {
                     {sidebarFilter}
                     <label>{this.state.filter}</label>
                 </div>
-                <span className="sidebar-content-container">
-                    {pages[this.state.currPage].map((photo) => (
-                        <SidebarItem
-                        key={photo._id}
-                        users={users}
-                        currentUserId={currentUserId}
-                        photo={photo}
-                        photos={photos}
-                        google={google}
-                        fetchPhotos={fetchPhotos}
-                        fetchPhoto={fetchPhoto}
-                        deletePhoto={deletePhoto}
-                        makeFavorite={makeFavorite}
-                        unFavorite={unFavorite}
-                        favorites={favorites}
-                        fetchUserFave={fetchUserFave}
-                        filter={this.state.filter}
-                        />
-                    ))}
-                </span>
+                {this.state.filter === 'Favorites' ? favoriteContent : allContent}
                 <div className="sidebar-buttons">
                     {prevBtn}
                     {nextBtn}

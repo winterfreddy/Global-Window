@@ -163,7 +163,7 @@ class SidebarItem extends React.Component {
             deletePhoto, 
             makeFavorite, 
             unFavorite,
-            favorites 
+            favorites
         } = this.props;
         let deleteButton;
         let editButton;
