@@ -86,7 +86,7 @@ class Sidebar extends React.Component {
             fetchUserFave
         } = this.props;
 
-        console.log(Object.values(this.props.favorites).length);
+        // console.log(Object.values(this.props.favorites).length);
 
         let prevBtn;
         let nextBtn;
@@ -124,7 +124,7 @@ class Sidebar extends React.Component {
 
         sidebarFilter = (
             <div className="dropdown-filter">
-                <button onClick={() => dropdown()} className="dropdown-filter-button" type="button"><i class="fas fa-filter"></i>&nbsp;Filter&nbsp;by:</button>
+                <button onClick={() => dropdown()} className="dropdown-filter-button" type="button"><i className="fas fa-filter"></i>&nbsp;Filter&nbsp;by:</button>
                 <div id="myDropdown" className="dropdown-content-filter">
                     <button className="filter-item" onClick={() => this.setState({ filter: 'All Content' })}>All Content</button>
                     <button className="filter-item" onClick={() => this.setState({ filter: 'Favorites' })}>Favorites</button>

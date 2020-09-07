@@ -18,20 +18,26 @@ class NavBar extends React.Component {
     this.props.logout();
   }
 
+  dropdown = () => {
+    document.getElementById("myDropdownUser").classList.toggle("show");
+  }
+
   // Selectively render links dependent on whether the user is logged in
   getLinks() {
     const { openModal, currentUser } = this.props;
     if (this.props.loggedIn) {
       return (
         <div className="navbar-links">
-          {/* <Link to={"/tweets"}>All Tweets</Link>
-          <Link to={"/profile"}>Profile</Link>
-          <Link to={"/new_tweet"}>Write a Tweet</Link> */}
           <span className="welcome">Welcome, {currentUser.username}!</span>
-          <Link to='/upload' className='navbar-upload'>
-            <button className='navbar-upload-btn'>Upload</button>
-          </Link>
-          <button className='logout-btn' onClick={this.logoutUser}>Log Out</button>
+          <div className="dropdown-user">
+            <button onClick={() => this.dropdown()} className="dropdown-user-button" type="button"><i class="fas fa-user"></i></button>
+            <div id="myDropdownUser" className="dropdown-content-user">
+              <Link to='/upload' className='navbar-upload'>
+                <button className='navbar-upload-btn'><i className="fas fa-upload"></i>&nbsp;Upload</button>
+              </Link>
+              <button className='logout-btn' onClick={this.logoutUser}><i class="fas fa-sign-out-alt"></i>&nbsp;Log Out</button>
+            </div>
+          </div>
         </div>
       );
     } else {
