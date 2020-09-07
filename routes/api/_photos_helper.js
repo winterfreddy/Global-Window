@@ -3,6 +3,8 @@ module.exports = function getSearchArea(query) {
     let southValue = parseFloat(query.lng1);
     let eastValue = parseFloat(query.lat2);
     let westValue = parseFloat(query.lat1);
+    console.log('west: ', westValue);
+    console.log('east: ', eastValue);
     const searchArea = {
         type: "Polygon",
         coordinates: [

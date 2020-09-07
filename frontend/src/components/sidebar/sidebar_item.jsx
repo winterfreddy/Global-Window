@@ -109,6 +109,34 @@ class SidebarItem extends React.Component {
         const map = new google.maps.Map(googleAPIMap, mapProp);
         map.setOptions({ styles: darkMode.styles });
 
+        console.log("MAP: ", map.__proto__.getBounds());
+        
+        let newLat = null;
+        let newLng = null;
+        let bounds = null;
+        while (!bounds) {
+            setTimeout()
+            bounds = map.__proto__.getBounds()
+        }
+        newLat = bounds.getNorthEast().lat();
+        newLng = bounds.getNorthEast().lng();
+        console.log(newLat)
+        console.log(newLng)
+        // while(map.__proto__.getBounds() === undefined) {
+        //     map.__proto__.getBounds();
+        // }
+
+        // const locButton = document.getElementById("triple-click");
+        // for(let i = 0; i < 3; i++) {
+        //     return locButton.click();
+        // }
+
+
+        if (map.__proto__.getBounds()) {
+            console.log("LAT: ", map.__proto__.getBounds().getNorthEast().lat());
+            console.log("LNG: ", map.__proto__.getBounds().getNorthEast().lng());
+        }
+
         let markers;
         markers = allPhotos.map(point => {
             const marker = new google.maps.Marker({
@@ -215,7 +243,7 @@ class SidebarItem extends React.Component {
                         </div>
                         {deleteButton}
                         {editButton}
-                        <i className="fas fa-map-marker-alt" onClick={this.handlePanTo}></i>
+                        <i id="triple-click" className="fas fa-map-marker-alt" onClick={this.handlePanTo}></i>
                     </div>
                 </div>
             );

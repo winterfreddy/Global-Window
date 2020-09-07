@@ -23,6 +23,7 @@ class MainPage extends React.Component {
             photos={photos}
             fetchPhotos={fetchPhotos}
             fetchPhotosInArea={fetchPhotosInArea}
+            
             />
         </div>
       </div>
