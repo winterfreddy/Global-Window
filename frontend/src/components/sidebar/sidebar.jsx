@@ -156,28 +156,33 @@ class Sidebar extends React.Component {
 
         favoriteContent = (
             <span className="sidebar-content-container">
-                {Object.values(this.props.favorites).map( (favoriteId) => {
+                {/* {Object.values(this.props.favorites).map( (favoriteId) => {
                     console.log(favoriteId);
+                    console.log(favoriteId.photoId);
                     console.log(photos);
-                })}
+                })} */}
 
-                {/* {pages[this.state.currPage].map((photo) => (
-                    <SidebarItem
-                        key={photo._id}
-                        users={users}
-                        currentUserId={currentUserId}
-                        photo={photo}
-                        photos={photos}
-                        google={google}
-                        fetchPhotos={fetchPhotos}
-                        fetchPhoto={fetchPhoto}
-                        deletePhoto={deletePhoto}
-                        makeFavorite={makeFavorite}
-                        unFavorite={unFavorite}
-                        favorites={favorites}
-                        fetchUserFave={fetchUserFave}
-                    />
-                ))} */}
+                {pages[this.state.currPage].map((photo) => {
+                    if (favorites[photo._id]) {
+                        return (
+                        <SidebarItem
+                            key={photo._id}
+                            users={users}
+                            currentUserId={currentUserId}
+                            photo={photo}
+                            photos={photos}
+                            google={google}
+                            fetchPhotos={fetchPhotos}
+                            fetchPhoto={fetchPhoto}
+                            deletePhoto={deletePhoto}
+                            makeFavorite={makeFavorite}
+                            unFavorite={unFavorite}
+                            favorites={favorites}
+                            fetchUserFave={fetchUserFave}
+                        />
+                        )}
+                    }
+                )}
             </span>
         )
                 
