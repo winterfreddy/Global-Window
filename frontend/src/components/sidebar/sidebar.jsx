@@ -12,12 +12,14 @@ class Sidebar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            photoStart: 0,
-            photoEnd: 10,
-            photosSet: [],
+            // photoStart: 0,
+            // photoEnd: 10,
+            // photosSet: []
+            // statePages: null
+            currPage: 0
         }
-        this.handleNext = this.handleNext.bind(this);
-        this.handlePrev = this.handlePrev.bind(this);
+        // this.handleNext = this.handleNext.bind(this);
+        // this.handlePrev = this.handlePrev.bind(this);
     }
 
     componentDidMount() {
@@ -25,46 +27,50 @@ class Sidebar extends React.Component {
         this.props.fetchPhotosInArea(url)
             .then(() => this.props.fetchUsers())
             .then(() => this.props.fetchUserFaves(this.props.currentUserId))
-            .then(() => this.setState({ 
-                photosSet: this.props.photos.slice(this.state.photoStart, this.state.photoEnd) 
-            }));
+            // .then(() => this.setState({ 
+            //     photosSet: this.props.photos.slice(this.state.photoStart, this.state.photoEnd) 
+            // }));
     }
 
-    handleNext() {
-        let copyPhotoStart = {...this.state}.photoStart;
-        let copyPhotoEnd = {...this.state}.photoEnd;
-        this.setState({ 
-            photoStart: copyPhotoStart += 10, 
-            photoEnd: copyPhotoEnd += 10,
-            photosSet: this.props.photos.slice(copyPhotoStart+=10, copyPhotoEnd+=10) 
-        }, () => this.state.photosSet.forEach(photo => {
-            this.props.fetchPhoto(photo._id)
-        }));
-    }
+    // componentDidUpdate(prevProps) {
+    //     if (prevProps.photos.length !== this.props.photos.length) {
+    //         this.setState({ 
+    //             photosSet: this.props.photos.slice(this.state.photoStart, this.state.photoEnd 
+    //         )});
+    //     }
+    // }
 
-    handlePrev() {
-        let copyPhotoStart = {...this.state}.photoStart;
-        let copyPhotoEnd = {...this.state}.photoEnd;
-        let prevTenStart = (copyPhotoStart - 10 < 0) ? (0) : (copyPhotoStart -= 10);
-        let prevTenEnd = (copyPhotoEnd - 10 < 10) ? (10) : (copyPhotoEnd -= 10);
-        this.setState({ 
-            photoStart: prevTenStart,
-            photoEnd: prevTenEnd,
-            // photoStart: copyPhotoStart -= 10,
-            // photoEnd: copyPhotoEnd -= 10,
-            photosSet: this.props.photos.slice(prevTenStart, prevTenEnd)
-        }, () => {
-            console.log(this.state.photosSet);
-            this.state.photosSet.forEach(photo => {
-            this.props.fetchPhoto(photo._id)
-        })});  
-    }
+    // handleNext() {
+    //     let copyPhotoStart = {...this.state}.photoStart;
+    //     let copyPhotoEnd = {...this.state}.photoEnd;
+    //     debugger
+    //     this.setState({ 
+    //         photoStart: copyPhotoStart += 10, 
+    //         photoEnd: copyPhotoEnd += 10,
+    //         photosSet: this.props.photos.slice(copyPhotoStart += 10, copyPhotoEnd += 10) 
+    //     }, () => this.state.photosSet.forEach(photo => {
+    //         debugger
+    //         this.props.fetchPhoto(photo._id)
+    //     }));
+    // }
+
+    // handlePrev() {
+    //     let copyPhotoStart = {...this.state}.photoStart;
+    //     let copyPhotoEnd = {...this.state}.photoEnd;
+    //     let prevTenStart = (copyPhotoStart - 10 < 0) ? (0) : (copyPhotoStart -= 10);
+    //     let prevTenEnd = (copyPhotoEnd - 10 < 10) ? (10) : (copyPhotoEnd -= 10);
+    //     this.setState({ 
+    //         photoStart: prevTenStart,
+    //         photoEnd: prevTenEnd,
+    //         photosSet: this.props.photos.slice(prevTenStart, prevTenEnd)
+    //     }, () => {
+    //         console.log(this.state.photosSet);
+    //         this.state.photosSet.forEach(photo => {
+    //         this.props.fetchPhoto(photo._id)
+    //     })});  
+    // }
 
     render() {
-        console.log('photoStart ', this.state.photoStart);
-        console.log('photoEnd ', this.state.photoEnd);
-        console.log(this.state.photosSet);
-
         const { 
             users,
             currentUserId, 
@@ -81,26 +87,44 @@ class Sidebar extends React.Component {
 
         let prevBtn;
         let nextBtn;
+        let numPages = Math.floor(photos.length / 10);
+        // let currPage = 0;
+        let pages = {};
 
-        if (photos.length > 10 && this.state.photoEnd + 10 < photos.length ) {
-           nextBtn = (
-                <button className='next-btn' onClick={this.handleNext}>Next</button>
-           ); 
-        };
 
-        if (this.state.photoStart > 0) {
-            prevBtn = (
-                <button className='prev-btn' onClick={this.handlePrev}>Prev</button>
-            );
+        let copyPhotos = [...photos];
+        for (let i = 0; i <= numPages; i++) {
+            let subPage = [];
+            [0,1,2,3,4,5,6,7,8,9].forEach(num => subPage.push(copyPhotos.shift()));
+            pages[i] = subPage.filter(ele => ele !== undefined);
         }
+
+        if (numPages > 0 && this.state.currPage < numPages) {
+            nextBtn = (
+                // <button className='next-btn' onClick={this.handleNext}>Next</button>
+                <button className='next-btn' onClick={() => this.setState({ currPage: {...this.state}.currPage +=1 })}>Next</button>
+                ); 
+        }
+            
+        if (this.state.currPage > 0) {
+            prevBtn = (
+                // <button className='prev-btn' onClick={this.handlePrev}>Prev</button>
+                <button className='prev-btn' onClick={() => this.setState({ currPage: {...this.state}.currPage -= 1})}>Previous</button>
+                );
+        }
+                
+        console.log('numPages', numPages);
+        console.log('pages', pages);
+        console.log('currPage', this.state.currPage);
+        console.log('pages[currPage]', pages[this.state.currPage]);
         
-        if (!photos || !this.state.photosSet) {
+        if (pages[this.state.currPage] === undefined) {
             return null;
         } else {
             return (
               <div>
                 <span className="sidebar-content-container">
-                    {photos.map((photo) => (
+                    {pages[this.state.currPage].map((photo) => (
                         <SidebarItem
                         key={photo._id}
                         users={users}

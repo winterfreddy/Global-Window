@@ -5,10 +5,8 @@ export const fetchPhotos = () => (
 )
 
 export const fetchPhotosInArea = (coordsPath) => {
-    console.log("photosAPI");
     return (
     axios.get(`/api/photos/${coordsPath}`)
-    // /api/photos/?lat1= 37.980350&lng1=-122.769670&lat2= 37.980360&lng2=-122.76968
 )}
 
 export const fetchPhoto = (id) => (

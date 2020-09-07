@@ -32,7 +32,6 @@ export const fetchPhotos = () => (dispatch) =>
     .catch((error) => console.log(error));
 
 export const fetchPhotosInArea = (coorsUrlPath) => (dispatch) => {
-    console.log(coorsUrlPath);
     return PhotoAPIUtil.fetchPhotosInArea(coorsUrlPath)
         .then((photos) => dispatch(receivePhotos(photos)))
         .then((res) => 
