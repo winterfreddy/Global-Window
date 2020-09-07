@@ -379,18 +379,13 @@ function seedEvents(req, res) {
         const favoriterId =
           createdUsers[Math.floor(Math.random() * createdUsers.length)]._id;
 
-        // console.log("photoid: ", photoId);
-        // console.log("favid: ", favoriterId);
-
         Favorite.find({ photoId: photoId, favoriterId: favoriterId }).then(
           (fav) => {
-            console.log("fav: ", fav);
             if (!fav.length) {
               newFav = new Favorite({
                 photoId: photoId,
                 favoriterId: favoriterId,
               });
-              console.log(newFav);
               newFav.save();
             }
           }

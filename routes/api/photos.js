@@ -92,7 +92,6 @@ const uploadImage = (file) => {
     ContentType: file.mimetype,
     ACL: "public-read",
   };
-  console.log("image params are set");
   const uploadPhoto = s3.upload(params).promise();
   return uploadPhoto;
 };
