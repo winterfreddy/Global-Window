@@ -4,6 +4,15 @@ import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
 import UploadImageFormContainer from './upload_image_form_container';
 import EditImageFormContainer from './edit_image_form_container';
 
+// Initial Maps Coords
+const INIT_CENTER_LAT = 37.7941135;
+const INIT_CENTER_LNG = -122.4126891;
+export const INIT_NE_LAT = 37.90422179588181;
+export const INIT_NE_LNG = -122.19241635173456;
+export const INIT_SW_LAT = 37.683840859595705;
+export const INIT_SW_LNG = -122.6329618482654;
+
+
 const mapStyles = {
   width: "100%",
   height: "100%"
@@ -102,10 +111,10 @@ export class MapContainer extends Component {
       selectedPlace: {}, //Shows the infoWindow to the selected place upon a marker
       lat: "",
       lng: "",
-      neLatBound: "",
-      neLngBound: "",
-      swLatBound: "",
-      swLngBound: ""
+      neLatBound: INIT_NE_LAT,
+      neLngBound: INIT_NE_LNG,
+      swLatBound: INIT_SW_LAT,
+      swLngBound: INIT_SW_LNG,
     };
 
     this.mapClick = this.mapClick.bind(this);
@@ -132,7 +141,6 @@ export class MapContainer extends Component {
 
   mapClick(mapProps, map, clickEvent) {
     const { google } = this.props;
-
     let tmpCoordinates = map.addListener('click', e => {
       let tmpLatLng = placeMarkerAndPanTo(e.latLng, map);
       this.setState({
@@ -154,16 +162,22 @@ export class MapContainer extends Component {
   }
 
   centerMoved = (mapProps, map) => {
-    this.setState({ neLatBound: map.getBounds().getNorthEast().lat()});
-    this.setState({ neLngBound: map.getBounds().getNorthEast().lng()});
-    this.setState({ swLatBound: map.getBounds().getSouthWest().lat()});
-    this.setState({ swLngBound: map.getBounds().getSouthWest().lng()}); 
+    // console.log(map.getBounds().getNorthEast().lat());
+    // console.log(map.getBounds().getNorthEast().lng());
+    // console.log(map.getBounds().getSouthWest().lat()); 
+    // console.log(map.getBounds().getSouthWest().lng());
+    
+    this.setState({ 
+        neLatBound: map.getBounds().getNorthEast().lat(), 
+        neLngBound: map.getBounds().getNorthEast().lng(),
+        swLatBound: map.getBounds().getSouthWest().lat(),
+        swLngBound: map.getBounds().getSouthWest().lng()
+    }); 
   }
   
   handleSearch() {
     const { neLatBound, neLngBound, swLatBound, swLngBound } = this.state;
     const url = `?lat1=${neLatBound}&lng1=${neLngBound}&lat2=${swLatBound}&lng2=${swLngBound}`;
-    console.log("url", url);
     this.props.fetchPhotosInArea(url);
   }
 
@@ -186,25 +200,37 @@ export class MapContainer extends Component {
     }
 
     return (
-      <div className='google-maps-images-container'>
+      <div className="google-maps-images-container">
         <div id="mainpage-google-map">
           <div className="search-bar">
-            <input type="text" className="search-bar-input" placeholder="Find photos by tag or just press search to update"/>
+            <input
+              type="text"
+              className="search-bar-input"
+              placeholder="Find photos by tag or just press search to update"
+            />
             <button className="search-button" onClick={this.handleSearch}>
               <i className="fas fa-search"></i>
             </button>
           </div>
           <Map
             id="google-api-map"
-            className={this.props.formType === 'upload' ? "google-api-map-upload" : "google-api-map"}
+            className={
+              this.props.formType === "upload"
+                ? "google-api-map-upload"
+                : "google-api-map"
+            }
             google={this.props.google}
             zoom={12}
             styles={darkMode.styles}
             initialCenter={{
-              lat: 37.7941135,
-              lng: -122.4126891,
+              lat: INIT_CENTER_LAT,
+              lng: INIT_CENTER_LNG,
             }}
-            onClick={this.props.location.pathname === '/upload' ? this.mapClick : () => console.log('click inactive')}
+            onClick={
+              this.props.location.pathname === "/upload"
+                ? this.mapClick
+                : () => console.log("click inactive")
+            }
             onDragend={this.centerMoved}
             onZoomChanged={this.centerMoved}
           >
