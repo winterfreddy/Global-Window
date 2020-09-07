@@ -128,7 +128,7 @@ export class MapContainer extends Component {
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true,
-    }, () => marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png'));
+    }, () => marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png'));
     // this.props.google.maps.panTo
   }
 
