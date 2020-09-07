@@ -119,11 +119,11 @@ class Sidebar extends React.Component {
         }
 
         sidebarFilter = (
-            <div className="dropdown">
-                <button onClick={() => dropdown()} className="dropdown-button" type="button">Filter</button>
-                <div id="myDropdown" className="dropdown-content">
-                    <button onClick={() => this.setState({ filter: 'All Content' })}>All content</button>
-                    <button onClick={() => this.setState({ filter: 'Favorites' })}>Favorites</button>
+            <div className="dropdown-filter">
+                <button onClick={() => dropdown()} className="dropdown-filter-button" type="button"><i class="fas fa-filter"></i>&nbsp;Filter&nbsp;by:</button>
+                <div id="myDropdown" className="dropdown-content-filter">
+                    <button className="filter-item" onClick={() => this.setState({ filter: 'All Content' })}>All Content</button>
+                    <button className="filter-item" onClick={() => this.setState({ filter: 'Favorites' })}>Favorites</button>
                 </div>
             </div>
         )
@@ -141,9 +141,9 @@ class Sidebar extends React.Component {
         } else {
             return (
               <div>
-                <div>
-                    <label>{this.state.filter}</label>
+                <div className="filter-action">
                     {sidebarFilter}
+                    <label>{this.state.filter}</label>
                 </div>
                 <span className="sidebar-content-container">
                     {pages[this.state.currPage].map((photo) => (
