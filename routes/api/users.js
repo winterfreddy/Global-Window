@@ -126,9 +126,29 @@ router.get(
   "/:id/favoritePhotos",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Favorite.find({ favoriterId: req.params.id })
+    const favs = Favorite.find({ favoriterId: { $eq: req.params.id } })
       .sort({ date: -1 })
-      .then((photos) => res.json(photos))
+      .then((favs) => {
+        //   const photoIds = favs.map(fav => fav.photoId);
+        //   console.log(photoIds);
+        // res.json(favs);
+        console.log("hi");
+        favs.map((fav) => console.log(fav));
+        const photoIds = favs.map((fav) => fav.photoId);
+        // const photos = [];
+        // photoIds.map(
+        //   (photoId) =>
+        //     Photo.findById(photoId).exec()
+        //         .then(photo => {
+        //             console.log(photo);
+        //             photos.push(photo);
+        //         })
+        //         .catch(err => res.status(404).json(err))
+        //   //   return Photo.find({_id: photoId})
+        // );
+        // console.log(photos);
+        res.json(photoIds);
+      })
       .catch((err) => res.status(404).json(err));
   }
 );
