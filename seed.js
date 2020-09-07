@@ -174,7 +174,7 @@ function seedEvents(req, res) {
         },
         {
           description: "Napa Vineyards",
-          coordinates: { lat: 38.031316, lng: -122.733937 },
+          coordinates: { lat: 38.430799, lng: -122.405915 },
           tags: ["nature", "napa", "winery", "vineyard"],
           imageURL: `https://global-window-project-dev.s3-us-west-1.amazonaws.com/022-photo.jpeg`,
         },

@@ -12,14 +12,10 @@ class Sidebar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            // photoStart: 0,
-            // photoEnd: 10,
-            // photosSet: []
-            // statePages: null
             currPage: 0
         }
-        // this.handleNext = this.handleNext.bind(this);
-        // this.handlePrev = this.handlePrev.bind(this);
+        this.handleNext = this.handleNext.bind(this);
+        this.handlePrev = this.handlePrev.bind(this);
     }
 
     componentDidMount() {
@@ -27,49 +23,26 @@ class Sidebar extends React.Component {
         this.props.fetchPhotosInArea(url)
             .then(() => this.props.fetchUsers())
             .then(() => this.props.fetchUserFaves(this.props.currentUserId))
-            // .then(() => this.setState({ 
-            //     photosSet: this.props.photos.slice(this.state.photoStart, this.state.photoEnd) 
-            // }));
     }
 
-    // componentDidUpdate(prevProps) {
-    //     if (prevProps.photos.length !== this.props.photos.length) {
-    //         this.setState({ 
-    //             photosSet: this.props.photos.slice(this.state.photoStart, this.state.photoEnd 
-    //         )});
-    //     }
-    // }
+    componentDidUpdate(prevProps) {
+        if (this.props.photos !== prevProps.photos) {
+            const renderedSideBar = document.getElementsByClassName("sidebar-content-container")[0];
+            if (renderedSideBar !== undefined) renderedSideBar.scrollTop = 0;
+            if (this.state.currPage > 0) this.setState({ currPage: 0 });
+        }
+    }
 
-    // handleNext() {
-    //     let copyPhotoStart = {...this.state}.photoStart;
-    //     let copyPhotoEnd = {...this.state}.photoEnd;
-    //     debugger
-    //     this.setState({ 
-    //         photoStart: copyPhotoStart += 10, 
-    //         photoEnd: copyPhotoEnd += 10,
-    //         photosSet: this.props.photos.slice(copyPhotoStart += 10, copyPhotoEnd += 10) 
-    //     }, () => this.state.photosSet.forEach(photo => {
-    //         debugger
-    //         this.props.fetchPhoto(photo._id)
-    //     }));
-    // }
+    handleNext() {
+        this.setState({ currPage: { ...this.state }.currPage += 1 })
+        document.getElementsByClassName("sidebar-content-container")[0].scrollTop = 0;
+    }
 
-    // handlePrev() {
-    //     let copyPhotoStart = {...this.state}.photoStart;
-    //     let copyPhotoEnd = {...this.state}.photoEnd;
-    //     let prevTenStart = (copyPhotoStart - 10 < 0) ? (0) : (copyPhotoStart -= 10);
-    //     let prevTenEnd = (copyPhotoEnd - 10 < 10) ? (10) : (copyPhotoEnd -= 10);
-    //     this.setState({ 
-    //         photoStart: prevTenStart,
-    //         photoEnd: prevTenEnd,
-    //         photosSet: this.props.photos.slice(prevTenStart, prevTenEnd)
-    //     }, () => {
-    //         console.log(this.state.photosSet);
-    //         this.state.photosSet.forEach(photo => {
-    //         this.props.fetchPhoto(photo._id)
-    //     })});  
-    // }
-
+    handlePrev() {
+        this.setState({ currPage: { ...this.state }.currPage -= 1 })
+        document.getElementsByClassName("sidebar-content-container")[0].scrollTop = 0;
+    }
+    
     render() {
         const { 
             users,
@@ -87,10 +60,9 @@ class Sidebar extends React.Component {
 
         let prevBtn;
         let nextBtn;
-        let numPages = Math.floor(photos.length / 10);
-        // let currPage = 0;
+        let allResults;
+        let numPages = (Math.floor((photos.length - 1) / 10) < 0) ? (0) : (Math.floor((photos.length - 1) / 10));
         let pages = {};
-
 
         let copyPhotos = [...photos];
         for (let i = 0; i <= numPages; i++) {
@@ -101,16 +73,18 @@ class Sidebar extends React.Component {
 
         if (numPages > 0 && this.state.currPage < numPages) {
             nextBtn = (
-                // <button className='next-btn' onClick={this.handleNext}>Next</button>
-                <button className='next-btn' onClick={() => this.setState({ currPage: {...this.state}.currPage +=1 })}>Next</button>
+                <button className='next-btn' onClick={this.handleNext}>Next</button>
                 ); 
         }
             
         if (this.state.currPage > 0) {
             prevBtn = (
-                // <button className='prev-btn' onClick={this.handlePrev}>Prev</button>
-                <button className='prev-btn' onClick={() => this.setState({ currPage: {...this.state}.currPage -= 1})}>Previous</button>
+                <button className='prev-btn' onClick={this.handlePrev}>Previous</button>
                 );
+        }
+
+        if (photos.length <= 10) {
+            allResults = <button disabled className="all-results">All Results</button>
         }
                 
         console.log('numPages', numPages);
@@ -143,6 +117,7 @@ class Sidebar extends React.Component {
                     ))}
                 </span>
                 <div className="sidebar-buttons">
+                    {allResults}
                     {prevBtn}
                     {nextBtn}
                 </div>
