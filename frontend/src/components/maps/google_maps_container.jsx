@@ -115,6 +115,7 @@ export class MapContainer extends Component {
       neLngBound: INIT_NE_LNG,
       swLatBound: INIT_SW_LAT,
       swLngBound: INIT_SW_LNG,
+      searchInput: "",
     };
 
     this.mapClick = this.mapClick.bind(this);
