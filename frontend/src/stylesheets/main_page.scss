@@ -127,3 +127,9 @@
 .search-bar-input:hover + .search-button {
     background: white;
 }
+
+@media screen and (max-height: 550px) {
+    .google-api-map {
+        height: 80% !important;
+    }
+}

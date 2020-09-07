@@ -5,7 +5,7 @@ import '../../stylesheets/main_page.scss';
 
 class MainPage extends React.Component {
   componentDidMount() {
-    this.props.fetchPhotos();
+    // this.props.fetchPhotos();
   }
 
   render() {

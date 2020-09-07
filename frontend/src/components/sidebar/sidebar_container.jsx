@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Sidebar from './sidebar';
-import { fetchPhotos, fetchPhoto, deletePhoto } from '../../actions/photo_actions';
+import { fetchPhotos, fetchPhoto, deletePhoto, fetchPhotosInArea } from '../../actions/photo_actions';
 import { fetchPhotoFavorites, makeFavorite, unFavorite, fetchUserFaves } from '../../actions/favorite_actions';
 import { fetchUsers } from '../../actions/user_actions';
 const mapStateToProps = state => ({
@@ -12,6 +12,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     fetchPhotos: () => dispatch(fetchPhotos()),
+    fetchPhotosInArea: (url) => dispatch(fetchPhotosInArea(url)),
     fetchPhoto: photoId => dispatch(fetchPhoto(photoId)),
     deletePhoto: id => dispatch(deletePhoto(id)),
     fetchPhotoFavorites: id => dispatch(fetchPhotoFavorites(id)),

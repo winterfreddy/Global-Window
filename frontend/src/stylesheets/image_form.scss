@@ -102,3 +102,9 @@
 .input-file {
     margin: 10px 5px 10px 5px;
 }
+
+@media screen and (max-height: 550px) {
+    .image-upload-form-box {
+        overflow-y: scroll;
+    }
+}
