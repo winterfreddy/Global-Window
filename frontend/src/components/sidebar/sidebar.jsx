@@ -85,7 +85,7 @@ class Sidebar extends React.Component {
             favorites,
             fetchUserFave
         } = this.props;
-
+        // console.log(photos);
         // console.log(Object.values(this.props.favorites).length);
 
         let prevBtn;
