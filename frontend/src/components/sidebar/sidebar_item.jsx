@@ -98,7 +98,8 @@ class SidebarItem extends React.Component {
     }
 
     handlePanTo() {
-        const allPhotos = this.props.filter === "favorite" ? Object.values(this.props.favorites) : this.props.photos;
+        const allPhotos = this.props.photos;
+        console.log(allPhotos);
         const { lat, lng } = this.props.photo.coordinates;
         const google = window.google;
         const mapProp = { 
@@ -111,6 +112,19 @@ class SidebarItem extends React.Component {
 
         let markers;
         markers = allPhotos.map(point => {
+            if(!allPhotos[this.state.photo._id]) {
+                const marker = new google.maps.Marker({
+                    position: this.state.photo.coordinates,
+                    map
+                });
+                const infowindow = new google.maps.InfoWindow({
+                    content: this.state.photo.description
+                });
+                marker.addListener("click", () => {
+                    infowindow.open(map, marker);
+                });    
+            }
+
             const marker = new google.maps.Marker({
                 position: point.coordinates,
                 map
@@ -173,6 +187,7 @@ class SidebarItem extends React.Component {
         let deleteButton;
         let editButton;
         if (photo.creatorId === currentUserId) {
+            console.log(photo);
             deleteButton = (
                 <i className="far fa-trash-alt" onClick={() => deletePhoto(photo._id).then(() => fetchPhotos())}></i>
             );

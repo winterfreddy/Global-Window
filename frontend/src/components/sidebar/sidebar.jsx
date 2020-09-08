@@ -74,7 +74,7 @@ class Sidebar extends React.Component {
         let allContent;
         let favoriteContent;
 
-        let copyPhotos = [...photos];
+        let copyPhotos = this.state.filter === "All Content" ? [...photos] : [...Object.values(favorites)];
         for (let i = 0; i <= numPages; i++) {
             let subPage = [];
             [0,1,2,3,4,5,6,7,8,9].forEach(num => subPage.push(copyPhotos.shift()));
@@ -116,83 +116,57 @@ class Sidebar extends React.Component {
         // console.log('currPage', this.state.currPage);
         // console.log('pages[currPage]', pages[this.state.currPage]);
 
-        // if (pages[this.state.currPage] === undefined) {
-        //     return null;
-        // } else {
-            
-        allContent = (
-            <span className="sidebar-content-container">
-                {pages[this.state.currPage].map((photo) => (
-                    <SidebarItem
-                        key={photo._id}
-                        users={users}
-                        currentUserId={currentUserId}
-                        photo={photo}
-                        photos={photos}
-                        google={google}
-                        fetchPhotos={fetchPhotos}
-                        fetchPhoto={fetchPhoto}
-                        deletePhoto={deletePhoto}
-                        makeFavorite={makeFavorite}
-                        unFavorite={unFavorite}
-                        favorites={favorites}
-                        fetchUserFave={fetchUserFave}
-                    />
-                ))}
-            </span>
-        )
+        // favoriteContent = (
+        //     <span className="sidebar-content-container">
+        //         {pages[this.state.currPage].map( (photo) => {
+        //             // console.log(favorite);
+        //             // console.log(favoriteId.photoId);
+        //             // console.log(photos);
+        //             return (
+        //                 <SidebarItem
+        //                     key={favorite._id}
+        //                     users={users}
+        //                     currentUserId={currentUserId}
+        //                     photo={favorite}
+        //                     photos={photos}
+        //                     favorites={favorites}
+        //                     google={google}
+        //                     fetchPhotos={fetchPhotos}
+        //                     fetchPhoto={fetchPhoto}
+        //                     deletePhoto={deletePhoto}
+        //                     makeFavorite={makeFavorite}
+        //                     unFavorite={unFavorite}
+        //                     favorites={favorites}
+        //                     fetchUserFave={fetchUserFave}
+        //                     filter="favorite"
+        //                 />
+        //                 )
+        //         })}
 
-        favoriteContent = (
-            <span className="sidebar-content-container">
-                {Object.values(favorites).map( (favorite) => {
-                    // console.log(favoriteId);
-                    // console.log(favoriteId.photoId);
-                    // console.log(photos);
-                    return (
-                        <SidebarItem
-                            key={favorite._id}
-                            users={users}
-                            currentUserId={currentUserId}
-                            photo={favorite}
-                            photos={photos}
-                            favorites={favorites}
-                            google={google}
-                            fetchPhotos={fetchPhotos}
-                            fetchPhoto={fetchPhoto}
-                            deletePhoto={deletePhoto}
-                            makeFavorite={makeFavorite}
-                            unFavorite={unFavorite}
-                            favorites={favorites}
-                            fetchUserFave={fetchUserFave}
-                            filter="favorite"
-                        />
-                        )
-                })}
-
-                {/* {pages[this.state.currPage].map((photo) => {
-                    console.log(photo);
-                    if (favorites[photo._id]) {
-                        return (
-                        <SidebarItem
-                            key={photo._id}
-                            users={users}
-                            currentUserId={currentUserId}
-                            photo={photo}
-                            photos={photos}
-                            google={google}
-                            fetchPhotos={fetchPhotos}
-                            fetchPhoto={fetchPhoto}
-                            deletePhoto={deletePhoto}
-                            makeFavorite={makeFavorite}
-                            unFavorite={unFavorite}
-                            favorites={favorites}
-                            fetchUserFave={fetchUserFave}
-                        />
-                        )}
-                    }
-                )} */}
-            </span>
-        )
+        //         {/* {pages[this.state.currPage].map((photo) => {
+        //             console.log(photo);
+        //             if (favorites[photo._id]) {
+        //                 return (
+        //                 <SidebarItem
+        //                     key={photo._id}
+        //                     users={users}
+        //                     currentUserId={currentUserId}
+        //                     photo={photo}
+        //                     photos={photos}
+        //                     google={google}
+        //                     fetchPhotos={fetchPhotos}
+        //                     fetchPhoto={fetchPhoto}
+        //                     deletePhoto={deletePhoto}
+        //                     makeFavorite={makeFavorite}
+        //                     unFavorite={unFavorite}
+        //                     favorites={favorites}
+        //                     fetchUserFave={fetchUserFave}
+        //                 />
+        //                 )}
+        //             }
+        //         )} */}
+        //     </span>
+        // )
                 
         // console.log('numPages', numPages);
         // console.log('pages', pages);
@@ -210,7 +184,25 @@ class Sidebar extends React.Component {
                     {sidebarFilter}
                     <label>{this.state.filter}</label>
                 </div>
-                {this.state.filter === 'Favorites' ? favoriteContent : allContent}
+                <span className="sidebar-content-container">
+                    {pages[this.state.currPage].map((photo) => (
+                        <SidebarItem
+                            key={photo._id}
+                            users={users}
+                            currentUserId={currentUserId}
+                            photo={photo}
+                            photos={photos}
+                            google={google}
+                            fetchPhotos={fetchPhotos}
+                            fetchPhoto={fetchPhoto}
+                            deletePhoto={deletePhoto}
+                            makeFavorite={makeFavorite}
+                            unFavorite={unFavorite}
+                            favorites={favorites}
+                            fetchUserFave={fetchUserFave}
+                        />
+                    ))}
+                </span>
                 <div className="sidebar-buttons">
                     {allResults}
                     {prevBtn}

@@ -103,6 +103,8 @@ class EditImageForm extends React.Component {
             selectedPlace: {}, //Shows the infoWindow to the selected place upon a marker
             lat: this.props.photo.coordinates.lat,
             lng: this.props.photo.coordinates.lng
+            // lat: "",
+            // lng: ""
         };
 
         this.mapClick = this.mapClick.bind(this);
@@ -153,6 +155,10 @@ class EditImageForm extends React.Component {
 
     render() {
         const { photo, formType, fetchPhoto } = this.props;
+        console.log(photo);
+        // if(this.props.photo.coordinates !== "undefined"){
+        //     console.log(this.props.photo.coordinates);
+        // }
         if (!photo) {
             return null;
         } else {
