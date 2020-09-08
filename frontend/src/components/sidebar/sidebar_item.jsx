@@ -99,6 +99,7 @@ class SidebarItem extends React.Component {
 
     handlePanTo() {
         const allPhotos = this.props.photos;
+        console.log(allPhotos);
         const { lat, lng } = this.props.photo.coordinates;
         const google = window.google;
         const mapProp = { 
@@ -111,6 +112,19 @@ class SidebarItem extends React.Component {
 
         let markers;
         markers = allPhotos.map(point => {
+            if(!allPhotos[this.state.photo._id]) {
+                const marker = new google.maps.Marker({
+                    position: this.state.photo.coordinates,
+                    map
+                });
+                const infowindow = new google.maps.InfoWindow({
+                    content: this.state.photo.description
+                });
+                marker.addListener("click", () => {
+                    infowindow.open(map, marker);
+                });    
+            }
+
             const marker = new google.maps.Marker({
                 position: point.coordinates,
                 map
@@ -138,16 +152,21 @@ class SidebarItem extends React.Component {
             fetchPhoto
         } = this.props;
         let clickAction;
-        if (favorites[photo._id] !== undefined) {
-            if (favorites[photo._id].favoriterId === currentUserId) {
+        if (favorites[photo._id]) {
+            if (favorites[photo._id].creatorId === currentUserId) {
+                // console.log("hitting unfave");
+                clickAction = unFavorite(favorites[photo._id]._id)
+                    .then(photoId => fetchPhoto(photoId.id.data))
+                    .catch(err => console.log(err.response));
+            } else if (favorites[photo._id].favoriterId === currentUserId) {
+                // console.log("hitting unfave");
                 clickAction = unFavorite(favorites[photo._id].photoId)
                     .then(photoId => fetchPhoto(photoId.id.data))
                     .catch(err => console.log(err.response));
-            } else {
             }
         } else {
-            console.log(favorites[photo._id]);
-            console.log('hitting fave');
+            // console.log(favorites[photo._id]);
+            // console.log('hitting fave');
             clickAction = makeFavorite({ photoId: photo._id })
                 .then(photo => fetchPhoto(photo.favorite.data.photoId)).catch(err => console.log(err));
         } 
@@ -163,11 +182,12 @@ class SidebarItem extends React.Component {
             deletePhoto, 
             makeFavorite, 
             unFavorite,
-            favorites 
+            favorites
         } = this.props;
         let deleteButton;
         let editButton;
         if (photo.creatorId === currentUserId) {
+            console.log(photo);
             deleteButton = (
                 <i className="far fa-trash-alt" onClick={() => deletePhoto(photo._id).then(() => fetchPhotos())}></i>
             );
@@ -184,7 +204,8 @@ class SidebarItem extends React.Component {
             </div>
         )
 
-        if(favorites[photo._id] && (favorites[photo._id].favoriterId === currentUserId)) {
+        if(favorites[photo._id]) {
+            // console.log("liked");
             favoriteButton = (
                 <div className="favorite-like">
                     <i className="fas fa-heart" onClick={this.handleFavorites}></i>
