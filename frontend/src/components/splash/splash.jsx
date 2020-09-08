@@ -9,8 +9,7 @@ class Splash extends React.Component {
     return (
       <div className="splash-container">
         <h2 className="splash-header">See the world through your own window.</h2>
-        <img src="../../images/homepage copy.png" className='splash-screenshot' />
-        {/* <h2>The Image Geo-Tagging Social Media Platform that was developed by Kev Win Ad and Al</h2> */}
+        <img src={require("../../images/homepage.png")} className='splash-screenshot' />
       </div>
     );
   }

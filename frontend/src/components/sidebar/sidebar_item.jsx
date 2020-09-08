@@ -197,87 +197,152 @@ class SidebarItem extends React.Component {
     return clickAction;
   }
 
-  render() {
-    const {
-      users,
-      currentUserId,
-      photo,
-      fetchPhotos,
-      deletePhoto,
-      makeFavorite,
-      unFavorite,
-      favorites,
-    } = this.props;
-    let deleteButton;
-    let editButton;
-    if (photo.creatorId === currentUserId) {
-      deleteButton = (
-        <i
-          className="far fa-trash-alt"
-          onClick={() => deletePhoto(photo._id).then(() => fetchPhotos())}
-        ></i>
-      );
-      editButton = (
-        <Link to={`/edit/${photo._id}`}>
-          <i className="far fa-edit"></i>
-        </Link>
-      );
+    handlePanTo() {
+        const allPhotos = this.props.photos;
+        console.log(allPhotos);
+        const { lat, lng } = this.props.photo.coordinates;
+        const google = window.google;
+        const mapProp = { 
+            center: new google.maps.LatLng(lat, lng),
+            zoom: 12
+        }
+        const googleAPIMap = [...document.getElementsByClassName('google-api-map')][0];
+        const map = new google.maps.Map(googleAPIMap, mapProp);
+        map.setOptions({ styles: darkMode.styles });
+
+        let markers;
+        markers = allPhotos.map(point => {
+            if(!allPhotos[this.state.photo._id]) {
+                const marker = new google.maps.Marker({
+                    position: this.state.photo.coordinates,
+                    map
+                });
+                const infowindow = new google.maps.InfoWindow({
+                    content: this.state.photo.description
+                });
+                marker.addListener("click", () => {
+                    infowindow.open(map, marker);
+                });    
+            }
+
+            const marker = new google.maps.Marker({
+                position: point.coordinates,
+                map
+            });
+            const infowindow = new google.maps.InfoWindow({
+                content: point.description
+            });
+            marker.addListener("click", () => {
+                infowindow.open(map, marker);
+            });
+        })
+
+        const panPoint = new google.maps.LatLng(lat, lng);
+        map.panTo(panPoint);
     }
 
-    let favoriteButton = (
-      <div>
-        <i className="fas fa-heart" onClick={this.handleFavorites}></i>
-      </div>
-    );
-
-    if (
-      favorites[photo._id] &&
-      favorites[photo._id].favoriterId === currentUserId
-    ) {
-      favoriteButton = (
-        <div className="favorite-like">
-          <i className="fas fa-heart" onClick={this.handleFavorites}></i>
-        </div>
-      );
+    handleFavorites() {
+        const { 
+            favorites, 
+            photo, 
+            currentUserId, 
+            makeFavorite, 
+            unFavorite, 
+            fetchPhotos,
+            fetchPhoto
+        } = this.props;
+        let clickAction;
+        if (favorites[photo._id]) {
+            if (favorites[photo._id].creatorId === currentUserId) {
+                // console.log("hitting unfave");
+                clickAction = unFavorite(favorites[photo._id]._id)
+                    .then(photoId => fetchPhoto(photoId.id.data))
+                    .catch(err => console.log(err.response));
+            } else if (favorites[photo._id].favoriterId === currentUserId) {
+                // console.log("hitting unfave");
+                clickAction = unFavorite(favorites[photo._id].photoId)
+                    .then(photoId => fetchPhoto(photoId.id.data))
+                    .catch(err => console.log(err.response));
+            }
+        } else {
+            // console.log(favorites[photo._id]);
+            // console.log('hitting fave');
+            clickAction = makeFavorite({ photoId: photo._id })
+                .then(photo => fetchPhoto(photo.favorite.data.photoId)).catch(err => console.log(err));
+        } 
+        return clickAction;
     }
 
-    if (!users[photo.creatorId]) {
-      return null;
-    } else {
-      return (
-        <div className="sidebar-item">
-          <img className="sidebar-img-item" src={photo.imageURL} />
-          <br />
-          <div className="sidebar-item-description">"{photo.description}"</div>
-          <br />
-          <div className="sidebar-item-other-info">
-            <div className="sidebar-username">
-              @{users[photo.creatorId].username}
+    render() {
+        const { 
+            users,
+            currentUserId, 
+            photo, 
+            fetchPhotos, 
+            deletePhoto, 
+            makeFavorite, 
+            unFavorite,
+            favorites
+        } = this.props;
+        let deleteButton;
+        let editButton;
+        if (photo.creatorId === currentUserId) {
+            // console.log(photo);
+            deleteButton = (
+                <i className="far fa-trash-alt" onClick={() => deletePhoto(photo._id).then(() => fetchPhotos())}></i>
+            );
+            editButton = (
+                <Link to={`/edit/${photo._id}`}>
+                    <i className="far fa-edit"></i>
+                </Link>
+            );
+        }
+
+        let favoriteButton = (
+            <div>
+                <i className="fas fa-heart" onClick={this.handleFavorites}></i>
             </div>
-            <div className="sidebar-item-timestamp">{photo.created}</div>
-            <div className="sidebar-item-tags">
-              Tags: {photo.tags.join(", ")}
-            </div>
-          </div>
-          <br />
-          <div className="sidebar-item-actions">
-            <div className="item-favorites">
-              {favoriteButton}
-              {/* <i className="fas fa-heart" onClick={this.handleFavorites}></i> */}
-              <div className="numFavorites">{photo.numFavorites}</div>
-            </div>
-            {deleteButton}
-            {editButton}
-            <i
-              id="triple-click"
-              className="fas fa-map-marker-alt"
-              onClick={this.handlePanTo}
-            ></i>
-          </div>
-        </div>
-      );
+        )
+
+        if(favorites[photo._id]) {
+            // console.log("liked");
+            favoriteButton = (
+                <div className="favorite-like">
+                    <i className="fas fa-heart" onClick={this.handleFavorites}></i>
+                </div>
+            );
+        }
+
+        if (!users[photo.creatorId]) {
+            return null;
+        } else {
+            return (
+                <div className='sidebar-item'>
+                    <img className='sidebar-img-item' src={photo.imageURL}/>
+                    <br/>
+                    <div className="sidebar-item-description">"{photo.description}"</div>
+                    <br/>
+                    <div className="sidebar-item-other-info">
+                        <div className='sidebar-username'>@{users[photo.creatorId].username}</div>
+                        <div className="sidebar-item-timestamp">{photo.created}</div>
+                        <div className='sidebar-item-tags'>Tags: {photo.tags.join(', ')}</div>
+                    </div>
+                    <br/>
+                    <div className="sidebar-item-actions">
+                        <div className="item-favorites">
+                            {favoriteButton}
+                            {/* <i className="fas fa-heart" onClick={this.handleFavorites}></i> */}
+                            <div className="numFavorites">{photo.numFavorites}</div>
+                        </div>
+                        {deleteButton}
+                        {editButton}
+                        <i className="fas fa-map-marker-alt" onClick={this.handlePanTo}></i>
+                    </div>
+                </div>
+            );
+        }     
     }
-  }
 }
+
 
 export default SidebarItem;

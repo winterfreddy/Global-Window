@@ -50,27 +50,47 @@
     font-family: 'Roboto', sans-serif;
     font-size: 20px;
     border-radius: 5px;
-    border-width: thin;
-    border: 1px solid black;
-    background-color: transparent;
+    border: none;
+    background: none;
     padding: 10px;
-    margin: 10px 10px;
-    width: 100px;
+    width: 100%;
     -webkit-user-select: none; /* Safari */        
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
 }
 
+.navbar-signup {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.navbar-login,
+.navbar-signup {
+    border: 1px solid black;
+    color: black;
+    margin: 10px 10px;
+}
+
 .navbar-login:hover,
-.navbar-signup:hover,
-.logout-btn:hover,
-.navbar-upload-btn:hover {
-    // background: lightblue;
-    // color: blue;
+.navbar-signup:hover {
     border: 1px solid white;
     color: white;
+}
+
+.logout-btn:hover,
+.navbar-upload-btn:hover {
+    background-color: #daa520;
+    font-weight: 700;
     cursor: pointer;
+}
+
+.logout-btn:hover {
+    border-radius: 0 0 5px 5px;
+}
+
+.navbar-upload-btn:hover {
+    border-radius: 5px 5px 0 0;
 }
 
 .logout-btn, .navbar-signup {
@@ -100,7 +120,7 @@
     display: flex;
     // flex-direction: column-reverse;
     color: black;
-    padding: 12px 16px;
+    padding: 10px 0 5px 0;
     text-decoration: none;
     // display: block;
 }
@@ -110,10 +130,11 @@
     flex-direction: column;
 }
 
-.dropdown-content div:first-child {
-    font-weight: bold;
-    background-color: #ddd;
+.dropdown-content a {
+    display: inline-block;
+    font-weight: 700;
     border-radius: 3px 3px 0 0;
+    padding: 10px;
 }
 
 .dropdown-content div:hover {
@@ -129,6 +150,7 @@
 .global-window-devs {
     font-size: 24px;
     color: black;
+    padding-top: 10px;
 }
 
 .social-btns {
@@ -157,4 +179,36 @@
 
 .fa-globe:hover {
     color: white;
+}
+
+.dropdown-user-button {
+    font-size: 30px;
+    background: none;
+    border: none;
+    padding: 5px 20px 5px 5px;
+}
+
+.dropdown-user-button:hover {
+    color: white;
+    cursor: pointer;
+}
+
+.dropdown-user {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content-user {
+    display: none;
+    position: absolute;
+    min-width: 250px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 10px;
+}
+
+.show {
+    display: block;
 }

@@ -25,7 +25,7 @@
   height: 90% !important;
   width: 69.7% !important;
   position: absolute;
-  top: 110px;
+  top: 108px;
   left: 30%;
   border: 3px solid black;
 }
@@ -48,13 +48,13 @@
   flex-direction: column;
 }
 
-.image-upload-form-container {
-  position: absolute;
-  overflow: auto;
-  top: 67px;
-  right: 0;
-  bottom: 0;
-  left: 75%;
+.image-upload-form-container { 
+    position: absolute;
+    overflow: auto;
+    top: 64px;
+    right: 0;
+    bottom: 0;
+    left: 74.5%;
 }
 
 .splash-container {
@@ -74,7 +74,8 @@
 }
 
 .splash-screenshot {
-  height: 400px;
+//   height: 400px;
+  object-fit: cover;
   width: 800px;
   border-radius: 5px;
   border: 1px solid black;
@@ -82,17 +83,17 @@
 }
 
 .search-bar {
-  position: absolute;
-  display: flex;
-  flex-direction: row;
-  top: 67px;
-  right: 0;
-  left: 30%;
-  height: 40px;
-  background: #252525;
-  color: #252525;
-  background-color: #252525;
-  border: 1px solid black;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    top: 64px;
+    right: 0;
+    left: 30%;
+    height: 50px;
+    background:#252525;
+    color: #252525;
+    background-color: #252525;
+    border: 1px solid black;
 }
 
 .search-bar-input {
