@@ -1,40 +1,40 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 .main-page {
-    display: flex;
-    // margin-top: 20px;
+  display: flex;
+  // margin-top: 20px;
 }
 
 .left-side {
-    display: block;
-    background: orange;
-    height: 500px;
-    width: 200px;
+  display: block;
+  background: orange;
+  height: 500px;
+  width: 200px;
 }
 
 .google-maps {
-    width: 100%;
+  width: 100%;
 }
 
 .google-maps-container {
-    display: block;
-    margin-left: 50px;
+  display: block;
+  margin-left: 50px;
 }
 
 .google-api-map {
-    height: 90% !important;
-    width: 69.7% !important;
-    position: absolute;
-    top: 110px;
-    left: 30%;
-    border: 3px solid black;
+  height: 90% !important;
+  width: 69.7% !important;
+  position: absolute;
+  top: 108px;
+  left: 30%;
+  border: 3px solid black;
 }
 
 .google-api-map-upload,
 .google-api-map-edit {
-    height: 92.5% !important;
-    width: 75% !important;
-    border: 3px solid black;
+  height: 92.5% !important;
+  width: 75% !important;
+  border: 3px solid black;
 }
 
 // .google-api-map:active,
@@ -44,8 +44,8 @@
 // }
 
 .google-maps-images-container {
-    display: flex !important;
-    flex-direction: column;
+  display: flex !important;
+  flex-direction: column;
 }
 
 .image-upload-form-container { 
@@ -58,14 +58,29 @@
 }
 
 .splash-container {
-    background-image: url(../images/timo-wielink-4Zk45jNyQS4-unsplash.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 1000px;
+  background-image: url(../images/timo-wielink-4Zk45jNyQS4-unsplash.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 1000px;
+  text-align: center;
+  padding: 70px;
 }
 
+.splash-header {
+  font-size: 50px;
+  font: bolder;
+  color: black;
+}
 
+.splash-screenshot {
+//   height: 400px;
+  object-fit: cover;
+  width: 800px;
+  border-radius: 5px;
+  border: 1px solid black;
+  margin: 25px;
+}
 
 .search-bar {
     position: absolute;
@@ -74,7 +89,8 @@
     top: 64px;
     right: 0;
     left: 30%;
-    height: 50px;
+    height: 45px;
+    padding-bottom: 5px;
     background:#252525;
     color: #252525;
     background-color: #252525;
@@ -82,54 +98,55 @@
 }
 
 .search-bar-input {
-    border: none;
-    font-size: 16.5px;
-    height: 100%;
-    width: 100%;
-    text-indent: 15px;
-    color: rgb(125, 125, 125);
-    background-color: #252525;
+  border: none;
+  font-size: 22px;
+  padding-bottom: 5px;
+  height: 100%;
+  width: 100%;
+  text-indent: 15px;
+  color: rgb(125, 125, 125);
+  background-color: #252525;
 }
 
 .search-button {
-    font-size: 19px;
-    height: 43px;
-    width: 100px;
-    border: none;
-    color: rgb(125, 125, 125);
-    background: #252525;
-    border-left: 1px solid rgb(125, 125, 125);
+  font-size: 19px;
+  height: 43px;
+  width: 100px;
+  border: none;
+  color: rgb(125, 125, 125);
+  background: #252525;
+  border-left: 1px solid rgb(125, 125, 125);
 }
 
 .search-button:hover {
-    cursor: pointer;
-    color: white;
+  cursor: pointer;
+  color: white;
 }
 
 .search-bar-input:focus {
-    background: white;
-    color: black;
+  background: white;
+  color: black;
 }
 
 .search-bar-input:focus + .search-button {
-    background: white;
+  background: white;
 }
 
 .search-bar-input:hover {
-    background: white;
-    color: black;
+  background: white;
+  color: black;
 }
 
 .search-bar-input:focus + .search-button:hover {
-    color: black;
+  color: black;
 }
 
 .search-bar-input:hover + .search-button {
-    background: white;
+  background: white;
 }
 
 @media screen and (max-height: 550px) {
-    .google-api-map {
-        height: 80% !important;
-    }
+  .google-api-map {
+    height: 80% !important;
+  }
 }

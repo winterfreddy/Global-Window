@@ -22,7 +22,7 @@ class Sidebar extends React.Component {
     componentDidMount() {
         if(this.props.currentUserId !== undefined) {
             let test = this.props.fetchUserFaves(this.props.currentUserId);
-            console.log(test);
+            // console.log(test);
         }
         const url = `?lat1=${INIT_NE_LAT}&lng1=${INIT_NE_LNG}&lat2=${INIT_SW_LAT}&lng2=${INIT_SW_LNG}`;
         this.props.fetchPhotosInArea(url)
@@ -62,7 +62,7 @@ class Sidebar extends React.Component {
             favorites,
             fetchUserFave
         } = this.props;
-        console.log(favorites);
+        // console.log(favorites);
         // console.log(Object.values(this.props.favorites).length);
 
         let prevBtn;
