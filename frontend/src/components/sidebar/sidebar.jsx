@@ -32,8 +32,8 @@ class Sidebar extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.photos !== prevProps.photos) {
-            const renderedSideBar = document.getElementsByClassName("sidebar-content-container")[0];
-            if (renderedSideBar !== undefined) renderedSideBar.scrollTop = 0;
+            // const renderedSideBar = document.getElementsByClassName("sidebar-content-container")[0];
+            // if (renderedSideBar !== undefined) renderedSideBar.scrollTop = 0;
             if (this.state.currPage > 0) this.setState({ currPage: 0 });
         }
     }
