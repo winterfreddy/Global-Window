@@ -11,7 +11,7 @@ export default function (state = {}, action) {
         case RECEIVE_USER_FAVES:
             let newObj = {};
             action.photoIds.data.forEach(favorites => {
-                newObj[favorites._id] = favorites;
+                newObj[favorites.photoId] = favorites;
             });
             return newObj;
         case RECEIVE_FAVORITE:

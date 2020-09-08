@@ -27,9 +27,16 @@ const receiveErrors = (errors) => ({
 
 export const signup = user => dispatch => {
     return APIUtil.signup(user)
+        .then((res) => {
+            const { token } = res.data;
+            localStorage.setItem("jwtToken", token);
+            APIUtil.setAuthToken(token);
+            const decoded = jwt_decode(token);
+            dispatch(receiveCurrentUser(decoded));
+        })
         .then(() => dispatch(receiveUserSignIn()))
         .then(() => dispatch(closeModal()))
-        .then(() => dispatch(receiveCurrentUser(user)))
+        // .then(() => dispatch(receiveCurrentUser(user)))
         .catch(err => dispatch(receiveErrors(err.response.data)))
 };
 

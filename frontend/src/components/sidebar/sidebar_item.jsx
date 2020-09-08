@@ -97,78 +97,6 @@ class SidebarItem extends React.Component {
     this.handleFavorites = this.handleFavorites.bind(this);
   }
 
-  handlePanTo() {
-    const allPhotos = this.props.photos;
-    const { lat, lng } = this.props.photo.coordinates;
-    const google = window.google;
-    const mapProp = {
-      center: new google.maps.LatLng(lat, lng),
-      zoom: 12,
-    };
-    const googleAPIMap = [
-      ...document.getElementsByClassName("google-api-map"),
-    ][0];
-    const map = new google.maps.Map(googleAPIMap, mapProp);
-    // console.log("Map: ", map);
-    map.setOptions({ styles: darkMode.styles });
-    
-    // Put this in localStorage, the if statement gets triggered after 
-    // clicking on 'Location' twice
-    // map.addListener("dragend", function () {
-    //   console.log("map: ", map);
-    //   if (map.__proto__.getBounds()) {
-    //     console.log("LAT: ", map.__proto__.getBounds().getNorthEast().lat());
-    //     console.log("LNG: ", map.__proto__.getBounds().getNorthEast().lng());
-    //   }
-    // });
-    // console.log("MAP: ", map.__proto__.getBounds());
-
-    // TESTING BEGIN
-    // let newLat = null;
-    // let newLng = null;
-    // let bounds = null;
-    // while (!bounds) {
-    //     setTimeout()
-    //     bounds = map.__proto__.getBounds()
-    // }
-    // newLat = bounds.getNorthEast().lat();
-    // newLng = bounds.getNorthEast().lng();
-    // console.log(newLat)
-    // console.log(newLng)
-    // while(map.__proto__.getBounds() === undefined) {
-    //     map.__proto__.getBounds();
-    // }
-
-    // const locButton = document.getElementById("triple-click");
-    // for(let i = 0; i < 3; i++) {
-    //     return locButton.click();
-    // }
-
-    // if (map.__proto__.getBounds()) {
-    //   console.log("LAT: ", map.__proto__.getBounds().getNorthEast().lat());
-    //   console.log("LNG: ", map.__proto__.getBounds().getNorthEast().lng());
-    // }
-    // TESTING END
-
-    let markers;
-    markers = allPhotos.map((point) => {
-      const marker = new google.maps.Marker({
-        position: point.coordinates,
-        map,
-      });
-      const infowindow = new google.maps.InfoWindow({
-        content: point.description,
-      });
-      marker.addListener("click", () => {
-        infowindow.open(map, marker);
-      });
-    });
-
-    const panPoint = new google.maps.LatLng(lat, lng);
-    console.log("panPoint: ", panPoint);
-    map.panTo(panPoint);
-  }
-
   handleFavorites() {
     const {
       favorites,
@@ -176,7 +104,7 @@ class SidebarItem extends React.Component {
       currentUserId,
       makeFavorite,
       unFavorite,
-      fetchPhotos,
+      fetchPhotosInArea,
       fetchPhoto,
     } = this.props;
     let clickAction;
@@ -240,39 +168,7 @@ class SidebarItem extends React.Component {
         const panPoint = new google.maps.LatLng(lat, lng);
         map.panTo(panPoint);
     }
-
-    handleFavorites() {
-        const { 
-            favorites, 
-            photo, 
-            currentUserId, 
-            makeFavorite, 
-            unFavorite, 
-            fetchPhotos,
-            fetchPhoto
-        } = this.props;
-        let clickAction;
-        if (favorites[photo._id]) {
-            if (favorites[photo._id].creatorId === currentUserId) {
-                // console.log("hitting unfave");
-                clickAction = unFavorite(favorites[photo._id]._id)
-                    .then(photoId => fetchPhoto(photoId.id.data))
-                    .catch(err => console.log(err.response));
-            } else if (favorites[photo._id].favoriterId === currentUserId) {
-                // console.log("hitting unfave");
-                clickAction = unFavorite(favorites[photo._id].photoId)
-                    .then(photoId => fetchPhoto(photoId.id.data))
-                    .catch(err => console.log(err.response));
-            }
-        } else {
-            // console.log(favorites[photo._id]);
-            // console.log('hitting fave');
-            clickAction = makeFavorite({ photoId: photo._id })
-                .then(photo => fetchPhoto(photo.favorite.data.photoId)).catch(err => console.log(err));
-        } 
-        return clickAction;
-    }
-
+    
     render() {
         const { 
             users,
@@ -289,7 +185,7 @@ class SidebarItem extends React.Component {
         if (photo.creatorId === currentUserId) {
             // console.log(photo);
             deleteButton = (
-                <i className="far fa-trash-alt" onClick={() => deletePhoto(photo._id).then(() => fetchPhotos())}></i>
+                <i className="far fa-trash-alt" onClick={() => deletePhoto(photo._id)}></i>
             );
             editButton = (
                 <Link to={`/edit/${photo._id}`}>
