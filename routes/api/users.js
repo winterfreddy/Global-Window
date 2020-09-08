@@ -122,21 +122,6 @@ router.get("/:id/photos", (req, res) => {
     );
 });
 
-// router.get(
-//   "/:id/favoritePhotos",
-//   passport.authenticate("jwt", { session: false }),
-//   (req, res) => {
-//     Favorite.find({ favoriterId: { $eq: req.params.id } })
-//       .populate('photoId')
-//       .sort({ date: -1 })
-//       .then((favs) => {
-//         const photos = favs.map(fav => fav.photoId);
-//         res.json(photos);
-//       })
-//       .catch((err) => res.status(404).json(err));
-//   }
-// );
-
 router.get(
     "/:id/favoritePhotos",
     passport.authenticate("jwt", { session: false }),

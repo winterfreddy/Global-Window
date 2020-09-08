@@ -105,7 +105,7 @@ Upon searching for Photo objects, the frontend finds the North-East and South-We
 ## Future Features
 
 In later versions of the app, we would like to add:
-  - An option to filter by favorites
+  - an option to filter by favorites
   - a profile page for each user, displaying photos they have uploaded and favorited
   - more robust and flexible search functionality, such as the option to search by popularity or multiple tags at once
 
