@@ -232,10 +232,6 @@ export class MapContainer extends Component {
             onDragend={this.centerMoved}
             onZoomChanged={this.centerMoved}
           >
-            <Marker
-              onClick={this.onMarkerClick}
-              name={"App Academy San Francisco Office"}
-            />
             {markers}
             <InfoWindow
               marker={this.state.activeMarker}
