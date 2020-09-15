@@ -25,7 +25,7 @@ Global Window is a social media web app to display geo-tagged photos. Users can 
 
 Implementing the favorites feature was tricky because we were running into issues trying to retrieve the Favorite documents from the database. So we chose to count the number of Favorite documents with the same photoId, and render the number of favorites per photo. However, we later ran into more issues with favoriting and unfavoriting a photo because the Axios calls to the backend were concerned with a favorite's ID and the frontend had no easy way of grabbing that information to make the appropriate fetches. So, we made changes to both the backend routes and frontend reducers so that we could then grab the favorites with a photoId instead, and our favorites slice of state would then update properly upon favoriting and unfavoriting. 
 
-![Image of Homepage](https://octodex.github.com/images/https://github.com/winterfreddy/Global-Window/blob/master/screenshots/homepage.png)
+![Image of Homepage](https://github.com/winterfreddy/Global-Window/blob/master/screenshots/homepage.png)
 
 Below is a code snippet of how we achieved favoriting and unfavoriting in this project: 
 
@@ -64,7 +64,7 @@ Ideally, Global Window only displays photos based on the current search area, as
 
 To search for photos in a specified area, we utilized the GeoJSON library. GeoJSON creates 'location' objects, which have an associated latitude and longitude. GeoJSON also creates 'polygon' objects. When given coordinates as bounds, these polygon objects create a search area to find the mentioned location objects. With these location objects and polygons, we can associate a location to each uploaded Photo object, we are able to check if a Photo's location object falls within a specified polygon. 
 
-![Image of Search](https://octodex.github.com/images/https://github.com/winterfreddy/Global-Window/blob/master/screenshots/us-search.png)
+![Image of Search](https://github.com/winterfreddy/Global-Window/blob/master/screenshots/us-search.png)
 
 ```js
 const searchArea = {
