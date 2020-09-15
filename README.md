@@ -64,7 +64,7 @@ Ideally, Global Window only displays photos based on the current search area, as
 
 To search for photos in a specified area, we utilized the GeoJSON library. GeoJSON creates 'location' objects, which have an associated latitude and longitude. GeoJSON also creates 'polygon' objects. When given coordinates as bounds, these polygon objects create a search area to find the mentioned location objects. With these location objects and polygons, we can associate a location to each uploaded Photo object, we are able to check if a Photo's location object falls within a specified polygon. 
 
-![Image of Search](https://github.com/winterfreddy/Global-Window/blob/master/screenshots/us-search.png)
+![Image of Search](https://github.com/winterfreddy/Global-Window/blob/master/screenshots/us-serach.png)
 
 ```js
 const searchArea = {
