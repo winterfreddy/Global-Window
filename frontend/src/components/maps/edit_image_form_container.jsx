@@ -156,9 +156,6 @@ class EditImageForm extends React.Component {
     render() {
         const { photo, formType, fetchPhoto } = this.props;
         console.log(photo);
-        // if(this.props.photo.coordinates !== "undefined"){
-        //     console.log(this.props.photo.coordinates);
-        // }
         if (!photo) {
             return null;
         } else {

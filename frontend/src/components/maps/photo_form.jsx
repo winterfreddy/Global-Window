@@ -110,15 +110,23 @@ class PhotoForm extends React.Component {
             );
         }
         let inputFile;
+        let editLabel;
         if (this.props.formType === 'upload photo') {
             inputFile = (
                 <input type="file" className="input-file" onChange={this.singleFileChangedHandler} />
+            );
+            editLabel = (
+                <label className="image-upload-title">Image Upload</label>
+            );
+        } else {
+            editLabel = (
+                <label className="image-upload-title">Edit Image Location</label>
             );
         }
         return (
             <div className="image-upload-form-box">
                 {errorsDiv}
-                <label className="image-upload-title">Image Upload</label>
+                {editLabel}
                 <label className="image-upload-reminder">Click on the map to place a marker!</label>
                 <div className="image-description">
                     <label>Image Description:</label>
