@@ -129,7 +129,6 @@ export class MapContainer extends Component {
       activeMarker: marker,
       showingInfoWindow: true,
     }, () => marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png'));
-    // this.props.google.maps.panTo
   }
 
   onClose = (props) => {
@@ -183,6 +182,17 @@ export class MapContainer extends Component {
     this.props.fetchPhotosInArea(url);
   }
 
+  status(photoId) {
+    const { favorites } = this.props;
+    let favoriteStatus = 'unFavorited';
+    favorites.forEach(favorite => {
+      if (photoId == favorite.photoId) {
+        favoriteStatus = "Favorited";
+      }
+    });
+    return favoriteStatus;
+  }
+
   render() {
     let uploadForm;
     let editForm;
@@ -201,10 +211,13 @@ export class MapContainer extends Component {
         imageURL={photo.imageURL}
         numFavorites={photo.numFavorites}
         tags={photo.tags} 
-        description={photo.description}/>)
+        description={photo.description}
+        photoId={photo._id}
+        />)
+        
     }
-    console.log(this.props);
-    console.log(this.state.selectedPlace);
+    console.log('this.props', this.props);
+    console.log('this.state.selectedPlace', this.state.selectedPlace);
     return (
       <div className="google-maps-images-container">
         <div id="mainpage-google-map">
@@ -247,7 +260,7 @@ export class MapContainer extends Component {
                 <div className='info-window-subcontainer'>
                   <h4 className='info-window-description'>{this.state.selectedPlace.description}</h4>
                   <h4 className='info-window-faves'>
-                    <i className=`fas fa-heart ${this.status()}`></i>
+                    <i className='fas fa-heart' id={this.status(this.state.selectedPlace.photoId)}></i>
                     {this.state.selectedPlace.numFavorites}</h4>
                 </div>
               </div>

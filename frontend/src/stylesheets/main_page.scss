@@ -172,6 +172,16 @@
   padding: 6px;
 }
 
+#unFavorited {
+  color: gray;
+  cursor: unset;
+}
+
+#Favorited {
+  color: red;
+  cursor: unset;
+}
+
 @media screen and (max-height: 550px) {
   .google-api-map {
     height: 80% !important;
