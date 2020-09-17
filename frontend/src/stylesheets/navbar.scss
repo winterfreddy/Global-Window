@@ -1,6 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+.logo-container {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    left: 40%;
+    right: 50%;
+}
+
+.logo-container:hover {
+    color: white;
+}
+
 .logo-title {
     font-family: 'Courgette', cursive;
     font-size: 40px;
@@ -12,9 +24,9 @@
     user-select: none; /* Standard */
 }
 
-.logo-title:hover {
-    color: white;
-}
+// .logo-title:hover {
+//     color: white;
+// }
 
 .logo-section {
     display: flex;
@@ -177,7 +189,15 @@
     margin-top: 1px;
 }
 
-.fa-globe:hover {
+.about {
+    font-size: 30px;
+    font-family: 'Roboto', sans-serif;
+    padding: 18px 10px 10px 20px;
+    margin-top: 1px;
+}
+
+.fa-globe:hover,
+.about:hover {
     color: white;
 }
 

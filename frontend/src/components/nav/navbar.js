@@ -69,7 +69,7 @@ class NavBar extends React.Component {
       <div className="nav-bar">
         <div className="logo-section">
           <div className="dropdown">
-            <i className="fas fa-globe"></i>
+            <div className="about">About</div>
             <div className="dropdown-content">
               <a className='global-window-devs'>Global Window Developers</a>
               <div className='dropdown-item'>Winfred Huang
@@ -102,6 +102,9 @@ class NavBar extends React.Component {
               </div>
             </div>
           </div>
+        </div>
+        <div className="logo-container">
+          <i className="fas fa-globe"></i>
           {logoButton}
         </div>
         {this.getLinks()}
