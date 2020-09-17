@@ -42,13 +42,17 @@ class SignupForm extends React.Component {
   }
 
   renderErrors() {
-    return (
-      <ul className='errors-list'>
-        {Object.keys(this.state.errors).map((error, i) => (
-          <li key={`error-${i}`}>{this.state.errors[error]}</li>
-        ))}
-      </ul>
-    );
+    if(Object.keys(this.props.errors).length) {
+      return (
+        <ul className='errors-list'>
+          <h2>Errors:</h2>
+          {Object.keys(this.state.errors).map((error, i) => (
+            <li key={`error-${i}`}>{this.state.errors[error]}</li>
+          ))}
+        </ul>
+      );
+    }
+    return;
   }
 
   render() {
@@ -57,37 +61,48 @@ class SignupForm extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <div className="signup-form">
             <div className="modal-header">Signup for Global Window</div>
-            <div id='close-x' onClick={this.props.closeModal} className="close-x">
+            <div
+              id="close-x"
+              onClick={this.props.closeModal}
+              className="close-x"
+            >
               X
             </div>
             <br />
             <input
-              className="signup-username"
+              className="session-input"
               type="text"
               value={this.state.username}
               onChange={this.update("username")}
               placeholder="Username"
+              required={true}
             />
             <br />
             <input
-              className="signup-password"
+              className="session-input"
               type="password"
               value={this.state.password}
               onChange={this.update("password")}
               placeholder="Password"
+              required={true}
+              minLength="6"
             />
             <br />
             <input
-              className="signup-password2"
+              className="session-input"
               type="password"
               value={this.state.password2}
               onChange={this.update("password2")}
               placeholder="Confirm Password"
+              required={true}
+              minLength="6"
             />
             <br />
             <input type="submit" value="Submit" className="session-btn" />
             <br />
-            <div className="other-form-text">Already have an account?{this.props.otherForm}</div>
+            <div className="other-form-text">
+              Already have an account?{this.props.otherForm}
+            </div>
             {this.renderErrors()}
           </div>
         </form>
