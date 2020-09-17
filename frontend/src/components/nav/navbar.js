@@ -29,13 +29,13 @@ class NavBar extends React.Component {
       return (
         <div className="navbar-links">
           <span className="welcome">Welcome, {currentUser.username}!</span>
-          <div className="dropdown-user">
+          <button className='logout-btn' onClick={this.logoutUser}><i className="fas fa-sign-out-alt"></i>&nbsp;Log Out</button>
+          {/* <div className="dropdown-user">
             <button onClick={() => this.dropdown()} className="dropdown-user-button" type="button"><i className="fas fa-user"></i></button>
             <div id="myDropdownUser" className="dropdown-content-user">
               
-              <button className='logout-btn' onClick={this.logoutUser}><i className="fas fa-sign-out-alt"></i>&nbsp;Log Out</button>
             </div>
-          </div>
+          </div> */}
         </div>
       );
     } else {

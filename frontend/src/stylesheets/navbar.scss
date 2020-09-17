@@ -71,6 +71,12 @@
     user-select: none; /* Standard */
 }
 
+.logout-btn {
+    width: auto;
+    border-radius: 0;
+    padding-right: 20px;
+}
+
 .navbar-signup {
     display: inline-block;
     white-space: nowrap;
@@ -84,22 +90,17 @@
 }
 
 .navbar-login:hover,
-.navbar-signup:hover {
+.navbar-signup:hover,
+.logout-btn:hover {
     border: 1px solid white;
     color: white;
 }
 
 .logout-btn:hover {
-    background-color: #daa520;
-    font-weight: 700;
-    cursor: pointer;
+    border: none;
 }
 
-.logout-btn:hover {
-    border-radius: 0 0 5px 5px;
-}
-
-.logout-btn, .navbar-signup {
+.navbar-signup {
     margin-right: 20px;
 }
 
