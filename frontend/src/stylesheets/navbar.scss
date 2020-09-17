@@ -15,17 +15,13 @@
 .logo-title {
     font-family: 'Courgette', cursive;
     font-size: 40px;
-    padding: 12px 10px 10px 0;
+    padding: 10px 10px 10px 0;
     margin-top: 1px;
     -webkit-user-select: none; /* Safari */        
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
 }
-
-// .logo-title:hover {
-//     color: white;
-// }
 
 .logo-section {
     display: flex;
@@ -119,7 +115,7 @@
     font-family: 'Roboto', sans-serif;
     font-size: 20px;
     left: 20px;
-    top: 50px;
+    top: 60px;
     text-align: center;
 }
 
@@ -178,21 +174,15 @@
     color: blue;
 }
 
-.fa-globe {
+.fa-globe,
+.fa-info-circle {
     font-size: 40px;
-    padding: 12px 10px 10px 20px;
-    margin-top: 1px;
-}
-
-.about {
-    font-size: 30px;
-    font-family: 'Roboto', sans-serif;
-    padding: 15px 10px 20px 20px;
+    padding: 10px 10px 10px 20px;
     margin-top: 1px;
 }
 
 .fa-globe:hover,
-.about:hover {
+.fa-info-circle:hover {
     color: white;
 }
 

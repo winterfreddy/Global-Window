@@ -67,7 +67,7 @@ class NavBar extends React.Component {
       <div className="nav-bar">
         <div className="logo-section">
           <div className="dropdown">
-            <div className="about">About</div>
+            <i class="fas fa-info-circle"></i>
             <div className="dropdown-content">
               <a className='global-window-devs'>Global Window Developers</a>
               <div className='dropdown-item'>Winfred Huang
