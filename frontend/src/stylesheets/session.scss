@@ -38,9 +38,13 @@
     color: red;
     animation: .5s shake infinite;
     animation-iteration-count: 3;
-    font-size: 14px;
-    margin-top: 10px;
+    font-size: 20px;
+    margin-top: 3px;
     font-family: 'Roboto', sans-serif;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px 10px;
 }
 
 .modal-header {
