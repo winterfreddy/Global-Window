@@ -57,8 +57,7 @@
 
 .navbar-login,
 .navbar-signup,
-.logout-btn,
-.navbar-upload-btn {
+.logout-btn {
     font-family: 'Roboto', sans-serif;
     font-size: 20px;
     border-radius: 5px;
@@ -90,8 +89,7 @@
     color: white;
 }
 
-.logout-btn:hover,
-.navbar-upload-btn:hover {
+.logout-btn:hover {
     background-color: #daa520;
     font-weight: 700;
     cursor: pointer;
@@ -99,10 +97,6 @@
 
 .logout-btn:hover {
     border-radius: 0 0 5px 5px;
-}
-
-.navbar-upload-btn:hover {
-    border-radius: 5px 5px 0 0;
 }
 
 .logout-btn, .navbar-signup {

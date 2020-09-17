@@ -32,9 +32,7 @@ class NavBar extends React.Component {
           <div className="dropdown-user">
             <button onClick={() => this.dropdown()} className="dropdown-user-button" type="button"><i className="fas fa-user"></i></button>
             <div id="myDropdownUser" className="dropdown-content-user">
-              <Link to='/upload' className='navbar-upload'>
-                <button className='navbar-upload-btn'><i className="fas fa-upload"></i>&nbsp;Upload</button>
-              </Link>
+              
               <button className='logout-btn' onClick={this.logoutUser}><i className="fas fa-sign-out-alt"></i>&nbsp;Log Out</button>
             </div>
           </div>

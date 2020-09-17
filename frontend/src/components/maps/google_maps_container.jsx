@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
 import UploadImageFormContainer from './upload_image_form_container';
 import EditImageFormContainer from './edit_image_form_container';
@@ -209,6 +209,9 @@ export class MapContainer extends Component {
             <button className="search-button" onClick={this.handleSearch}>
               <i className="fas fa-search"></i>
             </button>
+            <Link to='/upload' className='upload'>
+              <button className='upload-btn'><i className="fas fa-upload"></i>&nbsp;Upload</button>
+            </Link>
           </div>
           <Map
             id="google-api-map"
