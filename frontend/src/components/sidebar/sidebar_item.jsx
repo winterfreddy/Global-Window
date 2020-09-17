@@ -91,6 +91,7 @@ class SidebarItem extends React.Component {
 
     this.state = {
       photo: this.props.photo,
+      favorites: this.props.favorites
     };
 
     this.handlePanTo = this.handlePanTo.bind(this);
@@ -123,49 +124,83 @@ class SidebarItem extends React.Component {
     return clickAction;
   }
 
-    handlePanTo() {
-        const allPhotos = this.props.photos;
-        console.log(allPhotos);
-        const { lat, lng } = this.props.photo.coordinates;
-        const google = window.google;
-        const mapProp = { 
-            center: new google.maps.LatLng(lat, lng),
-            zoom: 12
+  handlePanTo() {
+      const allPhotos = this.props.photos;
+      const { lat, lng } = this.props.photo.coordinates;
+      const google = window.google;
+      const mapProp = { 
+          center: new google.maps.LatLng(lat, lng),
+          zoom: 12
+      }
+      const googleAPIMap = [...document.getElementsByClassName('google-api-map')][0];
+      const map = new google.maps.Map(googleAPIMap, mapProp);
+      map.setOptions({ styles: darkMode.styles });
+
+      let contentString = "<div className='info-window-container'>" +
+        `<img className='info-window-img' src=${this.state.photo.imageURL} />` +
+        "<div className='info-window-subcontainer'>" +
+          `<h4 className='info-window-description'>${this.state.photo.description}</h4>` +
+          "<h4 className='info-window-faves'>" + 
+            "<i className='fas fa-heart'></i>" +
+            `${this.state.photo.numFavorites}</h4>` +
+        "</div>" +
+      "</div>";
+      
+      let markers;
+      markers = allPhotos.map(point => {
+          let contentStringMarkers = "<div className='info-window-container'>" +
+            `<img className='info-window-img' src=${point.imageURL} />` +
+            "<div className='info-window-subcontainer'>" +
+            `<h4 className='info-window-description'>${point.description}</h4>` +
+            "<h4 className='info-window-faves'>" +
+            "<i className='fas fa-heart'></i>" +
+            `${point.numFavorites}</h4>` +
+            "</div>" +
+            "</div>";
+          if(!allPhotos[this.state.photo._id]) {
+              console.log('point', point);
+              const marker = new google.maps.Marker({
+                  position: this.state.photo.coordinates,
+                  map
+              });
+              const infowindow = new google.maps.InfoWindow({
+                  content: contentStringMarkers,
+              });
+              marker.addListener("click", () => {
+                  infowindow.open(map, marker);
+              });    
+          }
+
+          const marker = new google.maps.Marker({
+              position: point.coordinates,
+              map
+          });
+          const infowindow = new google.maps.InfoWindow({
+            content: contentStringMarkers
+          });
+          marker.addListener("click", () => {
+              infowindow.open(map, marker);
+          });
+      })
+
+      const panPoint = new google.maps.LatLng(lat, lng);
+      map.panTo(panPoint);
+  }
+
+  status(photoId) {
+    const { favorites } = this.props;
+    if (!favorites) {
+      return null;
+    } else {
+      let favoriteStatus = 'unFavorited';
+      Object.values(favorites).forEach(favorite => {
+        if (photoId === favorite.photoId) {
+          favoriteStatus = "Favorited";
         }
-        const googleAPIMap = [...document.getElementsByClassName('google-api-map')][0];
-        const map = new google.maps.Map(googleAPIMap, mapProp);
-        map.setOptions({ styles: darkMode.styles });
-
-        let markers;
-        markers = allPhotos.map(point => {
-            if(!allPhotos[this.state.photo._id]) {
-                const marker = new google.maps.Marker({
-                    position: this.state.photo.coordinates,
-                    map
-                });
-                const infowindow = new google.maps.InfoWindow({
-                    content: this.state.photo.description
-                });
-                marker.addListener("click", () => {
-                    infowindow.open(map, marker);
-                });    
-            }
-
-            const marker = new google.maps.Marker({
-                position: point.coordinates,
-                map
-            });
-            const infowindow = new google.maps.InfoWindow({
-                content: point.description
-            });
-            marker.addListener("click", () => {
-                infowindow.open(map, marker);
-            });
-        })
-
-        const panPoint = new google.maps.LatLng(lat, lng);
-        map.panTo(panPoint);
+      });
+      return favoriteStatus;
     }
+  }
     
     render() {
         const { 
@@ -181,7 +216,6 @@ class SidebarItem extends React.Component {
         let deleteButton;
         let editButton;
         if (photo.creatorId === currentUserId) {
-            // console.log(photo);
             deleteButton = (
                 <i className="far fa-trash-alt" onClick={() => deletePhoto(photo._id)}></i>
             );

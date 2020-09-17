@@ -186,7 +186,7 @@ export class MapContainer extends Component {
     const { favorites } = this.props;
     let favoriteStatus = 'unFavorited';
     favorites.forEach(favorite => {
-      if (photoId == favorite.photoId) {
+      if (photoId === favorite.photoId) {
         favoriteStatus = "Favorited";
       }
     });
