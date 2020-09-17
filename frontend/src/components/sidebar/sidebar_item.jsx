@@ -135,30 +135,19 @@ class SidebarItem extends React.Component {
       const googleAPIMap = [...document.getElementsByClassName('google-api-map')][0];
       const map = new google.maps.Map(googleAPIMap, mapProp);
       map.setOptions({ styles: darkMode.styles });
-
-      let contentString = "<div className='info-window-container'>" +
-        `<img className='info-window-img' src=${this.state.photo.imageURL} />` +
-        "<div className='info-window-subcontainer'>" +
-          `<h4 className='info-window-description'>${this.state.photo.description}</h4>` +
-          "<h4 className='info-window-faves'>" + 
-            "<i className='fas fa-heart'></i>" +
-            `${this.state.photo.numFavorites}</h4>` +
-        "</div>" +
-      "</div>";
       
       let markers;
       markers = allPhotos.map(point => {
-          let contentStringMarkers = "<div className='info-window-container'>" +
-            `<img className='info-window-img' src=${point.imageURL} />` +
-            "<div className='info-window-subcontainer'>" +
-            `<h4 className='info-window-description'>${point.description}</h4>` +
-            "<h4 className='info-window-faves'>" +
-            "<i className='fas fa-heart'></i>" +
+          let contentStringMarkers = "<div class='info-window-container'>" +
+            `<img class='info-window-img' src=${point.imageURL} />` +
+            "<div class='info-window-subcontainer'>" +
+            `<h4 class='info-window-description'>${point.description}</h4>` +
+            "<h4 class='info-window-faves'>" +
+            "<i class='fas fa-heart'></i>" +
             `${point.numFavorites}</h4>` +
             "</div>" +
             "</div>";
           if(!allPhotos[this.state.photo._id]) {
-              console.log('point', point);
               const marker = new google.maps.Marker({
                   position: this.state.photo.coordinates,
                   map

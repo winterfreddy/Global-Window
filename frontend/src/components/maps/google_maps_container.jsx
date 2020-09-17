@@ -216,8 +216,6 @@ export class MapContainer extends Component {
         />)
         
     }
-    console.log('this.props', this.props);
-    console.log('this.state.selectedPlace', this.state.selectedPlace);
     return (
       <div className="google-maps-images-container">
         <div id="mainpage-google-map">
