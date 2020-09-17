@@ -22,7 +22,6 @@ class Sidebar extends React.Component {
     componentDidMount() {
         if(this.props.currentUserId !== undefined) {
             let test = this.props.fetchUserFaves(this.props.currentUserId);
-            // console.log(test);
         }
         const url = `?lat1=${INIT_NE_LAT}&lng1=${INIT_NE_LNG}&lat2=${INIT_SW_LAT}&lng2=${INIT_SW_LNG}`;
         this.props.fetchPhotosInArea(url)
@@ -32,8 +31,6 @@ class Sidebar extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.photos.length !== prevProps.photos.length) {
-            // const renderedSideBar = document.getElementsByClassName("sidebar-content-container")[0];
-            // if (renderedSideBar !== undefined) renderedSideBar.scrollTop = 0;
             if (this.state.currPage > 0) this.setState({ currPage: 0 });
         }
     }
@@ -63,8 +60,6 @@ class Sidebar extends React.Component {
             fetchUserFave, 
             fetchPhotosInArea
         } = this.props;
-        // console.log(favorites);
-        // console.log(Object.values(this.props.favorites).length);
 
         let prevBtn;
         let nextBtn;

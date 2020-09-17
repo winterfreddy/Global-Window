@@ -145,6 +145,44 @@
   background: white;
 }
 
+.info-window-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.info-window-subcontainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.info-window-img {
+  height: 200px;
+  width: 300px;
+  object-fit: contain;
+}
+
+.info-window-description {
+  font-size: 28px;
+  padding: 3px;
+  max-width: 300px;
+}
+
+.info-window-faves {
+  font-size: 24px;
+  padding: 6px;
+}
+
+#unFavorited {
+  color: gray;
+  cursor: unset;
+}
+
+#Favorited {
+  color: red;
+  cursor: unset;
+}
+
 @media screen and (max-height: 550px) {
   .google-api-map {
     height: 80% !important;
