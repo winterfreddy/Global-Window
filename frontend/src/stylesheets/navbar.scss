@@ -5,8 +5,7 @@
     position: absolute;
     display: flex;
     flex-direction: row;
-    left: 40%;
-    right: 50%;
+    right: 40%;
 }
 
 .logo-container:hover {
@@ -120,6 +119,7 @@
     font-family: 'Roboto', sans-serif;
     font-size: 20px;
     left: 20px;
+    top: 50px;
     text-align: center;
 }
 
@@ -187,7 +187,7 @@
 .about {
     font-size: 30px;
     font-family: 'Roboto', sans-serif;
-    padding: 18px 10px 10px 20px;
+    padding: 15px 10px 20px 20px;
     margin-top: 1px;
 }
 
