@@ -197,10 +197,14 @@ export class MapContainer extends Component {
       markers = this.props.photos.map(photo => <Marker 
         key={photo._id} 
         position={photo.coordinates} 
-        onClick={this.onMarkerClick} 
-        name={photo.description}/>)
+        onClick={this.onMarkerClick}
+        imageURL={photo.imageURL}
+        numFavorites={photo.numFavorites}
+        tags={photo.tags} 
+        description={photo.description}/>)
     }
-
+    console.log(this.props);
+    console.log(this.state.selectedPlace);
     return (
       <div className="google-maps-images-container">
         <div id="mainpage-google-map">
@@ -238,8 +242,14 @@ export class MapContainer extends Component {
               visible={this.state.showingInfoWindow}
               onClose={this.onClose}
             >
-              <div>
-                <h4>{this.state.selectedPlace.name}</h4>
+              <div className='info-window-container'>
+                <img className='info-window-img' src={this.state.selectedPlace.imageURL}/>
+                <div className='info-window-subcontainer'>
+                  <h4 className='info-window-description'>{this.state.selectedPlace.description}</h4>
+                  <h4 className='info-window-faves'>
+                    <i className=`fas fa-heart ${this.status()}`></i>
+                    {this.state.selectedPlace.numFavorites}</h4>
+                </div>
               </div>
             </InfoWindow>
           </Map>

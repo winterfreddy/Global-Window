@@ -116,8 +116,6 @@ class SidebarItem extends React.Component {
       } else {
       }
     } else {
-      // console.log(favorites[photo._id]);
-      // console.log("hitting fave");
       clickAction = makeFavorite({ photoId: photo._id })
         .then((photo) => fetchPhoto(photo.favorite.data.photoId))
         .catch((err) => console.log(err));
@@ -201,7 +199,6 @@ class SidebarItem extends React.Component {
         )
 
         if(favorites[photo._id]) {
-            // console.log("liked");
             favoriteButton = (
                 <div className="favorite-like">
                     <i className="fas fa-heart" onClick={this.handleFavorites}></i>
@@ -227,7 +224,6 @@ class SidebarItem extends React.Component {
                     <div className="sidebar-item-actions">
                         <div className="item-favorites">
                             {favoriteButton}
-                            {/* <i className="fas fa-heart" onClick={this.handleFavorites}></i> */}
                             <div className="numFavorites">{photo.numFavorites}</div>
                         </div>
                         {deleteButton}
