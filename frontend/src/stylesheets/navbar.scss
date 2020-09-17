@@ -133,6 +133,10 @@
     flex-direction: column;
 }
 
+.dropdown-item span {
+    padding: 5px;
+}
+
 .dropdown-content a {
     display: inline-block;
     font-weight: 700;
