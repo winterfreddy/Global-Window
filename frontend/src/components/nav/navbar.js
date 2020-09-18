@@ -62,10 +62,13 @@ class NavBar extends React.Component {
 
   render() {
       let logoButton;
+      let logoIcon;
       if(this.props.location.pathname === '/home') {
         logoButton = (<div className="logo-title" onClick={() => window.location.reload()}>globalWindow</div>)
+        logoIcon = (<i className="fas fa-globe" onClick={() => window.location.reload()}></i>);
       } else {
         logoButton = (<Link to="/home" className="logo-title">globalWindow</Link>);
+        logoIcon = (<Link to='/home'><i className="fas fa-globe"></i></Link>)
       }
     return (
       <div className="nav-bar">
@@ -110,7 +113,10 @@ class NavBar extends React.Component {
           </div>
         </div>
         <div className="logo-container">
-          <i className="fas fa-globe"></i>
+          {/* <Link to=''>
+            <i className="fas fa-globe"></i>
+          </Link> */}
+          {logoIcon}
           {logoButton}
         </div>
         {this.getLinks()}
