@@ -129,7 +129,6 @@ export class MapContainer extends Component {
       activeMarker: marker,
       showingInfoWindow: true,
     }, () => marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png'));
-    // this.props.google.maps.panTo
   }
 
   onClose = (props) => {
@@ -183,6 +182,17 @@ export class MapContainer extends Component {
     this.props.fetchPhotosInArea(url);
   }
 
+  status(photoId) {
+    const { favorites } = this.props;
+    let favoriteStatus = 'unFavorited';
+    favorites.forEach(favorite => {
+      if (photoId === favorite.photoId) {
+        favoriteStatus = "Favorited";
+      }
+    });
+    return favoriteStatus;
+  }
+
   render() {
     let uploadForm;
     let editForm;
@@ -197,10 +207,15 @@ export class MapContainer extends Component {
       markers = this.props.photos.map(photo => <Marker 
         key={photo._id} 
         position={photo.coordinates} 
-        onClick={this.onMarkerClick} 
-        name={photo.description}/>)
+        onClick={this.onMarkerClick}
+        imageURL={photo.imageURL}
+        numFavorites={photo.numFavorites}
+        tags={photo.tags} 
+        description={photo.description}
+        photoId={photo._id}
+        />)
+        
     }
-
     return (
       <div className="google-maps-images-container">
         <div id="mainpage-google-map">
@@ -241,8 +256,14 @@ export class MapContainer extends Component {
               visible={this.state.showingInfoWindow}
               onClose={this.onClose}
             >
-              <div>
-                <h4>{this.state.selectedPlace.name}</h4>
+              <div className='info-window-container'>
+                <img className='info-window-img' src={this.state.selectedPlace.imageURL}/>
+                <div className='info-window-subcontainer'>
+                  <h4 className='info-window-description'>{this.state.selectedPlace.description}</h4>
+                  <h4 className='info-window-faves'>
+                    <i className='fas fa-heart' id={this.status(this.state.selectedPlace.photoId)}></i>
+                    {this.state.selectedPlace.numFavorites}</h4>
+                </div>
               </div>
             </InfoWindow>
           </Map>
