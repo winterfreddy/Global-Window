@@ -38,8 +38,8 @@
     color: red;
     animation: .5s shake infinite;
     animation-iteration-count: 3;
-    font-size: 14px;
-    margin-top: 10px;
+    font-size: 20px;
+    margin-top: 3px;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -50,11 +50,7 @@
     font-family: 'Roboto', sans-serif;
 }
 
-.login-username, 
-.login-password, 
-.signup-username, 
-.signup-password, 
-.signup-password2 {
+.session-input {
     border-radius: 5px;
     border: 1px solid black;
     text-align: center;
@@ -65,30 +61,21 @@
     font-family: 'Roboto', sans-serif;
 }
 
-.login-username:focus, 
-.login-password:focus, 
-.signup-username:focus, 
-.signup-password:focus, 
-.signup-password2:focus {
+.session-input:focus{
     background: white;
 }
 
-.login-username:hover, 
-.login-password:hover, 
-.signup-username:hover, 
-.signup-password:hover, 
-.signup-password2:hover {
+.session-input:hover{
     border: 1px solid burlywood;
     background: white;
 }
 
-.login-username::placeholder, 
-.login-password::placeholder, 
-.signup-username::placeholder, 
-.signup-password::placeholder, 
-.signup-password2::placeholder {
+.session-input::placeholder {
     font-size: 20px;
     color: black;
+}
+
+.session-input:required {
 }
 
 .close-x {
