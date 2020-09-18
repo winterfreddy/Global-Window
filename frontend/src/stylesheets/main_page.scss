@@ -86,7 +86,7 @@
     position: absolute;
     display: flex;
     flex-direction: row;
-    top: 64px;
+    top: 60px;
     right: 0;
     left: 30%;
     height: 45px;
@@ -108,9 +108,10 @@
   background-color: #252525;
 }
 
-.search-button {
-  font-size: 19px;
-  height: 43px;
+.search-button,
+.upload-btn {
+  font-size: 20px;
+  height: 45px;
   width: 100px;
   border: none;
   color: rgb(125, 125, 125);
@@ -118,7 +119,12 @@
   border-left: 1px solid rgb(125, 125, 125);
 }
 
-.search-button:hover {
+.upload-btn {
+  font-size: 18px;
+}
+
+.search-button:hover,
+.upload-btn:hover {
   cursor: pointer;
   color: white;
 }
