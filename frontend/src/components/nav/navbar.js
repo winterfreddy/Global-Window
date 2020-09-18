@@ -29,15 +29,13 @@ class NavBar extends React.Component {
       return (
         <div className="navbar-links">
           <span className="welcome">Welcome, {currentUser.username}!</span>
-          <div className="dropdown-user">
+          <button className='logout-btn' onClick={this.logoutUser}><i className="fas fa-sign-out-alt"></i>&nbsp;Log Out</button>
+          {/* <div className="dropdown-user">
             <button onClick={() => this.dropdown()} className="dropdown-user-button" type="button"><i className="fas fa-user"></i></button>
             <div id="myDropdownUser" className="dropdown-content-user">
-              <Link to='/upload' className='navbar-upload'>
-                <button className='navbar-upload-btn'><i className="fas fa-upload"></i>&nbsp;Upload</button>
-              </Link>
-              <button className='logout-btn' onClick={this.logoutUser}><i className="fas fa-sign-out-alt"></i>&nbsp;Log Out</button>
+              
             </div>
-          </div>
+          </div> */}
         </div>
       );
     } else {
@@ -58,18 +56,25 @@ class NavBar extends React.Component {
     return () => window.open(`https://www.linkedin.com/in/${social}`)
   }
 
+  handleAngelList(social) {
+    return () => window.open(`https://angel.co/u/${social}`)
+  }
+
   render() {
       let logoButton;
+      let logoIcon;
       if(this.props.location.pathname === '/home') {
         logoButton = (<div className="logo-title" onClick={() => window.location.reload()}>globalWindow</div>)
+        logoIcon = (<i className="fas fa-globe" onClick={() => window.location.reload()}></i>);
       } else {
         logoButton = (<Link to="/home" className="logo-title">globalWindow</Link>);
+        logoIcon = (<Link to='/home'><i className="fas fa-globe"></i></Link>)
       }
     return (
       <div className="nav-bar">
         <div className="logo-section">
           <div className="dropdown">
-            <i className="fas fa-globe"></i>
+            <i class="fas fa-info-circle"></i>
             <div className="dropdown-content">
               <a className='global-window-devs'>Global Window Developers</a>
               <div className='dropdown-item'>Winfred Huang
@@ -77,6 +82,7 @@ class NavBar extends React.Component {
                 <div className='social-btns'>
                   <i className="fab fa-github-square" onClick={this.handleGitHub('winterfreddy')}></i>
                   <i className="fab fa-linkedin" onClick={this.handleLinkedIn('winfred-huang')}></i>
+                  <i class="fab fa-angellist" onClick={this.handleAngelList('winfred-huang')}></i>
                 </div>
               </div>
               <div className='dropdown-item'>Alex Choy
@@ -84,6 +90,7 @@ class NavBar extends React.Component {
                 <div className='social-btns'>
                   <i className="fab fa-github-square" onClick={this.handleGitHub('alex-choy')}></i>
                   <i className="fab fa-linkedin" onClick={this.handleLinkedIn('alexchoy179')}></i>
+                  <i class="fab fa-angellist" onClick={this.handleAngelList('alex-choy-5')}></i>
                 </div>
               </div>
               <div className='dropdown-item'>Adam Klimmek
@@ -91,6 +98,7 @@ class NavBar extends React.Component {
                 <div className='social-btns'>
                   <i className="fab fa-github-square" onClick={this.handleGitHub('AdamKlimmek')}></i>
                   <i className="fab fa-linkedin" onClick={this.handleLinkedIn('adamklimmek')}></i>
+                  <i class="fab fa-angellist" onClick={this.handleAngelList('adam-klimmek')}></i>
                 </div>
               </div>
               <div className='dropdown-item'>Kevin Zhang
@@ -98,10 +106,17 @@ class NavBar extends React.Component {
                 <div className='social-btns'>
                   <i className="fab fa-github-square" onClick={this.handleGitHub('kxwzhang')}></i>
                   <i className="fab fa-linkedin" onClick={this.handleLinkedIn('kevinxzhang')}></i>
+                  <i class="fab fa-angellist" onClick={this.handleAngelList('kevinxzhang')}></i>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        <div className="logo-container">
+          {/* <Link to=''>
+            <i className="fas fa-globe"></i>
+          </Link> */}
+          {logoIcon}
           {logoButton}
         </div>
         {this.getLinks()}

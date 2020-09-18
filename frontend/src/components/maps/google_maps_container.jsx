@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
 import UploadImageFormContainer from './upload_image_form_container';
 import EditImageFormContainer from './edit_image_form_container';
@@ -184,6 +184,7 @@ export class MapContainer extends Component {
 
   status(photoId) {
     const { favorites } = this.props;
+    if (!favorites) return null;
     let favoriteStatus = 'unFavorited';
     favorites.forEach(favorite => {
       if (photoId === favorite.photoId) {
@@ -216,15 +217,26 @@ export class MapContainer extends Component {
         />)
         
     }
+
+    console.log(this.props);
+    let searchBar;
+    if (this.props.location.pathname !== '/upload') {
+      searchBar = (
+        <div className="search-bar">
+          <input type="text" className="search-bar-input" value={this.state.searchInput} onChange={this.handleInput} placeholder="Find photos by tag or just press search to update" />
+          <button className="search-button" onClick={this.handleSearch}>
+            <i className="fas fa-search"></i>
+          </button>
+          <Link to='/upload' className='upload'>
+            <button className='upload-btn'><i className="fas fa-upload"></i>&nbsp;Upload</button>
+          </Link>
+        </div>
+      );
+    }
     return (
       <div className="google-maps-images-container">
         <div id="mainpage-google-map">
-          <div className="search-bar">
-            <input type="text" className="search-bar-input" value={this.state.searchInput} onChange={this.handleInput} placeholder="Find photos by tag or just press search to update"/>
-            <button className="search-button" onClick={this.handleSearch}>
-              <i className="fas fa-search"></i>
-            </button>
-          </div>
+          {searchBar}
           <Map
             id="google-api-map"
             className={

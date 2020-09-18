@@ -1,19 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+.logo-container {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    right: 40%;
+}
+
+.logo-container:hover {
+    color: white;
+}
+
 .logo-title {
     font-family: 'Courgette', cursive;
     font-size: 40px;
-    padding: 12px 10px 10px 0;
+    padding: 10px 10px 10px 0;
     margin-top: 1px;
     -webkit-user-select: none; /* Safari */        
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
-}
-
-.logo-title:hover {
-    color: white;
 }
 
 .logo-section {
@@ -45,8 +52,7 @@
 
 .navbar-login,
 .navbar-signup,
-.logout-btn,
-.navbar-upload-btn {
+.logout-btn {
     font-family: 'Roboto', sans-serif;
     font-size: 20px;
     border-radius: 5px;
@@ -58,6 +64,12 @@
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
+}
+
+.logout-btn {
+    width: auto;
+    border-radius: 0;
+    padding-right: 20px;
 }
 
 .navbar-signup {
@@ -73,27 +85,17 @@
 }
 
 .navbar-login:hover,
-.navbar-signup:hover {
+.navbar-signup:hover,
+.logout-btn:hover {
     border: 1px solid white;
     color: white;
 }
 
-.logout-btn:hover,
-.navbar-upload-btn:hover {
-    background-color: #daa520;
-    font-weight: 700;
-    cursor: pointer;
-}
-
 .logout-btn:hover {
-    border-radius: 0 0 5px 5px;
+    border: none;
 }
 
-.navbar-upload-btn:hover {
-    border-radius: 5px 5px 0 0;
-}
-
-.logout-btn, .navbar-signup {
+.navbar-signup {
     margin-right: 20px;
 }
 
@@ -113,6 +115,7 @@
     font-family: 'Roboto', sans-serif;
     font-size: 20px;
     left: 20px;
+    top: 60px;
     text-align: center;
 }
 
@@ -128,6 +131,10 @@
 .dropdown-item {
     display: flex;
     flex-direction: column;
+}
+
+.dropdown-item span {
+    padding: 5px;
 }
 
 .dropdown-content a {
@@ -167,17 +174,30 @@
     font-size: 30px;
 }
 
-.fa-github-square:hover, .fa-linkedin:hover {
+.fa-angellist {
+    font-size: 28px;
+}
+
+.fa-github-square:hover,
+.fa-linkedin:hover,
+.fa-angellist:hover {
     color: blue;
 }
 
-.fa-globe {
+.fa-globe,
+.fa-info-circle {
     font-size: 40px;
-    padding: 12px 10px 10px 20px;
+    padding: 10px 10px 10px 20px;
     margin-top: 1px;
 }
 
-.fa-globe:hover {
+.fa-info-circle {
+    font-size: 35px;
+    padding-bottom: 20px;
+}
+
+.fa-globe:hover,
+.fa-info-circle:hover {
     color: white;
 }
 
