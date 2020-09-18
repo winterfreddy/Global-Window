@@ -78,6 +78,7 @@ class LoginForm extends React.Component {
               value={this.state.username}
               onChange={this.update("username")}
               placeholder="Username"
+              required={true}
             />
             <br />
             <input
@@ -86,6 +87,8 @@ class LoginForm extends React.Component {
               value={this.state.password}
               onChange={this.update("password")}
               placeholder="Password"
+              required={true}
+              minLength="6"
             />
             <br />
             <input type="submit" value="Submit" className="session-btn" />
