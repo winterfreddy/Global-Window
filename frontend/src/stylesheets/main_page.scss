@@ -51,7 +51,7 @@
 .image-upload-form-container { 
     position: absolute;
     overflow: auto;
-    top: 64px;
+    top: 66px;
     right: 0;
     bottom: 0;
     left: 74.5%;
@@ -166,6 +166,7 @@
   height: 200px;
   width: 300px;
   object-fit: contain;
+  padding-bottom: 5px;
 }
 
 .info-window-description {
