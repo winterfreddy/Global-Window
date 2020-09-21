@@ -36,7 +36,6 @@ export const signup = user => dispatch => {
         })
         .then(() => dispatch(receiveUserSignIn()))
         .then(() => dispatch(closeModal()))
-        // .then(() => dispatch(receiveCurrentUser(user)))
         .catch(err => dispatch(receiveErrors(err.response.data)))
 };
 

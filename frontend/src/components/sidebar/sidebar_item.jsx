@@ -100,10 +100,10 @@ class SidebarItem extends React.Component {
 
     this.handlePanTo = this.handlePanTo.bind(this);
     this.handleFavorites = this.handleFavorites.bind(this);
-    this.mapClick = this.mapClick.bind(this);
     this.handleMarker = this.handleMarker.bind(this);
   }
 
+  // Handle updating the favorites counter and executing a favorite
   handleFavorites() {
     const {
       favorites,
@@ -130,48 +130,6 @@ class SidebarItem extends React.Component {
     return clickAction;
   }
 
-  onMarkerClick = (props, marker, e) => {
-    this.setState(
-      {
-        selectedPlace: props,
-        activeMarker: marker,
-        showingInfoWindow: true,
-      },
-      () =>
-        marker.setIcon("http://maps.google.com/mapfiles/ms/icons/blue-dot.png")
-    );
-  };
-
-  onClose = (props) => {
-    if (this.state.showingInfoWindow) {
-      this.setState({
-        showingInfoWindow: false,
-        activeMarker: null,
-      });
-    }
-  };
-
-  mapClick(mapProps, map, clickEvent) {
-    const { google } = this.props;
-    let tmpCoordinates = map.addListener("click", (e) => {
-      let tmpLatLng = placeMarkerAndPanTo(e.latLng, map);
-      this.setState({
-        lat: tmpLatLng[0],
-        lng: tmpLatLng[1],
-      });
-    });
-
-    function placeMarkerAndPanTo(latLng, map) {
-      let marker = new google.maps.Marker({
-        position: latLng,
-        map: map,
-      });
-      map.panTo(latLng);
-      let tmpLat = latLng.lat();
-      let tmpLng = latLng.lng();
-      return [tmpLat, tmpLng];
-    }
-  }
 
   handleMarker(marker, map, infowindow) {
     marker.addListener('click', () => {
@@ -244,10 +202,7 @@ class SidebarItem extends React.Component {
       users,
       currentUserId,
       photo,
-      fetchPhotos,
       deletePhoto,
-      makeFavorite,
-      unFavorite,
       favorites,
     } = this.props;
     let deleteButton;
