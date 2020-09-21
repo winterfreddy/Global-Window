@@ -24,28 +24,6 @@ router.post(
   }
 );
 
-// router.delete(
-//   "/:id",
-//   passport.authenticate("jwt", { session: false }),
-//   (req, res) => {
-//     const currUserId = req.user.id;
-//     Favorite.findById(req.params.id)
-//       .then((favorite) => {
-//         if (favorite.favoriterId == currUserId) {
-//           Favorite.deleteOne({ _id: req.params.id })
-//           .then(() => res.json({ successfulUnfavorite: "Favorite has been removed" }))
-//           .catch((err) => res.json({ favoriteNotDeleted: "Unable to delete favorite" }))
-//         } else {
-//            res.status(422).json({ unauthorizedFavoriter: "Can only delete your own favorites" });
-//         }
-//       }).catch((err) =>
-//         res
-//           .status(404)
-//           .json({ favoriteNotFound: "Favorite has not been found" })
-//       );
-//   }
-// );
-
 router.delete(
   "/:photoId",
   passport.authenticate("jwt", { session: false }),

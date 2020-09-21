@@ -130,7 +130,6 @@ class SidebarItem extends React.Component {
     return clickAction;
   }
 
-
   handleMarker(marker, map, infowindow) {
     marker.addListener('click', () => {
       if (this.state.prevInfoWindow) {
@@ -268,6 +267,5 @@ class SidebarItem extends React.Component {
     }
   }
 }
-
 
 export default SidebarItem;

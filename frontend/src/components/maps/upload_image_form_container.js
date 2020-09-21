@@ -5,8 +5,4 @@ const mapStateToProps = state => ({
     formType: 'upload photo'
 });
 
-const mapDispatchToProps = dispatch => ({
-    
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(PhotoForm);
+export default connect(mapStateToProps, null)(PhotoForm);

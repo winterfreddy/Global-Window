@@ -30,12 +30,6 @@ class NavBar extends React.Component {
         <div className="navbar-links">
           <span className="welcome">Welcome, {currentUser.username}!</span>
           <button className='logout-btn' onClick={this.logoutUser}><i className="fas fa-sign-out-alt"></i>&nbsp;Log Out</button>
-          {/* <div className="dropdown-user">
-            <button onClick={() => this.dropdown()} className="dropdown-user-button" type="button"><i className="fas fa-user"></i></button>
-            <div id="myDropdownUser" className="dropdown-content-user">
-              
-            </div>
-          </div> */}
         </div>
       );
     } else {
@@ -113,9 +107,6 @@ class NavBar extends React.Component {
           </div>
         </div>
         <div className="logo-container">
-          {/* <Link to=''>
-            <i className="fas fa-globe"></i>
-          </Link> */}
           {logoIcon}
           {logoButton}
         </div>

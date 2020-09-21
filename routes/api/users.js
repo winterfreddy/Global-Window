@@ -116,7 +116,6 @@ router.get("/", (req, res) => {
 router.get("/:id/photos", (req, res) => {
   Photo.find({ creatorId: req.params.id }, "_id")
     .sort({ date: -1 })
-    // .then(photos => res.json(photos))
     .catch((err) =>
       res.status(404).json({ nophotosfound: "No photos found from that user" })
     );

@@ -5,7 +5,6 @@ import NavBarContainer from "./nav/navbar_container";
 import MainPageContainer from "./main/main_page_container";
 import Modal from './modal/modal';
 import SplashContainer from './splash/splash_container';
-// import UploadImageFormContainer from './maps/upload_image_form_container';
 import UploadMapsFormContainer from './maps/upload_maps_forms_container';
 import EditImageFormContainer from './maps/edit_image_form_container';
 
