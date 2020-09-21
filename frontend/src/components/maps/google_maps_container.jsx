@@ -218,7 +218,6 @@ export class MapContainer extends Component {
         
     }
 
-    console.log(this.props);
     let searchBar;
     if (this.props.location.pathname !== '/upload') {
       searchBar = (

@@ -95,11 +95,13 @@ class SidebarItem extends React.Component {
       showingInfoWindow: false, //Hides or the shows the infoWindow
       activeMarker: {}, //Shows the active marker upon click
       selectedPlace: {},
+      prevInfoWindow: null
     };
 
     this.handlePanTo = this.handlePanTo.bind(this);
     this.handleFavorites = this.handleFavorites.bind(this);
     this.mapClick = this.mapClick.bind(this);
+    this.handleMarker = this.handleMarker.bind(this);
   }
 
   handleFavorites() {
@@ -128,10 +130,10 @@ class SidebarItem extends React.Component {
     return clickAction;
   }
 
-  onMarkerClick = (map, marker, e) => {
+  onMarkerClick = (props, marker, e) => {
     this.setState(
       {
-        selectedPlace: map,
+        selectedPlace: props,
         activeMarker: marker,
         showingInfoWindow: true,
       },
@@ -171,6 +173,17 @@ class SidebarItem extends React.Component {
     }
   }
 
+  handleMarker(marker, map, infowindow) {
+    marker.addListener('click', () => {
+      if (this.state.prevInfoWindow) {
+        this.state.prevInfoWindow.close();
+      }
+      this.setState({ prevInfoWindow: infowindow });
+      infowindow.open(map, marker);
+      marker.setIcon("http://maps.google.com/mapfiles/ms/icons/blue-dot.png");
+    });
+  }
+
   handlePanTo() {
     const allPhotos = this.props.photos;
     const { lat, lng } = this.props.photo.coordinates;
@@ -204,14 +217,7 @@ class SidebarItem extends React.Component {
       const infowindow = new google.maps.InfoWindow({
         content: contentStringMarkers,
       });
-      marker.addListener("click", () => {
-        infowindow
-          .open(map, marker);
-          marker.setIcon(
-            "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-          )
-        this.onMarkerClick(point, marker);
-      });
+      this.handleMarker(marker, map, infowindow);
     });
 
     const panPoint = new google.maps.LatLng(lat, lng);
