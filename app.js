@@ -44,24 +44,6 @@ app.use((req, res, next) => {
 // GOOGLE MAPS
 const client = new Client({});
 
-// Makes call to that specific location
-// client
-//   .elevation({
-//     params: {
-//       locations: [{ lat: 37.736155, lng: -122.508014 }],
-//       key: keys.mapsAPIKey,
-//     },
-//     timeout: 1000, // milliseconds
-//   })
-//   .then((r) => {
-//     console.log(r.data);
-//     console.log(r.data.results[0].elevation);
-//   })
-//   .catch((e) => {
-//     console.log(e.response.data.error_message);
-//   });
-
-
 // COMMENT HERE
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server is running on port ${port}`));

@@ -41,7 +41,3 @@ export default function (state = {}, action) {
             return state;
     }
 };
-
-// {
-//     photos: {#234512: photoObj1}
-// }

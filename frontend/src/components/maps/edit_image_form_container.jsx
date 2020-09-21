@@ -103,8 +103,6 @@ class EditImageForm extends React.Component {
             selectedPlace: {}, //Shows the infoWindow to the selected place upon a marker
             lat: this.props.photo.coordinates.lat,
             lng: this.props.photo.coordinates.lng
-            // lat: "",
-            // lng: ""
         };
 
         this.mapClick = this.mapClick.bind(this);
@@ -215,7 +213,4 @@ const mapDispatchToProps = dispatch => ({
     fetchPhoto: (id) => dispatch(fetchPhoto(id)),
 });
 
-// export default withRouter(GoogleApiWrapper({
-//     apiKey: 'AIzaSyAj-6TurQZ8nVQKKEMYKN_u7iCWuds7jpQ',
-// })(MapContainer));
 export default withRouter(GoogleApiWrapper({ apiKey: 'AIzaSyAj-6TurQZ8nVQKKEMYKN_u7iCWuds7jpQ'})(connect(mapStateToProps, mapDispatchToProps)(EditImageForm)));

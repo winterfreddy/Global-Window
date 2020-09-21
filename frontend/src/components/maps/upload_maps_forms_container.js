@@ -6,8 +6,4 @@ const mapStateToProps = state => ({
     formType: 'upload'
 });
 
-const mapDispatchToProps = dispatch => ({
-
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(UploadMapsForms);
+export default connect(mapStateToProps, null)(UploadMapsForms);

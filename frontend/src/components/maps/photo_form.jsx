@@ -49,7 +49,7 @@ class PhotoForm extends React.Component {
         let coordinates = { lat: this.props.lat, lng: this.props.lng };
         formData.append('coordinates', JSON.stringify(coordinates));
         let tagsArray = this.state.tags.split(' ');
-        formData.append('tags', tagsArray);
+        formData.append('tags', JSON.stringify(tagsArray));
         if (this.state.photoFile) {
             formData.append('file', this.state.photoFile);
         }
@@ -111,6 +111,7 @@ class PhotoForm extends React.Component {
         }
         let inputFile;
         let editLabel;
+        let submitBtn;
         if (this.props.formType === 'upload photo') {
             inputFile = (
                 <input type="file" className="input-file" onChange={this.singleFileChangedHandler} />
@@ -118,10 +119,12 @@ class PhotoForm extends React.Component {
             editLabel = (
                 <label className="image-upload-title">Image Upload</label>
             );
+            submitBtn = "Upload";
         } else {
             editLabel = (
                 <label className="image-upload-title">Edit Image Location</label>
             );
+            submitBtn = "Update";
         }
         return (
             <div className="image-upload-form-box">
@@ -151,7 +154,7 @@ class PhotoForm extends React.Component {
                     {inputFile}
                     <div className="submit-actions">
                         <button className="submit-button" onClick={() => this.props.history.push('/home')}>Cancel</button>
-                        <button className="submit-button" onClick={this.singleFileUploadHandler}>Upload</button>
+                        <button className="submit-button" onClick={this.singleFileUploadHandler}>{submitBtn}</button>
                     </div>
                 </div>
                 <div className="image-preview">

@@ -2,7 +2,6 @@ const mongoose = require("mongoose")
 require("mongoose-double")(mongoose);
 const Schema = mongoose.Schema;
 const SchemaTypes = mongoose.Schema.Types;
-// const PointSchema = require('./Point');
 
 const PointSchema = new Schema({
   type: {
