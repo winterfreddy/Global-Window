@@ -1,6 +1,6 @@
 # Global Window
 
-[Global Window Live Link](https://global-window.herokuapp.com/#/home)
+[Global Window Live Link](https://global-window.herokuapp.com/#/)
 
 Global Window is a social media web app to display geo-tagged photos. Users can look around the Google Maps overlay, where geo-tagged photos appear as a marker, and the corresponding photo appears on the sidebar. Users are allowed to upload their own photos, select a location on the Google Maps overlay, and add information about the photo. After uploading, the image and its marker will appear on the Google Maps overlay for other users to see.
 
