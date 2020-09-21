@@ -74,7 +74,7 @@ class NavBar extends React.Component {
       <div className="nav-bar">
         <div className="logo-section">
           <div className="dropdown">
-            <i class="fas fa-info-circle"></i>
+            <i className="fas fa-info-circle"></i>
             <div className="dropdown-content">
               <a className='global-window-devs'>Global Window Developers</a>
               <div className='dropdown-item'>Winfred Huang
@@ -82,7 +82,7 @@ class NavBar extends React.Component {
                 <div className='social-btns'>
                   <i className="fab fa-github-square" onClick={this.handleGitHub('winterfreddy')}></i>
                   <i className="fab fa-linkedin" onClick={this.handleLinkedIn('winfred-huang')}></i>
-                  <i class="fab fa-angellist" onClick={this.handleAngelList('winfred-huang')}></i>
+                  <i className="fab fa-angellist" onClick={this.handleAngelList('winfred-huang')}></i>
                 </div>
               </div>
               <div className='dropdown-item'>Alex Choy
@@ -90,7 +90,7 @@ class NavBar extends React.Component {
                 <div className='social-btns'>
                   <i className="fab fa-github-square" onClick={this.handleGitHub('alex-choy')}></i>
                   <i className="fab fa-linkedin" onClick={this.handleLinkedIn('alexchoy179')}></i>
-                  <i class="fab fa-angellist" onClick={this.handleAngelList('alex-choy-5')}></i>
+                  <i className="fab fa-angellist" onClick={this.handleAngelList('alex-choy-5')}></i>
                 </div>
               </div>
               <div className='dropdown-item'>Adam Klimmek
@@ -98,7 +98,7 @@ class NavBar extends React.Component {
                 <div className='social-btns'>
                   <i className="fab fa-github-square" onClick={this.handleGitHub('AdamKlimmek')}></i>
                   <i className="fab fa-linkedin" onClick={this.handleLinkedIn('adamklimmek')}></i>
-                  <i class="fab fa-angellist" onClick={this.handleAngelList('adam-klimmek')}></i>
+                  <i className="fab fa-angellist" onClick={this.handleAngelList('adam-klimmek')}></i>
                 </div>
               </div>
               <div className='dropdown-item'>Kevin Zhang
@@ -106,7 +106,7 @@ class NavBar extends React.Component {
                 <div className='social-btns'>
                   <i className="fab fa-github-square" onClick={this.handleGitHub('kxwzhang')}></i>
                   <i className="fab fa-linkedin" onClick={this.handleLinkedIn('kevinxzhang')}></i>
-                  <i class="fab fa-angellist" onClick={this.handleAngelList('kevinxzhang')}></i>
+                  <i className="fab fa-angellist" onClick={this.handleAngelList('kevinxzhang')}></i>
                 </div>
               </div>
             </div>
