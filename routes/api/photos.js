@@ -122,7 +122,7 @@ router.post(
           imageURL: uploadedFileURL,
           coordinates: coords,
           location: locationObject,
-          tags: req.body.tags,
+          tags: JSON.parse(req.body.tags),
           created: strftime("%b %d, %Y, %l:%M %P"),
         });
         newPhoto.save().then((photo) => res.json(photo));
@@ -173,8 +173,8 @@ router.patch('/:id', upload.single("file"),
             coordinates: [newCoords.lng, newCoords.lat],
           });
           photo.updateOne({ 
-                description: description ,
-                tags: tags ,
+                description: description,
+                tags: JSON.parse(tags),
                 coordinates: newCoords,
                 location: locationObject 
           })
